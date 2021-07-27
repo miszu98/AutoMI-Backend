@@ -2,12 +2,14 @@ package pl.malek.automi.Entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
 
+@Data
 @Entity
 @Builder
 @NoArgsConstructor
@@ -27,7 +29,7 @@ public class CarOfferEntity {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "carOfferEntity")
     private List<ImageEntity> images;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "car_id", referencedColumnName = "id")
     private CarEntity carEntity;
 

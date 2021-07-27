@@ -4,11 +4,14 @@ package pl.malek.automi.Entities;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
+
+@Data
 @Entity
 @Builder
 @NoArgsConstructor
@@ -30,7 +33,7 @@ public class CarEntity {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fuel_type_id", referencedColumnName = "id")
-    private FuelTypeEntity fuelTypeEntity;
+    private FuelTypeEntity fuelType;
 
     private Long power;
 
@@ -42,8 +45,8 @@ public class CarEntity {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "color_id", referencedColumnName = "id")
-    private ColorEntity colorEntity;
+    private ColorEntity color;
 
-    @JsonFormat(pattern = "yyyy")
-    private Date yearOfProduction;
+    @JsonFormat()
+    private LocalDate yearOfProduction;
 }
