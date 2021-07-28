@@ -19,14 +19,23 @@ import java.util.List;
 @AllArgsConstructor
 public class RoleServiceImpl implements RoleService {
 
-    private RoleRepository roleRepository;
+    private final RoleRepository roleRepository;
+
+    @Override
+    public RoleEntity getByName(String roleName) throws RoleNotFoundException {
+        return roleRepository.findByRoleName(roleName).orElseThrow(
+                () -> new RoleNotFoundException(
+                        "Role with name: " + roleName + " not found"
+                )
+        );
+    }
 
     @Override
     public Role add(Role role, BindingResult result) throws RoleCreationException {
         if (result.hasErrors()) {
             extractErrors(result.getAllErrors());
         }
-        RoleEntity roleEntity = roleRepository.save(RoleMapper.dtoToEntity(role));
+        var roleEntity = roleRepository.save(RoleMapper.dtoToEntity(role));
         return RoleMapper.entityToDto(roleEntity);
     }
 
@@ -37,7 +46,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Role delete(long id) throws RoleNotFoundException {
-        RoleEntity roleEntity = roleRepository.findById(id).orElseThrow(
+        var roleEntity = roleRepository.findById(id).orElseThrow(
                 () -> new RoleNotFoundException(
                         "Role with id: " + id + " not found"
                 )
