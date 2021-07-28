@@ -29,7 +29,7 @@ public class CarOfferEntity {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "carOfferEntity")
     private List<ImageEntity> images;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "car_id", referencedColumnName = "id")
     private CarEntity carEntity;
 
