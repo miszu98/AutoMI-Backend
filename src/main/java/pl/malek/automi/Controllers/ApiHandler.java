@@ -59,6 +59,17 @@ public class ApiHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessages());
     }
 
+    // Fuel types exceptions
+
+    @ExceptionHandler(FuelTypeNotFoundException.class)
+    public ResponseEntity<String> handleFuelTypeNotFoundException(FuelTypeNotFoundException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessage());
+    }
+
+    @ExceptionHandler(FuelTypeCreationException.class)
+    public ResponseEntity<List<String>> handleCreationFuelTypeException(FuelTypeCreationException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessages());
+    }
 
 
 
