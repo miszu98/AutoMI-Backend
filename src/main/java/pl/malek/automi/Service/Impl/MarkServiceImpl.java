@@ -36,15 +36,15 @@ public class MarkServiceImpl implements MarkService {
     }
 
     @Override
-    public Mark delete(long id) {
-        var markEntity = markRepository.getById(id);
+    public Mark delete(long id) throws MarkNotFoundException {
+        var markEntity = getById(id);
         markRepository.deleteById(id);
         return MarkMapper.entityToDto(markEntity);
     }
 
     @Override
-    public Mark update(long id, Mark mark, BindingResult result) throws MarkCreationException {
-        var markEntity = markRepository.getById(id);
+    public Mark update(long id, Mark mark, BindingResult result) throws MarkCreationException, MarkNotFoundException {
+        var markEntity = getById(id);
         if (result.hasErrors()) {
             extractErrors(result.getAllErrors());
         }

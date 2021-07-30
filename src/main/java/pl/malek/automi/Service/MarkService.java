@@ -15,9 +15,9 @@ public interface MarkService {
 
     List<Mark> getAll();
 
-    Mark delete(long id);
+    Mark delete(long id) throws MarkNotFoundException;
 
-    Mark update(long id, Mark mark, BindingResult result) throws MarkCreationException;
+    Mark update(long id, Mark mark, BindingResult result) throws MarkCreationException, MarkNotFoundException;
 
     void extractErrors(List<ObjectError> errors) throws MarkCreationException;
 

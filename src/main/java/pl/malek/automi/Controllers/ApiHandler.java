@@ -43,9 +43,22 @@ public class ApiHandler {
     }
 
     @ExceptionHandler(ModelCreationException.class)
-    public ResponseEntity<List<String>> handleModelNotFoundException(ModelCreationException exception) {
+    public ResponseEntity<List<String>> handleCreationModelException(ModelCreationException exception) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessages());
     }
+
+    // Mark exceptions
+
+    @ExceptionHandler(MarkNotFoundException.class)
+    public ResponseEntity<String> handleMarkNotFoundException(MarkNotFoundException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessage());
+    }
+
+    @ExceptionHandler(MarkCreationException.class)
+    public ResponseEntity<List<String>> handleCreationMarkException(MarkCreationException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessages());
+    }
+
 
 
 
