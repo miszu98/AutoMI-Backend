@@ -4,10 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import pl.malek.automi.Exceptions.RoleCreationException;
-import pl.malek.automi.Exceptions.RoleNotFoundException;
-import pl.malek.automi.Exceptions.UserCreationException;
-import pl.malek.automi.Exceptions.UserNotFoundException;
+import pl.malek.automi.Exceptions.*;
 
 import java.util.List;
 
@@ -37,6 +34,19 @@ public class ApiHandler {
     public ResponseEntity<String> handleUserNotFoundException(UserNotFoundException exception) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessage());
     }
+
+    // Model exceptions
+
+    @ExceptionHandler(ModelNotFoundException.class)
+    public ResponseEntity<String> handleModelNotFoundException(ModelNotFoundException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessage());
+    }
+
+    @ExceptionHandler(ModelCreationException.class)
+    public ResponseEntity<List<String>> handleModelNotFoundException(ModelCreationException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessages());
+    }
+
 
 
 

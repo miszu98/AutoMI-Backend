@@ -9,7 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.malek.automi.DTO.Model;
 import pl.malek.automi.Exceptions.ModelCreationException;
-import pl.malek.automi.Mappers.ModelMapper;
+import pl.malek.automi.Exceptions.ModelNotFoundException;
 import pl.malek.automi.Service.ModelService;
 
 import javax.validation.Valid;
@@ -22,18 +22,25 @@ public class ModelController {
 
     private final ModelService modelService;
 
-    private static final int COUNTS = 1;
-
-    @GetMapping("/{page}")
-    public ResponseEntity<List<Model>> getAll(@PathVariable int page) {
-        PageRequest pageRequest = PageRequest.of(page, COUNTS);
+    @GetMapping("/page={page}/counts={counts}")
+    public ResponseEntity<List<Model>> getAll(@PathVariable int page, @PathVariable int counts) {
+        PageRequest pageRequest = PageRequest.of(page, counts);
         return ResponseEntity.status(HttpStatus.OK).body(modelService.getAll(pageRequest));
     }
-
 
     @PostMapping("/")
     public ResponseEntity<Model> add(@Valid @RequestBody Model model, BindingResult result) throws ModelCreationException {
         return ResponseEntity.status(HttpStatus.OK).body(modelService.add(model, result));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Model> delete(@PathVariable long id) throws ModelNotFoundException {
+        return ResponseEntity.status(HttpStatus.OK).body(modelService.delete(id));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Model> update(@PathVariable long id, @Valid @RequestBody Model model, BindingResult result) throws ModelNotFoundException, ModelCreationException {
+        return ResponseEntity.status(HttpStatus.OK).body(modelService.update(id, model, result));
     }
 
 
