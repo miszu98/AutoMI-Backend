@@ -14,7 +14,7 @@ public interface FuelTypeService {
 
     List<FuelType> getAll();
 
-    FuelType delete(long id) throws MarkNotFoundException, FuelTypeNotFoundException;
+    FuelType delete(long id) throws FuelTypeNotFoundException;
 
     FuelType update(long id, FuelType fuelType, BindingResult result) throws FuelTypeCreationException, FuelTypeNotFoundException;
 
