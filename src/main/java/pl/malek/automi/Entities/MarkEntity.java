@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -20,4 +20,10 @@ public class MarkEntity {
     private Long id;
 
     private String mark;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "markEntity")
+    private List<ModelEntity> models;
+
+
+
 }

@@ -5,6 +5,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import pl.malek.automi.DTO.Model;
 import pl.malek.automi.Entities.ModelEntity;
+import pl.malek.automi.Exceptions.MarkNotFoundException;
 import pl.malek.automi.Exceptions.ModelCreationException;
 import pl.malek.automi.Exceptions.ModelNotFoundException;
 
@@ -13,7 +14,7 @@ import java.util.List;
 
 public interface ModelService {
 
-    Model add(Model model, BindingResult result) throws ModelCreationException;
+    Model add(Model model, BindingResult result) throws ModelCreationException, MarkNotFoundException;
 
     List<Model> getAll();
 

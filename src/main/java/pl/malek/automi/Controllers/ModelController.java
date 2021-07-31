@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.malek.automi.DTO.Model;
+import pl.malek.automi.Exceptions.MarkNotFoundException;
 import pl.malek.automi.Exceptions.ModelCreationException;
 import pl.malek.automi.Exceptions.ModelNotFoundException;
 import pl.malek.automi.Service.ModelService;
@@ -28,8 +29,13 @@ public class ModelController {
         return ResponseEntity.status(HttpStatus.OK).body(modelService.getAll(pageRequest));
     }
 
+    @GetMapping("/")
+    public ResponseEntity<List<Model>> getAll() {
+        return ResponseEntity.status(HttpStatus.OK).body(modelService.getAll());
+    }
+
     @PostMapping("/")
-    public ResponseEntity<Model> add(@Valid @RequestBody Model model, BindingResult result) throws ModelCreationException {
+    public ResponseEntity<Model> add(@Valid @RequestBody Model model, BindingResult result) throws ModelCreationException, MarkNotFoundException {
         return ResponseEntity.status(HttpStatus.OK).body(modelService.add(model, result));
     }
 

@@ -6,7 +6,6 @@ import pl.malek.automi.DTO.FuelType;
 import pl.malek.automi.Entities.FuelTypeEntity;
 import pl.malek.automi.Exceptions.FuelTypeCreationException;
 import pl.malek.automi.Exceptions.FuelTypeNotFoundException;
-import pl.malek.automi.Exceptions.MarkNotFoundException;
 import java.util.List;
 
 public interface FuelTypeService {

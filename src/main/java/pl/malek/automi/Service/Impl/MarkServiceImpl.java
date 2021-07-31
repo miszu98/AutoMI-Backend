@@ -5,21 +5,31 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import pl.malek.automi.DTO.Mark;
+import pl.malek.automi.DTO.Model;
 import pl.malek.automi.Entities.MarkEntity;
 import pl.malek.automi.Exceptions.MarkCreationException;
 import pl.malek.automi.Exceptions.MarkNotFoundException;
 import pl.malek.automi.Mappers.MarkMapper;
+import pl.malek.automi.Mappers.ModelMapper;
 import pl.malek.automi.Repository.MarkRepository;
 import pl.malek.automi.Service.MarkService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class MarkServiceImpl implements MarkService {
 
     private final MarkRepository markRepository;
+
+    @Override
+    public List<Model> getByMark(String mark) {
+        Optional<MarkEntity> optionalMarkEntity = markRepository.findMarkEntityByMark(mark);
+        MarkEntity founded = optionalMarkEntity.orElseThrow();
+        return ModelMapper.entitiesToDto(founded.getModels());
+    }
 
     @Override
     public Mark add(Mark mark, BindingResult result) throws MarkCreationException {
