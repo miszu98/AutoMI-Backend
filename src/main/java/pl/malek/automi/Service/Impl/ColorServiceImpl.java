@@ -8,8 +8,6 @@ import pl.malek.automi.DTO.Color;
 import pl.malek.automi.Entities.ColorEntity;
 import pl.malek.automi.Exceptions.ColorCreationException;
 import pl.malek.automi.Exceptions.ColorNotFoundException;
-import pl.malek.automi.Exceptions.DrivinGearCreationException;
-import pl.malek.automi.Exceptions.DrivingGearNotFoundException;
 import pl.malek.automi.Mappers.ColorMapper;
 import pl.malek.automi.Repository.ColorRepository;
 import pl.malek.automi.Service.ColorService;
