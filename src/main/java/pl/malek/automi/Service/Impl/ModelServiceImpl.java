@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import pl.malek.automi.DTO.Model;
 import pl.malek.automi.Entities.ModelEntity;
+import pl.malek.automi.Exceptions.MarkNotFoundException;
 import pl.malek.automi.Exceptions.ModelCreationException;
 import pl.malek.automi.Exceptions.ModelNotFoundException;
 import pl.malek.automi.Mappers.ModelMapper;
@@ -22,13 +23,14 @@ import java.util.List;
 public class ModelServiceImpl implements ModelService {
 
     private final ModelRepository modelRepository;
+    private final ModelMapper modelMapper;
 
     @Override
-    public Model add(Model model, BindingResult result) throws ModelCreationException {
+    public Model add(Model model, BindingResult result) throws ModelCreationException, MarkNotFoundException {
         if (result.hasErrors()) {
             extractErrors(result.getAllErrors());
         }
-        var modelEntity = modelRepository.save(ModelMapper.dtoToEntity(model));
+        var modelEntity = modelRepository.save(modelMapper.dtoToEntity(model));
         return ModelMapper.entityToDto(modelEntity);
     }
 

@@ -1,7 +1,16 @@
 package pl.malek.automi.Config;
 
 import org.springframework.context.annotation.Configuration;
+import pl.malek.automi.DTO.Mark;
+import pl.malek.automi.DTO.Model;
+import pl.malek.automi.Entities.MarkEntity;
+import pl.malek.automi.Entities.ModelEntity;
+import pl.malek.automi.Exceptions.MarkNotFoundException;
+import pl.malek.automi.Mappers.MarkMapper;
+import pl.malek.automi.Mappers.ModelMapper;
 import pl.malek.automi.Repository.*;
+import pl.malek.automi.Service.MarkService;
+import pl.malek.automi.Service.ModelService;
 
 
 @Configuration
@@ -17,8 +26,12 @@ public class DataConfig {
     private DrivingGearRepository drivingGearRepository;
     private CarOfferRepository carOfferRepository;
 
+    private MarkService markService;
+    private ModelService modelService;
+    private ModelMapper modelMapper;
 
-    public DataConfig(CarOfferRepository carOfferRepository, UserRepository userRepository, RoleRepository roleRepository, CarRepository carRepository, ModelRepository modelRepository, MarkRepository markRepository, ColorRepository colorRepository, FuelTypeRepository fuelTypeRepository, DrivingGearRepository drivingGearRepository) {
+
+    public DataConfig(ModelMapper modelMapper, UserRepository userRepository, RoleRepository roleRepository, CarRepository carRepository, ModelRepository modelRepository, MarkRepository markRepository, ColorRepository colorRepository, FuelTypeRepository fuelTypeRepository, DrivingGearRepository drivingGearRepository, CarOfferRepository carOfferRepository, MarkService markService, ModelService modelService) throws MarkNotFoundException {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.carRepository = carRepository;
@@ -28,54 +41,33 @@ public class DataConfig {
         this.fuelTypeRepository = fuelTypeRepository;
         this.drivingGearRepository = drivingGearRepository;
         this.carOfferRepository = carOfferRepository;
+        this.markService = markService;
+        this.modelService = modelService;
+        this.modelMapper = modelMapper;
+
+
+        Mark bmw = Mark.builder().mark("BMW").build();
+        Mark mercedes = Mark.builder().mark("Mercedes-Benz").build();
+
+        Model m5 = Model.builder().model("M5").markId(1L).build();
+        Model c63s = Model.builder().model("C63s").markId(2L).build();
+
+        markRepository.save(MarkMapper.dtoToEntity(bmw));
+        markRepository.save(MarkMapper.dtoToEntity(mercedes));
+
+        modelRepository.save(modelMapper.dtoToEntity(m5));
+        modelRepository.save(modelMapper.dtoToEntity(c63s));
+
 //
-//        RoleEntity role = RoleEntity.builder().roleName("ADMIN").build();
-//        roleRepository.save(role);
+        MarkEntity markEntity = markService.getById(1L);
+        System.out.println(markService.getByMark("BMW"));
 //
-//        UserEntity user = UserEntity
-//                .builder()
-//                .email("admin@admin.com")
-//                .password("admin")
-//                .isActive(true)
-//                .roleEntity(role)
-//                .build();
-//        userRepository.save(user);
-//
-//        MarkEntity mark = MarkEntity.builder().mark("BMW").build();
-//        ModelEntity model = ModelEntity.builder().model("M5").build();
-//        FuelTypeEntity fuelType = FuelTypeEntity.builder().fuelTypeName("BENZINE").build();
-//        DrivingGearEntity drivingGear = DrivingGearEntity.builder().drivingGearName("AUTOMAT").build();
-//        ColorEntity color = ColorEntity.builder().colorName("BLACK").build();
-//
-//        markRepository.save(mark);
-//        modelRepository.save(model);
-//        fuelTypeRepository.save(fuelType);
-//        drivingGearRepository.save(drivingGear);
-//        colorRepository.save(color);
-//
-//        CarEntity car = CarEntity
-//                .builder()
-//                .mark(mark)
-//                .model(model)
-//                .fuelType(fuelType)
-//                .drivingGear(drivingGear)
-//                .color(color)
-//                .power(500L)
-//                .engineCapacity(2000L)
-//                .yearOfProduction(LocalDate.now())
-//                .build();
-//
-//        carRepository.save(car);
-//        CarOfferEntity offer = CarOfferEntity
-//                .builder()
-//                .title("Tytul oferty")
-//                .description("opisik")
-//                .carEntity(car)
-//                .userEntity(user)
-//                .price(new BigDecimal(100000))
-//                .build();
-//
-//        carOfferRepository.save(offer);
+//        System.out.println(ModelMapper.entitiesToDto(markEntity.getModels()));
+//        System.out.println(modelRepository.findAll());
+
+
+
+
 
     }
 }

@@ -1,9 +1,7 @@
 package pl.malek.automi.Mappers;
 
 import pl.malek.automi.DTO.Mark;
-import pl.malek.automi.DTO.Model;
 import pl.malek.automi.Entities.MarkEntity;
-import pl.malek.automi.Entities.ModelEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +12,7 @@ public class MarkMapper {
     public static MarkEntity dtoToEntity(Mark mark) {
         return MarkEntity
                 .builder()
+                .id(mark.getId())
                 .mark(mark.getMark())
                 .build();
     }
@@ -26,7 +25,9 @@ public class MarkMapper {
                 .map(mark -> Mark
                         .builder()
                         .id(mark.getId())
-                        .mark(mark.getMark()).build()
+                        .mark(mark.getMark())
+                        .models(ModelMapper.entitiesToDto(mark.getModels()))
+                        .build()
                 ).collect(Collectors.toList());
     }
 

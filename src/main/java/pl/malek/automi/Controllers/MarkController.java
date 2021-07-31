@@ -2,11 +2,13 @@ package pl.malek.automi.Controllers;
 
 
 import lombok.AllArgsConstructor;
+import org.dom4j.rule.Mode;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.malek.automi.DTO.Mark;
+import pl.malek.automi.DTO.Model;
 import pl.malek.automi.Exceptions.MarkCreationException;
 import pl.malek.automi.Exceptions.MarkNotFoundException;
 import pl.malek.automi.Service.MarkService;
@@ -25,6 +27,11 @@ public class MarkController {
     @GetMapping("/")
     public ResponseEntity<List<Mark>> getAll() {
         return ResponseEntity.status(HttpStatus.OK).body(markService.getAll());
+    }
+
+    @GetMapping("/{mark}")
+    public ResponseEntity<List<Model>> getAllModels(@PathVariable String mark) {
+        return ResponseEntity.status(HttpStatus.OK).body(markService.getByMark(mark));
     }
 
     @PostMapping("/")
