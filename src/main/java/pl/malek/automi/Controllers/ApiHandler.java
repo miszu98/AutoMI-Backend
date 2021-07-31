@@ -83,7 +83,17 @@ public class ApiHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessages());
     }
 
+    // Colors exception
 
+    @ExceptionHandler(ColorNotFoundException.class)
+    public ResponseEntity<String> handleColorNotFoundException(ColorNotFoundException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessage());
+    }
+
+    @ExceptionHandler(ColorCreationException.class)
+    public ResponseEntity<List<String>> handleCreationColorException(ColorCreationException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessages());
+    }
 
 
 

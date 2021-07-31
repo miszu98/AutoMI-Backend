@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/driving-gears")
+@RequestMapping("/colors")
 public class ColorController {
 
     private final ColorService colorService;
