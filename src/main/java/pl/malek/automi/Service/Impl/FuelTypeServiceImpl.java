@@ -11,7 +11,6 @@ import pl.malek.automi.Exceptions.FuelTypeNotFoundException;
 import pl.malek.automi.Mappers.FuelTypeMapper;
 import pl.malek.automi.Repository.FuelTypeRepository;
 import pl.malek.automi.Service.FuelTypeService;
-
 import java.util.ArrayList;
 import java.util.List;
 
