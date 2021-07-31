@@ -71,6 +71,19 @@ public class ApiHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessages());
     }
 
+    // Driving gears exceptions
+
+    @ExceptionHandler(DrivingGearNotFoundException.class)
+    public ResponseEntity<String> handleDrivingGearNotFoundException(DrivingGearNotFoundException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessage());
+    }
+
+    @ExceptionHandler(DrivinGearCreationException.class)
+    public ResponseEntity<List<String>> handleCreationDrivingGearException(DrivinGearCreationException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessages());
+    }
+
+
 
 
 
