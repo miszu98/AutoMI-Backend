@@ -43,6 +43,7 @@ public class ModelMapper {
                 .builder()
                 .id(modelEntity.getId())
                 .model(modelEntity.getModel())
+                .markId(modelEntity.getMarkEntity().getId())
                 .build();
     }
 }

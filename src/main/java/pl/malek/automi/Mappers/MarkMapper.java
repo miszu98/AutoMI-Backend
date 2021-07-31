@@ -26,7 +26,6 @@ public class MarkMapper {
                         .builder()
                         .id(mark.getId())
                         .mark(mark.getMark())
-                        .models(ModelMapper.entitiesToDto(mark.getModels()))
                         .build()
                 ).collect(Collectors.toList());
     }
