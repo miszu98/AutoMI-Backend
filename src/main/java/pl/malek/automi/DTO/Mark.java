@@ -15,5 +15,4 @@ import java.util.List;
 public class Mark {
     private Long id;
     private String mark;
-    private List<Model> models;
 }
