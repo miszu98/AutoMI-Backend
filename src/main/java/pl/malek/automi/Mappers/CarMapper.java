@@ -8,6 +8,8 @@ import pl.malek.automi.Exceptions.*;
 import pl.malek.automi.Service.*;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @AllArgsConstructor
@@ -19,8 +21,10 @@ public class CarMapper {
     private DrivingGearService drivingGearService;
     private ColorService colorService;
 
+
     private DrivingGearMapper drivingGearMapper;
     private ColorMapper colorMapper;
+
 
     public CarEntity dtoToEntity(Car car) throws MarkNotFoundException, ModelNotFoundException, FuelTypeNotFoundException, DrivingGearNotFoundException, ColorNotFoundException {
         return CarEntity
@@ -39,6 +43,7 @@ public class CarMapper {
     public Car entityToDto(CarEntity carEntity) {
         return Car
                 .builder()
+                .id(carEntity.getId())
                 .mark(MarkMapper.entityToDto(carEntity.getMark()))
                 .model(ModelMapper.entityToDto(carEntity.getModel()))
                 .fuelType(FuelTypeMapper.entityToDto(carEntity.getFuelType()))
@@ -48,6 +53,25 @@ public class CarMapper {
                 .color(colorMapper.entityToDto(carEntity.getColor()))
                 .yearOfProduction(carEntity.getYearOfProduction().toString())
                 .build();
+    }
+
+    public List<Car> entitiesToDto(List<CarEntity> cars) {
+        return cars
+                .stream()
+                .map(
+                        carEntity -> Car
+                                        .builder()
+                                        .id(carEntity.getId())
+                                        .mark(MarkMapper.entityToDto(carEntity.getMark()))
+                                        .model(ModelMapper.entityToDto(carEntity.getModel()))
+                                        .fuelType(FuelTypeMapper.entityToDto(carEntity.getFuelType()))
+                                        .power(carEntity.getPower())
+                                        .engineCapacity(carEntity.getEngineCapacity())
+                                        .drivingGear(drivingGearMapper.entityToDto(carEntity.getDrivingGear()))
+                                        .color(colorMapper.entityToDto(carEntity.getColor()))
+                                        .yearOfProduction(carEntity.getYearOfProduction().toString())
+                                        .build()
+                ).collect(Collectors.toList());
     }
 
 }

@@ -20,29 +20,33 @@ public class CarServiceImpl implements CarService {
 
     private final CarRepository carRepository;
     private final CarMapper carMapper;
-    private final ModelMapper modelMapper;
-    private final FuelTypeMapper fuelTypeMapper;
-    private final DrivingGearMapper drivingGearMapper;
-    private final ColorMapper colorMapper;
-
 
     @Override
-    public Car add(Car car, BindingResult result) {
-        return null;
+    public Car add(Car car, BindingResult result) throws ColorNotFoundException, MarkNotFoundException, ModelNotFoundException, DrivingGearNotFoundException, FuelTypeNotFoundException, CarCreationException {
+        if (result.hasErrors()) {
+            extractErrors(result.getAllErrors());
+        }
+        var carEntity = carRepository.save(carMapper.dtoToEntity(car));
+        return carMapper.entityToDto(carEntity);
     }
 
     @Override
     public List<Car> getAll() {
-        return null;
+        return carMapper.entitiesToDto(carRepository.findAll());
     }
 
     @Override
-    public Car delete(long id) {
-        return null;
+    public Car delete(long id) throws CarNotFoundException {
+        var carEntity = getById(id);
+        carRepository.deleteById(id);
+        return carMapper.entityToDto(carEntity);
     }
 
     @Override
     public Car update(long id, Car car, BindingResult result) throws CarNotFoundException, CarCreationException, MarkNotFoundException, ColorNotFoundException, FuelTypeNotFoundException, ModelNotFoundException, DrivingGearNotFoundException {
+        if (!carRepository.existsById(id)) {
+            throw new CarNotFoundException(String.format("Car with id: %d not found", id));
+        }
         if (result.hasErrors()) {
             extractErrors(result.getAllErrors());
         }
@@ -64,7 +68,7 @@ public class CarServiceImpl implements CarService {
     public CarEntity getById(Long id) throws CarNotFoundException {
         return carRepository.findById(id).orElseThrow(
                 () -> new CarNotFoundException(
-                        String.format("Car with id: %s not found", id)
+                        String.format("Car with id: %d not found", id)
                 )
         );
     }

@@ -6,4 +6,5 @@ import pl.malek.automi.Entities.CarEntity;
 
 @Repository
 public interface CarRepository extends JpaRepository<CarEntity, Long> {
+    boolean existsById(long id);
 }
