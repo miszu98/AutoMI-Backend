@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("/cars")
 public class CarController {
 
-    private CarService carService;
+    private final CarService carService;
 
     @GetMapping("/")
     public ResponseEntity<List<Car>> getAll() {
