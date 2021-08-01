@@ -26,6 +26,6 @@ public interface ModelService {
 
     void extractErrors(List<ObjectError> errors) throws ModelCreationException;
 
-    ModelEntity getByName(String model) throws ModelNotFoundException;
+    ModelEntity getById(long id) throws ModelNotFoundException;
 
 }

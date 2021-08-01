@@ -9,7 +9,6 @@ import pl.malek.automi.DTO.Color;
 import pl.malek.automi.Exceptions.ColorCreationException;
 import pl.malek.automi.Exceptions.ColorNotFoundException;
 import pl.malek.automi.Service.ColorService;
-
 import javax.validation.Valid;
 import java.util.List;
 
