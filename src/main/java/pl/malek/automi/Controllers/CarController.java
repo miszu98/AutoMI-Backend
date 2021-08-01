@@ -6,11 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.malek.automi.DTO.Car;
-import pl.malek.automi.DTO.Color;
 import pl.malek.automi.Exceptions.*;
 import pl.malek.automi.Service.CarService;
-import pl.malek.automi.Service.UserService;
-
 import javax.validation.Valid;
 import java.util.List;
 
