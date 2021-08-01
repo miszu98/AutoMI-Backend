@@ -11,6 +11,8 @@ import java.util.List;
 public interface CarService {
     Car add(Car car, BindingResult result) throws ColorNotFoundException, MarkNotFoundException, ModelNotFoundException, DrivingGearNotFoundException, FuelTypeNotFoundException, CarCreationException;
 
+    Car add(Car car) throws ColorNotFoundException, MarkNotFoundException, ModelNotFoundException, DrivingGearNotFoundException, FuelTypeNotFoundException;
+
     List<Car> getAll();
 
     Car delete(long id) throws CarNotFoundException;
