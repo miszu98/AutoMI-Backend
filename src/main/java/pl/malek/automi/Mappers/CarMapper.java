@@ -6,8 +6,6 @@ import pl.malek.automi.DTO.Car;
 import pl.malek.automi.Entities.CarEntity;
 import pl.malek.automi.Exceptions.*;
 import pl.malek.automi.Service.*;
-
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,7 +34,6 @@ public class CarMapper {
                 .engineCapacity(car.getEngineCapacity())
                 .drivingGear(drivingGearService.getById(car.getDrivingGear().getId()))
                 .color(colorService.getById(car.getColor().getId()))
-                .yearOfProduction(LocalDate.parse(car.getYearOfProduction()))
                 .build();
     }
 
@@ -51,7 +48,6 @@ public class CarMapper {
                 .engineCapacity(carEntity.getEngineCapacity())
                 .drivingGear(drivingGearMapper.entityToDto(carEntity.getDrivingGear()))
                 .color(colorMapper.entityToDto(carEntity.getColor()))
-                .yearOfProduction(carEntity.getYearOfProduction().toString())
                 .build();
     }
 
