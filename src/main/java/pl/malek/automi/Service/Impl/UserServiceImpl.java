@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import pl.malek.automi.DTO.User;
+import pl.malek.automi.Entities.UserEntity;
 import pl.malek.automi.Exceptions.RoleNotFoundException;
 import pl.malek.automi.Exceptions.UserCreationException;
 import pl.malek.automi.Exceptions.UserNotFoundException;
@@ -41,22 +42,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User delete(long id) throws UserNotFoundException {
-        var userEntity = userRepository.findById(id).orElseThrow(
-                () -> new UserNotFoundException(
-                        "User with id: " + id + " not found"
-                )
-        );
+        var userEntity = getById(id);
         userRepository.deleteById(id);
         return userMapper.entityToDto(userEntity);
     }
 
     @Override
     public User update(long id, User user, BindingResult result) throws UserNotFoundException, UserCreationException, RoleNotFoundException {
-        var userEntity = userRepository.findById(id).orElseThrow(
-                () -> new UserNotFoundException(
-                        "User with id: " + id + " not found"
-                )
-        );
+        var userEntity = getById(id);
         if (result.hasErrors()) {
             extractErrors(result.getAllErrors());
         }
@@ -74,5 +67,14 @@ public class UserServiceImpl implements UserService {
             messages.add(error.getDefaultMessage());
         }
         throw new UserCreationException(messages);
+    }
+
+    @Override
+    public UserEntity getById(long id) throws UserNotFoundException {
+        return userRepository.findById(id).orElseThrow(
+                () -> new UserNotFoundException(
+                        String.format("User with id: %d not found", id)
+                )
+        );
     }
 }
