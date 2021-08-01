@@ -3,6 +3,7 @@ package pl.malek.automi.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import pl.malek.automi.DTO.User;
+import pl.malek.automi.Entities.UserEntity;
 import pl.malek.automi.Exceptions.RoleNotFoundException;
 import pl.malek.automi.Exceptions.UserCreationException;
 import pl.malek.automi.Exceptions.UserNotFoundException;
@@ -19,4 +20,6 @@ public interface UserService {
     User update(long id, User user, BindingResult result) throws UserNotFoundException, UserCreationException, RoleNotFoundException;
 
     void extractErrors(List<ObjectError> errors) throws UserCreationException;
+
+    UserEntity getById(long id) throws UserNotFoundException;
 }

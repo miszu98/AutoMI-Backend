@@ -13,15 +13,15 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class CarMapper {
 
-    private MarkService markService;
-    private ModelService modelService;
-    private FuelTypeService fuelTypeService;
-    private DrivingGearService drivingGearService;
-    private ColorService colorService;
+    private final MarkService markService;
+    private final ModelService modelService;
+    private final FuelTypeService fuelTypeService;
+    private final DrivingGearService drivingGearService;
+    private final ColorService colorService;
 
 
-    private DrivingGearMapper drivingGearMapper;
-    private ColorMapper colorMapper;
+    private final DrivingGearMapper drivingGearMapper;
+    private final ColorMapper colorMapper;
 
 
     public CarEntity dtoToEntity(Car car) throws MarkNotFoundException, ModelNotFoundException, FuelTypeNotFoundException, DrivingGearNotFoundException, ColorNotFoundException {
