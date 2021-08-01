@@ -44,26 +44,8 @@ public class DataConfig {
         this.markService = markService;
         this.modelService = modelService;
         this.modelMapper = modelMapper;
-//
-//
-//        Mark bmw = Mark.builder().mark("BMW").build();
-//        Mark mercedes = Mark.builder().mark("Mercedes-Benz").build();
-//
-//        Model m5 = Model.builder().model("M5").markId(1L).build();
-//        Model c63s = Model.builder().model("C63s").markId(2L).build();
-//
-//        markRepository.save(MarkMapper.dtoToEntity(bmw));
-//        markRepository.save(MarkMapper.dtoToEntity(mercedes));
-//
-//        modelRepository.save(modelMapper.dtoToEntity(m5));
-//        modelRepository.save(modelMapper.dtoToEntity(c63s));
-//
-////
-//        MarkEntity markEntity = markService.getById(1L);
-//        System.out.println(markService.getByMark("BMW"));
-////
-////        System.out.println(ModelMapper.entitiesToDto(markEntity.getModels()));
-////        System.out.println(modelRepository.findAll());
+
+
 
 
 

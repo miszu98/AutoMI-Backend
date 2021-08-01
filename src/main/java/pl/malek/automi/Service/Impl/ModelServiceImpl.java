@@ -36,11 +36,7 @@ public class ModelServiceImpl implements ModelService {
 
     @Override
     public Model update(long id, Model model, BindingResult result) throws ModelNotFoundException, ModelCreationException {
-        var modelEntity = modelRepository.findById(id).orElseThrow(
-                () -> new ModelNotFoundException(
-                        "Model with id: " + id + " not found"
-                )
-        );
+        var modelEntity = getById(id);
         if (result.hasErrors()) {
             extractErrors(result.getAllErrors());
         }
@@ -61,11 +57,7 @@ public class ModelServiceImpl implements ModelService {
 
     @Override
     public Model delete(long id) throws ModelNotFoundException {
-        var modelEntity = modelRepository.findById(id).orElseThrow(
-                () -> new ModelNotFoundException(
-                        "Model with id: " + id + " not found"
-                )
-        );
+        var modelEntity = getById(id);
         modelRepository.deleteById(id);
         return ModelMapper.entityToDto(modelEntity);
     }
@@ -80,10 +72,10 @@ public class ModelServiceImpl implements ModelService {
     }
 
     @Override
-    public ModelEntity getByName(String model) throws ModelNotFoundException {
-        return modelRepository.findByModel(model).orElseThrow(
+    public ModelEntity getById(long id) throws ModelNotFoundException {
+        return modelRepository.findById(id).orElseThrow(
                 () -> new ModelNotFoundException(
-                        "Model with name: " + model + " not found"
+                        "Model with id: " + id + " not found"
                 )
         );
     }

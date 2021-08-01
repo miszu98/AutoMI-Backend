@@ -83,7 +83,7 @@ public class ApiHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessages());
     }
 
-    // Colors exception
+    // Colors exceptions
 
     @ExceptionHandler(ColorNotFoundException.class)
     public ResponseEntity<String> handleColorNotFoundException(ColorNotFoundException exception) {
@@ -92,6 +92,18 @@ public class ApiHandler {
 
     @ExceptionHandler(ColorCreationException.class)
     public ResponseEntity<List<String>> handleCreationColorException(ColorCreationException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessages());
+    }
+
+    // Car exceptions
+
+    @ExceptionHandler(CarNotFoundException.class)
+    public ResponseEntity<String> handleCarNotFoundException(CarNotFoundException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessage());
+    }
+
+    @ExceptionHandler(CarCreationException.class)
+    public ResponseEntity<List<String>> handleCreationCarException(CarCreationException exception) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessages());
     }
 
