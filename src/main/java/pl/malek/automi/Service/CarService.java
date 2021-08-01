@@ -4,7 +4,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import pl.malek.automi.DTO.Car;
 import pl.malek.automi.Entities.CarEntity;
-import pl.malek.automi.Exceptions.ColorNotFoundException;
+import pl.malek.automi.Exceptions.*;
+
 import java.util.List;
 
 public interface CarService {
@@ -14,9 +15,9 @@ public interface CarService {
 
     Car delete(long id) throws ColorNotFoundException;
 
-    Car update(long id, Car car, BindingResult result);
+    Car update(long id, Car car, BindingResult result) throws CarNotFoundException, CarCreationException, MarkNotFoundException, ColorNotFoundException, FuelTypeNotFoundException, ModelNotFoundException, DrivingGearNotFoundException;
 
-    void extractErrors(List<ObjectError> errors);
+    void extractErrors(List<ObjectError> errors) throws CarCreationException;
 
-    CarEntity getById(Long id);
+    CarEntity getById(Long id) throws CarNotFoundException;
 }
