@@ -30,7 +30,8 @@ public class UserMapper {
         return User
                 .builder()
                 .email(userEntity.getEmail())
-                .password(userEntity.getPassword())
+                .dateJoined(userEntity.getDateJoined())
+                .isActive(userEntity.getIsActive())
                 .role(userEntity.getRoleEntity().getRoleName())
                 .build();
     }
@@ -42,7 +43,8 @@ public class UserMapper {
                                 .builder()
                                 .id(user.getId())
                                 .email(user.getEmail())
-                                .password(user.getPassword())
+                                .isActive(user.getIsActive())
+                                .dateJoined(user.getDateJoined())
                                 .role(user.getRoleEntity().getRoleName())
                                 .build()
                 ).collect(Collectors.toList());
