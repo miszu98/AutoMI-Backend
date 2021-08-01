@@ -7,9 +7,11 @@ import org.springframework.validation.ObjectError;
 import pl.malek.automi.DTO.CarOffer;
 import pl.malek.automi.Entities.CarOfferEntity;
 import pl.malek.automi.Exceptions.*;
+import pl.malek.automi.Mappers.CarMapper;
 import pl.malek.automi.Mappers.CarOfferMapper;
 import pl.malek.automi.Repository.CarOfferRepository;
 import pl.malek.automi.Service.CarOfferService;
+import pl.malek.automi.Service.CarService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,12 +22,15 @@ public class CarOfferServiceImpl implements CarOfferService {
 
     private final CarOfferRepository carOfferRepository;
     private final CarOfferMapper carOfferMapper;
+    private final CarService carService;
 
     @Override
-    public CarOffer add(CarOffer carOffer, BindingResult result) throws CarNotFoundException, UserNotFoundException, CarOfferCreationException {
+    public CarOffer add(CarOffer carOffer, BindingResult result) throws CarNotFoundException, UserNotFoundException, CarOfferCreationException, ColorNotFoundException, MarkNotFoundException, ModelNotFoundException, DrivingGearNotFoundException, FuelTypeNotFoundException {
         if (result.hasErrors()) {
             extractErrors(result.getAllErrors());
         }
+        var car = carService.add(carOffer.getCar());
+        carOffer.setCar(car);
         var carOfferEntity = carOfferRepository.save(carOfferMapper.dtoToEntity(carOffer));
         return carOfferMapper.entityToDto(carOfferEntity);
     }

@@ -4,15 +4,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import pl.malek.automi.DTO.CarOffer;
 import pl.malek.automi.Entities.CarOfferEntity;
-import pl.malek.automi.Exceptions.CarNotFoundException;
-import pl.malek.automi.Exceptions.CarOfferCreationException;
-import pl.malek.automi.Exceptions.CarOfferNotFoundException;
-import pl.malek.automi.Exceptions.UserNotFoundException;
+import pl.malek.automi.Exceptions.*;
 
 import java.util.List;
 
 public interface CarOfferService {
-    CarOffer add(CarOffer carOffer, BindingResult result) throws CarNotFoundException, UserNotFoundException, CarOfferCreationException;
+    CarOffer add(CarOffer carOffer, BindingResult result) throws CarNotFoundException, UserNotFoundException, CarOfferCreationException, ColorNotFoundException, MarkNotFoundException, ModelNotFoundException, DrivingGearNotFoundException, FuelTypeNotFoundException;
 
     List<CarOffer> getAll();
 

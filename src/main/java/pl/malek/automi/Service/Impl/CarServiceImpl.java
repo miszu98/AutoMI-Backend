@@ -31,6 +31,12 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
+    public Car add(Car car) throws ColorNotFoundException, MarkNotFoundException, ModelNotFoundException, DrivingGearNotFoundException, FuelTypeNotFoundException {
+        var carEntity = carRepository.save(carMapper.dtoToEntity(car));
+        return carMapper.entityToDto(carEntity);
+    }
+
+    @Override
     public List<Car> getAll() {
         return carMapper.entitiesToDto(carRepository.findAll());
     }
