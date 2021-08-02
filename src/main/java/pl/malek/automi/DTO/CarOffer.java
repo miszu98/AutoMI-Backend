@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
@@ -17,6 +16,7 @@ import java.math.BigDecimal;
 public class CarOffer {
 
     private Long id;
+
 
     @Size(min = 5, max = 100, message = "length (5-100)")
     @NotBlank(message = "Title field may be not blank")

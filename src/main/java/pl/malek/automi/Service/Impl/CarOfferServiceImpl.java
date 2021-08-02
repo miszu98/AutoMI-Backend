@@ -7,12 +7,10 @@ import org.springframework.validation.ObjectError;
 import pl.malek.automi.DTO.CarOffer;
 import pl.malek.automi.Entities.CarOfferEntity;
 import pl.malek.automi.Exceptions.*;
-import pl.malek.automi.Mappers.CarMapper;
 import pl.malek.automi.Mappers.CarOfferMapper;
 import pl.malek.automi.Repository.CarOfferRepository;
 import pl.malek.automi.Service.CarOfferService;
 import pl.malek.automi.Service.CarService;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,6 +57,7 @@ public class CarOfferServiceImpl implements CarOfferService {
         carOfferRepository.save(carOfferEntity);
         return carOfferMapper.entityToDto(carOfferEntity);
     }
+
 
     @Override
     public void extractErrors(List<ObjectError> errors) throws CarOfferCreationException {
