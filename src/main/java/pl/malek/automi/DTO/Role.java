@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 
 @Data
@@ -14,6 +15,7 @@ public class Role {
 
     private Long id;
 
+    @Size(min = 5, max = 12, message = "length (5-12)")
     @NotNull(message = "Role field may be not null")
     @NotBlank(message = "Role field may be not blank")
     private String role;
