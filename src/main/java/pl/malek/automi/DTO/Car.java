@@ -22,14 +22,17 @@ public class Car {
 
     private FuelType fuelType;
 
+    @NotNull(message = "Power field may be not null")
     private Long power;
 
+    @NotNull(message = "Engine capactiy field may be not null")
     private Long engineCapacity;
 
     private DrivingGear drivingGear;
 
     private Color color;
 
+    @NotBlank(message = "Year of production field may be not null")
     private String yearOfProduction;
 
 }
