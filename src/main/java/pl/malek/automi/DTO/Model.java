@@ -16,7 +16,7 @@ import javax.validation.constraints.Size;
 public class Model {
     private Long id;
 
-    @Size(min = 3, max = 24, message = "length (5-24)")
+    @Size(min = 3, max = 24, message = "length (3-24)")
     @NotBlank(message = "Model field may be not blank")
     private String model;
 
