@@ -107,6 +107,18 @@ public class ApiHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessages());
     }
 
+    // Car offers exceptions
+
+    @ExceptionHandler(CarOfferCreationException.class)
+    public ResponseEntity<List<String>> handleCreationCarOfferException(CarOfferCreationException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessages());
+    }
+
+    @ExceptionHandler(CarOfferNotFoundException.class)
+    public ResponseEntity<String> handleCarOfferNotFoundException(CarOfferNotFoundException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessage());
+    }
+
 
 
 }
