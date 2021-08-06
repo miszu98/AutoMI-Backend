@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import pl.malek.automi.Entities.DrivingGearEntity;
-import pl.malek.automi.Entities.FuelTypeEntity;
 
 import java.util.List;
 
@@ -30,7 +29,7 @@ public class DrivingGearRepositoryTests {
     }
 
     @Test
-    void shouldAddNewFuelType() {
+    void shouldAddNewDrivingGear() {
         DrivingGearEntity manual = DrivingGearEntity.builder().drivingGearName("MANUAL").build();
         drivingGearRepository.save(manual);
 
@@ -41,7 +40,7 @@ public class DrivingGearRepositoryTests {
     }
 
     @Test
-    void shouldReturnAllFuelTypes() {
+    void shouldReturnAllDrivingGears() {
         List<DrivingGearEntity> drivingGears = drivingGearRepository.findAll();
         assertEquals(1, drivingGears.size());
     }
