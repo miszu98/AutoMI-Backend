@@ -47,22 +47,14 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Role delete(long id) throws RoleNotFoundException {
-        var roleEntity = roleRepository.findById(id).orElseThrow(
-                () -> new RoleNotFoundException(
-                        "Role with id: " + id + " not found"
-                )
-        );
+        var roleEntity = getById(id);
         roleRepository.deleteById(id);
         return roleMapper.entityToDto(roleEntity);
     }
 
     @Override
     public Role update(long id, Role role, BindingResult result) throws RoleNotFoundException, RoleCreationException {
-        var roleEntity = roleRepository.findById(id).orElseThrow(
-                () -> new RoleNotFoundException(
-                        "Role with id: " + id + " not found"
-                )
-        );
+        var roleEntity = getById(id);
         if (result.hasErrors()) {
             extractErrors(result.getAllErrors());
         }
@@ -79,4 +71,14 @@ public class RoleServiceImpl implements RoleService {
         }
         throw new RoleCreationException(messages);
     }
+
+    @Override
+    public RoleEntity getById(Long id) throws RoleNotFoundException {
+        return roleRepository.findById(id).orElseThrow(
+                () -> new RoleNotFoundException(
+                        "Role with id: " + id + " not found"
+                )
+        );
+    }
+
 }
