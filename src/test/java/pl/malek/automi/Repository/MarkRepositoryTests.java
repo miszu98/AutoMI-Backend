@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import pl.malek.automi.Entities.MarkEntity;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
@@ -53,11 +55,18 @@ public class MarkRepositoryTests {
 
     @Test
     void shouldUpdateMarkName() {
-        MarkEntity markEntity = markRepository.findMarkEntityByMark("Mercedes-Benz").get();
-        markEntity.setMark("Mercedes");
+        Optional<MarkEntity> optionalMarkEntity = markRepository.findMarkEntityByMark("Mercedes-Benz");
+        boolean isExist = optionalMarkEntity.isPresent();
+        MarkEntity markEntity;
+        if (isExist) {
+            markEntity = optionalMarkEntity.get();
+        } else {
+            markEntity = new MarkEntity();
+        }
+        markEntity.setMark("Mercedes-Updated");
         markRepository.save(markEntity);
         assertEquals(1, markRepository.findAll().size());
-        assertEquals("Mercedes", markRepository.findMarkEntityByMark("Mercedes").get().getMark());
+        assertEquals("Mercedes-Updated", markRepository.findMarkEntityByMark("Mercedes-Updated").orElse(new MarkEntity()).getMark());
     }
 
     @Test
