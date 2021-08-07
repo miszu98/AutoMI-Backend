@@ -10,13 +10,14 @@ import org.springframework.validation.BindingResult;
 import pl.malek.automi.DTO.Role;
 import pl.malek.automi.Entities.RoleEntity;
 import pl.malek.automi.Exceptions.RoleCreationException;
+import pl.malek.automi.Exceptions.RoleNotFoundException;
 import pl.malek.automi.Mappers.RoleMapper;
 import pl.malek.automi.Repository.RoleRepository;
 import pl.malek.automi.Service.Impl.RoleServiceImpl;
 import java.util.List;
+import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
@@ -29,46 +30,75 @@ public class RoleServiceTests {
     @Mock
     private RoleMapper roleMapper;
 
-    @InjectMocks
-    private RoleServiceImpl roleService;
-
     @Mock
     private BindingResult bindingResult;
+
+    @InjectMocks
+    private RoleServiceImpl roleServiceImpl;
 
     @Test
     void checkIfMocksWorks() {
         assertNotNull(roleRepository);
-        assertNotNull(roleService);
+        assertNotNull(roleServiceImpl);
     }
 
     @Test
     void shouldReturnsListOfRoles() {
-        Role user = Role.builder().role("USER").build();
-        Role admin = Role.builder().role("ADMIN").build();
+        var user = Role.builder().role("USER").build();
+        var admin = Role.builder().role("ADMIN").build();
         var roles = List.of(user, admin);
 
-        given(roleService.getAll()).willReturn(roles);
+        given(roleServiceImpl.getAll()).willReturn(roles);
 
-        var response = roleService.getAll();
+        verify(roleRepository).findAll();
 
-        assertEquals(2, response.size());
-        assertEquals("USER", response.get(0).getRole());
+        assertEquals(2, roleServiceImpl.getAll().size());
+        assertEquals("USER", roleServiceImpl.getAll().get(0).getRole());
     }
 
     @Test
     void shouldAddRole() throws RoleCreationException {
-        Role role = Role.builder().role("MODERATOR").build();
+        var role = Role.builder().role("MODERATOR").build();
 
-        roleService.add(role, bindingResult);
+        roleServiceImpl.add(role, bindingResult);
 
-        ArgumentCaptor<RoleEntity> roleArgumentCaptor = ArgumentCaptor.forClass(RoleEntity.class);
+        var roleArgumentCaptor = ArgumentCaptor.forClass(RoleEntity.class);
         verify(roleRepository).save(roleArgumentCaptor.capture());
 
         assertThat(roleMapper.dtoToEntity(role)).isEqualTo(roleArgumentCaptor.getValue());
     }
 
     @Test
-    void shouldUpdateGivenRole() {
+    void shouldUpdateGivenRole() throws RoleNotFoundException, RoleCreationException {
+        var id = 1L;
+        var old = RoleEntity.builder().roleName("USER").build();
+        var updated = Role.builder().role("NEW_USER").build();
+
+        given(roleRepository.findById(id)).willReturn(Optional.of(old));
+
+        roleServiceImpl.update(id, updated, bindingResult);
+
+        var roleArgumentCaptor = ArgumentCaptor.forClass(RoleEntity.class);
+
+        verify(roleRepository).findById(id);
+        verify(roleRepository).save(roleArgumentCaptor.capture());
+
+        assertEquals("NEW_USER", roleArgumentCaptor.getValue().getRoleName());
+        assertNotEquals("USER", roleArgumentCaptor.getValue().getRoleName());
+    }
+
+    @Test
+    void shouldDeleteRole() throws RoleNotFoundException {
+        var id = 1L;
+        var role = RoleEntity.builder().roleName("ADMIN").build();
+
+        given(roleRepository.findById(id)).willReturn(Optional.of(role));
+
+        roleServiceImpl.delete(id);
+
+        verify(roleRepository).findById(id);
+        verify(roleRepository).deleteById(id);
 
     }
+
 }
