@@ -22,4 +22,6 @@ public interface RoleService {
     void extractErrors(List<ObjectError> errors) throws RoleCreationException;
 
     RoleEntity getByName(String roleName) throws RoleNotFoundException;
+
+    RoleEntity getById(Long id) throws RoleNotFoundException;
 }

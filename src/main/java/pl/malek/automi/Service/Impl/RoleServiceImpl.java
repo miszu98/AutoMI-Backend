@@ -20,6 +20,7 @@ import java.util.List;
 public class RoleServiceImpl implements RoleService {
 
     private final RoleRepository roleRepository;
+    private final RoleMapper roleMapper;
 
     @Override
     public RoleEntity getByName(String roleName) throws RoleNotFoundException {
@@ -35,39 +36,31 @@ public class RoleServiceImpl implements RoleService {
         if (result.hasErrors()) {
             extractErrors(result.getAllErrors());
         }
-        var roleEntity = roleRepository.save(RoleMapper.dtoToEntity(role));
-        return RoleMapper.entityToDto(roleEntity);
+        var roleEntity = roleRepository.save(roleMapper.dtoToEntity(role));
+        return roleMapper.entityToDto(roleEntity);
     }
 
     @Override
     public List<Role> getAll() {
-        return RoleMapper.entitiesToDto(roleRepository.findAll());
+        return roleMapper.entitiesToDto(roleRepository.findAll());
     }
 
     @Override
     public Role delete(long id) throws RoleNotFoundException {
-        var roleEntity = roleRepository.findById(id).orElseThrow(
-                () -> new RoleNotFoundException(
-                        "Role with id: " + id + " not found"
-                )
-        );
+        var roleEntity = getById(id);
         roleRepository.deleteById(id);
-        return RoleMapper.entityToDto(roleEntity);
+        return roleMapper.entityToDto(roleEntity);
     }
 
     @Override
     public Role update(long id, Role role, BindingResult result) throws RoleNotFoundException, RoleCreationException {
-        var roleEntity = roleRepository.findById(id).orElseThrow(
-                () -> new RoleNotFoundException(
-                        "Role with id: " + id + " not found"
-                )
-        );
+        var roleEntity = getById(id);
         if (result.hasErrors()) {
             extractErrors(result.getAllErrors());
         }
         roleEntity.setRoleName(role.getRole());
         roleRepository.save(roleEntity);
-        return RoleMapper.entityToDto(roleEntity);
+        return roleMapper.entityToDto(roleEntity);
     }
 
     @Override
@@ -78,4 +71,14 @@ public class RoleServiceImpl implements RoleService {
         }
         throw new RoleCreationException(messages);
     }
+
+    @Override
+    public RoleEntity getById(Long id) throws RoleNotFoundException {
+        return roleRepository.findById(id).orElseThrow(
+                () -> new RoleNotFoundException(
+                        "Role with id: " + id + " not found"
+                )
+        );
+    }
+
 }
