@@ -47,9 +47,9 @@ public class MarkServiceTests {
     @Test
     void shouldReturnAllMarks() {
         var marks = List.of(
-                Constants.Marks.MERCEDES_BENZ,
-                Constants.Marks.BMW,
-                Constants.Marks.AUDI
+                Constants.Marks.DataTransferObjects.MERCEDES_BENZ,
+                Constants.Marks.DataTransferObjects.BMW,
+                Constants.Marks.DataTransferObjects.AUDI
         );
 
         given(markService.getAll()).willReturn(marks);
@@ -59,13 +59,13 @@ public class MarkServiceTests {
         var response = markService.getAll();
 
         assertEquals(3, response.size());
-        assertEquals(Constants.MarksLabels.BMW, response.get(1).getMark());
+        assertEquals(Constants.Marks.Labels.BMW, response.get(1).getMark());
     }
 
     @Test
     void shouldAddMark() throws MarkCreationException {
-        var newMark = Constants.Marks.BMW;
-        var markEntity = MarkEntity.builder().id(1L).mark(Constants.MarksLabels.BMW).build();
+        var newMark = Constants.Marks.DataTransferObjects.BMW;
+        var markEntity = MarkEntity.builder().id(1L).mark(Constants.Marks.Labels.BMW).build();
 
         given(markMapper.dtoToEntity(newMark))
                 .willReturn(markEntity);
@@ -80,18 +80,18 @@ public class MarkServiceTests {
         assertThat(markEntity)
                 .isEqualTo(markArgumentCaptor.getValue());
         assertEquals(1, markArgumentCaptor.getValue().getId());
-        assertEquals(Constants.MarksLabels.BMW,
+        assertEquals(Constants.Marks.Labels.BMW,
                 markArgumentCaptor.getValue().getMark());
     }
 
     @Test
     void shouldUpdateMark() throws MarkCreationException, MarkNotFoundException {
         var id = 1L;
-        var oldMark = Constants.Marks.BMW;
+        var oldMark = Constants.Marks.DataTransferObjects.BMW;
         var updatedMark = Mark.builder().mark("Bawaria Motors").build();
 
         given(markRepository.findById(id))
-                .willReturn(Optional.of(Constants.MarksEntities.BMW_ENTITY));
+                .willReturn(Optional.of(Constants.Marks.Entities.BMW_ENTITY));
 
         markService.update(id, updatedMark, bindingResult);
 
@@ -101,7 +101,7 @@ public class MarkServiceTests {
         verify(markRepository).findById(id);
         verify(markRepository).save(markArgumentCaptor.capture());
 
-        assertThat(Constants.MarksEntities.BMW_ENTITY)
+        assertThat(Constants.Marks.Entities.BMW_ENTITY)
                 .isEqualTo(markArgumentCaptor.getValue())
         ;
         assertEquals("Bawaria Motors",
@@ -114,7 +114,7 @@ public class MarkServiceTests {
         var id = 1L;
 
         given(markRepository.findById(id))
-                .willReturn(Optional.of(Constants.MarksEntities.BMW_ENTITY));
+                .willReturn(Optional.of(Constants.Marks.Entities.BMW_ENTITY));
 
         markService.delete(id);
 
