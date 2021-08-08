@@ -1,5 +1,6 @@
 package pl.malek.automi.Mappers;
 
+import org.springframework.stereotype.Component;
 import pl.malek.automi.DTO.Mark;
 import pl.malek.automi.Entities.MarkEntity;
 
@@ -7,9 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@Component
 public class MarkMapper {
-    public static MarkEntity dtoToEntity(Mark mark) {
+    public MarkEntity dtoToEntity(Mark mark) {
         return MarkEntity
                 .builder()
                 .id(mark.getId())
@@ -17,20 +18,18 @@ public class MarkMapper {
                 .build();
     }
 
-    public static List<Mark> entitiesToDto(Iterable<MarkEntity> markEntities) {
-        var list = new ArrayList<MarkEntity>();
-        markEntities.forEach(list::add);
-        return list
+    public List<Mark> entitiesToDto(List<MarkEntity> markEntities) {
+        return markEntities
                 .stream()
-                .map(mark -> Mark
+                .map(markEntity -> Mark
                         .builder()
-                        .id(mark.getId())
-                        .mark(mark.getMark())
+                        .id(markEntity.getId())
+                        .mark(markEntity.getMark())
                         .build()
                 ).collect(Collectors.toList());
     }
 
-    public static Mark entityToDto(MarkEntity markEntity) {
+    public Mark entityToDto(MarkEntity markEntity) {
         return Mark
                 .builder()
                 .id(markEntity.getId())
