@@ -23,6 +23,7 @@ import java.util.Optional;
 public class MarkServiceImpl implements MarkService {
 
     private final MarkRepository markRepository;
+    private final MarkMapper markMapper;
 
     @Override
     public List<Model> getByMark(String mark) {
@@ -36,20 +37,20 @@ public class MarkServiceImpl implements MarkService {
         if (result.hasErrors()) {
             extractErrors(result.getAllErrors());
         }
-        var markEntity = markRepository.save(MarkMapper.dtoToEntity(mark));
-        return MarkMapper.entityToDto(markEntity);
+        var markEntity = markRepository.save(markMapper.dtoToEntity(mark));
+        return markMapper.entityToDto(markEntity);
     }
 
     @Override
     public List<Mark> getAll() {
-        return MarkMapper.entitiesToDto(markRepository.findAll());
+        return markMapper.entitiesToDto(markRepository.findAll());
     }
 
     @Override
     public Mark delete(long id) throws MarkNotFoundException {
         var markEntity = getById(id);
         markRepository.deleteById(id);
-        return MarkMapper.entityToDto(markEntity);
+        return markMapper.entityToDto(markEntity);
     }
 
     @Override
@@ -60,7 +61,7 @@ public class MarkServiceImpl implements MarkService {
         }
         markEntity.setMark(mark.getMark());
         markRepository.save(markEntity);
-        return MarkMapper.entityToDto(markEntity);
+        return markMapper.entityToDto(markEntity);
     }
 
     @Override
