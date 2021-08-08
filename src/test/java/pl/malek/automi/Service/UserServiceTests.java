@@ -29,24 +29,12 @@ import static org.mockito.Mockito.verify;
 @ExtendWith(MockitoExtension.class)
 public class UserServiceTests {
 
-    @Mock
-    private UserRepository userRepository;
-
-    @Mock
-    private UserMapper userMapper;
-
-    @Mock
-    private BindingResult bindingResult;
-
-    @Mock
-    private RoleRepository roleRepository;
-
-    @Mock
-    private RoleServiceImpl roleService;
-
-    @InjectMocks
-    private UserServiceImpl userService;
-
+    @Mock private UserRepository userRepository;
+    @Mock private UserMapper userMapper;
+    @Mock private BindingResult bindingResult;
+    @Mock private RoleRepository roleRepository;
+    @Mock private RoleServiceImpl roleService;
+    @InjectMocks private UserServiceImpl userService;
 
     @Test
     void checkIfMocksWorks() {
@@ -80,10 +68,7 @@ public class UserServiceTests {
                         UserEntity.builder()
                                 .email("r.nowak@automi.com")
                                 .password("Jakiestam1.")
-                                .roleEntity(
-                                        RoleEntity.builder()
-                                                .roleName(Constants.Roles.ROLE_USER)
-                                                .build()).build());
+                                .roleEntity(Constants.RolesEntities.ROLE_USER_ENTITY).build());
 
         userService.add(user, bindingResult);
 
