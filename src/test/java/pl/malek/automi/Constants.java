@@ -6,8 +6,24 @@ import pl.malek.automi.Entities.MarkEntity;
 import pl.malek.automi.Entities.RoleEntity;
 import pl.malek.automi.Entities.UserEntity;
 
+/**
+ * Class with inner classes which represent data
+ * for tests for all objects:
+ * {@link Users}
+ * {@link Roles}
+ * {@link Marks}
+ * @author Michał Małek
+ * @version 1.0
+ */
 public class Constants {
 
+    /**
+     * Class with Users data for tests
+     * {@link DataTransferObjects}
+     * {@link Entities}
+     * @author Michał Małek
+     * @version 1.0
+     */
     public static class Users {
 
         public static class DataTransferObjects {
@@ -40,6 +56,13 @@ public class Constants {
         }
     }
 
+    /**
+     * Class with Roles data for tests
+     * {@link Labels}
+     * {@link Entities}
+     * @author Michał Małek
+     * @version 1.0
+     */
     public static class Roles {
 
         public static class Labels {
@@ -54,6 +77,14 @@ public class Constants {
 
     }
 
+    /**
+     * Class with car Marks data for tests
+     * {@link Labels}
+     * {@link Entities}
+     * {@link DataTransferObjects}
+     * @author Michał Małek
+     * @version 1.0
+     */
     public static class Marks {
 
         public static class Labels {
