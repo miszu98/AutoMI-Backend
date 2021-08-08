@@ -45,8 +45,8 @@ public class RoleServiceTests {
 
     @Test
     void shouldReturnsListOfRoles() {
-        var user = Role.builder().role(Constants.Roles.ROLE_USER).build();
-        var admin = Role.builder().role(Constants.Roles.ROLE_ADMIN).build();
+        var user = Role.builder().role(Constants.Roles.Labels.ROLE_USER).build();
+        var admin = Role.builder().role(Constants.Roles.Labels.ROLE_ADMIN).build();
         var roles = List.of(user, admin);
 
         given(roleServiceImpl.getAll()).willReturn(roles);
@@ -54,7 +54,7 @@ public class RoleServiceTests {
         verify(roleRepository).findAll();
 
         assertEquals(2, roleServiceImpl.getAll().size());
-        assertEquals(Constants.Roles.ROLE_USER, roleServiceImpl.getAll().get(0).getRole());
+        assertEquals(Constants.Roles.Labels.ROLE_USER, roleServiceImpl.getAll().get(0).getRole());
     }
 
     @Test
@@ -72,7 +72,7 @@ public class RoleServiceTests {
     @Test
     void shouldUpdateGivenRole() throws RoleNotFoundException, RoleCreationException {
         var id = 1L;
-        var old = RoleEntity.builder().roleName(Constants.Roles.ROLE_USER).build();
+        var old = RoleEntity.builder().roleName(Constants.Roles.Labels.ROLE_USER).build();
         var updated = Role.builder().role("NEW_USER").build();
 
         given(roleRepository.findById(id)).willReturn(Optional.of(old));
@@ -85,13 +85,13 @@ public class RoleServiceTests {
         verify(roleRepository).save(roleArgumentCaptor.capture());
 
         assertEquals("NEW_USER", roleArgumentCaptor.getValue().getRoleName());
-        assertNotEquals(Constants.Roles.ROLE_USER, roleArgumentCaptor.getValue().getRoleName());
+        assertNotEquals(Constants.Roles.Labels.ROLE_USER, roleArgumentCaptor.getValue().getRoleName());
     }
 
     @Test
     void shouldDeleteRole() throws RoleNotFoundException {
         var id = 1L;
-        var role = RoleEntity.builder().roleName(Constants.Roles.ROLE_ADMIN).build();
+        var role = RoleEntity.builder().roleName(Constants.Roles.Labels.ROLE_ADMIN).build();
 
         given(roleRepository.findById(id)).willReturn(Optional.of(role));
 

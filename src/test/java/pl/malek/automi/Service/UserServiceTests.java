@@ -48,8 +48,8 @@ public class UserServiceTests {
 
     @Test
     void shouldGetAllUsers() {
-        var user = Constants.Users.USER;
-        var admin = Constants.Users.ADMIN;
+        var user = Constants.Users.DataTransferObjects.USER;
+        var admin = Constants.Users.DataTransferObjects.ADMIN;
         var users = List.of(user, admin);
 
         given(userService.getAll()).willReturn(users);
@@ -61,14 +61,14 @@ public class UserServiceTests {
 
     @Test
     void shouldAddUser() throws RoleNotFoundException, UserCreationException {
-        var user = Constants.Users.USER;
+        var user = Constants.Users.DataTransferObjects.USER;
 
         given(userMapper.dtoToEntity(user))
                 .willReturn(
                         UserEntity.builder()
                                 .email("r.nowak@automi.com")
                                 .password("Jakiestam1.")
-                                .roleEntity(Constants.RolesEntities.ROLE_USER_ENTITY).build());
+                                .roleEntity(Constants.Roles.Entities.ROLE_USER_ENTITY).build());
 
         userService.add(user, bindingResult);
 
@@ -84,10 +84,10 @@ public class UserServiceTests {
     @Test
     void shouldUpdateUser() throws UserNotFoundException, RoleNotFoundException, UserCreationException {
         var id = 1L;
-        var oldUser = Constants.UsersEntities.USER_ENTITY;
-        var updatedUser = Constants.Users.UPDATED_USER;
+        var oldUser = Constants.Users.Entities.USER_ENTITY;
+        var updatedUser = Constants.Users.DataTransferObjects.UPDATED_USER;
 
-        given(roleService.getByName(Constants.Roles.ROLE_USER)).willReturn(Constants.RolesEntities.ROLE_USER_ENTITY);
+        given(roleService.getByName(Constants.Roles.Labels.ROLE_USER)).willReturn(Constants.Roles.Entities.ROLE_USER_ENTITY);
         given(userRepository.findById(id))
                 .willReturn(Optional.of(oldUser));
 
@@ -105,7 +105,7 @@ public class UserServiceTests {
     void shouldDeleteUser() throws UserNotFoundException {
         var id = 1L;
 
-        given(userRepository.findById(id)).willReturn(Optional.of(Constants.UsersEntities.USER_ENTITY));
+        given(userRepository.findById(id)).willReturn(Optional.of(Constants.Users.Entities.USER_ENTITY));
 
         userService.delete(id);
 
