@@ -1,5 +1,6 @@
 package pl.malek.automi;
 
+import pl.malek.automi.DTO.FuelType;
 import pl.malek.automi.DTO.Mark;
 import pl.malek.automi.DTO.Model;
 import pl.malek.automi.DTO.User;
@@ -170,7 +171,23 @@ public class Constants {
         }
     }
 
+    public static class FuelTypes {
+        public static class Labels {
+            public static final String GAS = "GAS";
+            public static final String DIESEL = "DIESEL";
+        }
+        public static class DataTransferObjects {
+            public static final FuelType GAS = FuelType.builder()
+                    .id(1L)
+                    .fuelTypeName(Labels.GAS)
+                    .build();
 
+            public static final FuelType DIESEL = FuelType.builder()
+                    .id(2L)
+                    .fuelTypeName(Labels.DIESEL)
+                    .build();
+        }
+    }
 }
 
 
