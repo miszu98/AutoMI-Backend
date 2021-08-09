@@ -1,8 +1,10 @@
 package pl.malek.automi;
 
 import pl.malek.automi.DTO.Mark;
+import pl.malek.automi.DTO.Model;
 import pl.malek.automi.DTO.User;
 import pl.malek.automi.Entities.MarkEntity;
+import pl.malek.automi.Entities.ModelEntity;
 import pl.malek.automi.Entities.RoleEntity;
 import pl.malek.automi.Entities.UserEntity;
 
@@ -115,9 +117,60 @@ public class Constants {
                     .id(1L)
                     .mark(Labels.BMW)
                     .build();
+
+            public static final MarkEntity MERCEDES_BENZ = MarkEntity.builder()
+                    .id(1L)
+                    .mark(Labels.MERCEDES_BENZ)
+                    .build();
         }
 
     }
+
+    /**
+     * Class with car Models data for tests
+     * {@link Labels}
+     * {@link Entities}
+     * {@link DataTransferObjects}
+     * @author Michał Małek
+     * @version 1.0
+     */
+    public static class Models {
+        public static class Labels {
+            public static final String M5 = "M5";
+            public static final String C63S = "C63s";
+            public static final String M5CS = "M5 CS";
+        }
+
+        public static class DataTransferObjects {
+            public static final Model C63S = Model.builder()
+                    .id(1L)
+                    .model(Labels.C63S)
+                    .markId(1L)
+                    .build();
+
+            public static final Model M5 = Model.builder()
+                    .id(2L)
+                    .model(Labels.M5)
+                    .markId(2L)
+                    .build();
+        }
+
+        public static class Entities {
+            public static final ModelEntity C63S = ModelEntity.builder()
+                    .id(1L)
+                    .model(Labels.C63S)
+                    .markEntity(Marks.Entities.MERCEDES_BENZ)
+                    .build();
+
+            public static final ModelEntity M5 = ModelEntity.builder()
+                    .id(2L)
+                    .model(Labels.M5)
+                    .markEntity(Marks.Entities.BMW_ENTITY)
+                    .build();
+        }
+    }
+
+
 }
 
 
