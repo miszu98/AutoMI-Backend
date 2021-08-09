@@ -2,6 +2,7 @@ package pl.malek.automi.Service.Impl;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import pl.malek.automi.DTO.Mark;
@@ -24,12 +25,13 @@ public class MarkServiceImpl implements MarkService {
 
     private final MarkRepository markRepository;
     private final MarkMapper markMapper;
+    private final ModelMapper modelMapper;
 
     @Override
     public List<Model> getByMark(String mark) {
         Optional<MarkEntity> optionalMarkEntity = markRepository.findMarkEntityByMark(mark);
         MarkEntity founded = optionalMarkEntity.orElseThrow();
-        return ModelMapper.entitiesToDto(founded.getModels());
+        return modelMapper.entitiesToDto(founded.getModels());
     }
 
     @Override
