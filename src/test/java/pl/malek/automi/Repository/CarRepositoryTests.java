@@ -4,18 +4,13 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace.NONE;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import pl.malek.automi.Entities.*;
+import pl.malek.automi.GenericCarTest;
 
-import java.util.Optional;
 
-
-@DataJpaTest
-@AutoConfigureTestDatabase(replace = NONE)
+@SpringBootTest
 public class CarRepositoryTests {
 
     @Autowired private MarkRepository markRepository;
@@ -75,19 +70,5 @@ public class CarRepositoryTests {
                         .tryToGetEntityObject(carRepository.findCarEntityByModel(modelEntity))
                         .getColor()
                         .getColorName());
-    }
-}
-
-
-class GenericCarTest {
-    public static <T> T tryToGetEntityObject(Optional<T> optionalObject) {
-        T objectEntity;
-        var isExist = optionalObject.isPresent();
-        if (isExist) {
-            objectEntity = optionalObject.get();
-        } else {
-            objectEntity = (T) new Object();
-        }
-        return objectEntity;
     }
 }
