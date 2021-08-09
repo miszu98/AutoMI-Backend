@@ -24,7 +24,7 @@ public class ModelMapper {
                 .build();
     }
 
-    public static List<Model> entitiesToDto(Iterable<ModelEntity> modelEntities) {
+    public List<Model> entitiesToDto(Iterable<ModelEntity> modelEntities) {
         var list = new ArrayList<ModelEntity>();
         modelEntities.forEach(list::add);
         return list
@@ -38,7 +38,7 @@ public class ModelMapper {
                 ).collect(Collectors.toList());
     }
 
-    public static Model entityToDto(ModelEntity modelEntity) {
+    public Model entityToDto(ModelEntity modelEntity) {
         return Model
                 .builder()
                 .id(modelEntity.getId())
