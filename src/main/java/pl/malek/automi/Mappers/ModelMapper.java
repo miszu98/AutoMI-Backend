@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import pl.malek.automi.DTO.Model;
 import pl.malek.automi.Entities.ModelEntity;
 import pl.malek.automi.Exceptions.MarkNotFoundException;
-import pl.malek.automi.Service.MarkService;
+import pl.malek.automi.Repository.MarkRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,13 +14,17 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class ModelMapper {
 
-    private final MarkService markService;
+    private final MarkRepository markRepository;
 
     public ModelEntity dtoToEntity(Model model) throws MarkNotFoundException {
         return ModelEntity
                 .builder()
                 .model(model.getModel())
-                .markEntity(markService.getById(model.getMarkId()))
+                .markEntity(markRepository.findById(model.getMarkId()).orElseThrow(
+                        () -> new MarkNotFoundException(
+                                "Mark with id: " + model.getMarkId() + " not found"
+                        )
+                ))
                 .build();
     }
 
