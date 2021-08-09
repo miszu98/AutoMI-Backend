@@ -31,7 +31,7 @@ public class ModelServiceImpl implements ModelService {
             extractErrors(result.getAllErrors());
         }
         var modelEntity = modelRepository.save(modelMapper.dtoToEntity(model));
-        return ModelMapper.entityToDto(modelEntity);
+        return modelMapper.entityToDto(modelEntity);
     }
 
     @Override
@@ -42,24 +42,24 @@ public class ModelServiceImpl implements ModelService {
         }
         modelEntity.setModel(model.getModel());
         modelRepository.save(modelEntity);
-        return ModelMapper.entityToDto(modelEntity);
+        return modelMapper.entityToDto(modelEntity);
     }
 
     @Override
     public List<Model> getAll() {
-        return ModelMapper.entitiesToDto(modelRepository.findAll());
+        return modelMapper.entitiesToDto(modelRepository.findAll());
     }
 
     @Override
     public List<Model> getAll(Pageable pageable) {
-        return ModelMapper.entitiesToDto(modelRepository.findAll(pageable));
+        return modelMapper.entitiesToDto(modelRepository.findAll(pageable));
     }
 
     @Override
     public Model delete(long id) throws ModelNotFoundException {
         var modelEntity = getById(id);
         modelRepository.deleteById(id);
-        return ModelMapper.entityToDto(modelEntity);
+        return modelMapper.entityToDto(modelEntity);
     }
 
     @Override
