@@ -1,20 +1,23 @@
 package pl.malek.automi.Mappers;
 
+import org.springframework.stereotype.Component;
 import pl.malek.automi.DTO.FuelType;
 import pl.malek.automi.Entities.FuelTypeEntity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class FuelTypeMapper {
-    public static FuelTypeEntity dtoToEntity(FuelType fuelType) {
+
+    public FuelTypeEntity dtoToEntity(FuelType fuelType) {
         return FuelTypeEntity
                 .builder()
                 .fuelTypeName(fuelType.getFuelTypeName())
                 .build();
     }
 
-    public static List<FuelType> entitiesToDto(Iterable<FuelTypeEntity> fuelTypeEntities) {
+    public List<FuelType> entitiesToDto(Iterable<FuelTypeEntity> fuelTypeEntities) {
         var list = new ArrayList<FuelTypeEntity>();
         fuelTypeEntities.forEach(list::add);
         return list
@@ -26,7 +29,7 @@ public class FuelTypeMapper {
                 ).collect(Collectors.toList());
     }
 
-    public static FuelType entityToDto(FuelTypeEntity fuelTypeEntity) {
+    public FuelType entityToDto(FuelTypeEntity fuelTypeEntity) {
         return FuelType
                 .builder()
                 .id(fuelTypeEntity.getId())

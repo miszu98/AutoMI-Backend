@@ -19,26 +19,27 @@ import java.util.List;
 public class FuelTypeServiceImpl implements FuelTypeService {
 
     private final FuelTypeRepository fuelTypeRepository;
+    private final FuelTypeMapper fuelTypeMapper;
 
     @Override
     public FuelType add(FuelType fuelType, BindingResult result) throws FuelTypeCreationException {
         if (result.hasErrors()) {
             extractErrors(result.getAllErrors());
         }
-        var fuelTypeEntity = fuelTypeRepository.save(FuelTypeMapper.dtoToEntity(fuelType));
-        return FuelTypeMapper.entityToDto(fuelTypeEntity);
+        var fuelTypeEntity = fuelTypeRepository.save(fuelTypeMapper.dtoToEntity(fuelType));
+        return fuelTypeMapper.entityToDto(fuelTypeEntity);
     }
 
     @Override
     public List<FuelType> getAll() {
-        return FuelTypeMapper.entitiesToDto(fuelTypeRepository.findAll());
+        return fuelTypeMapper.entitiesToDto(fuelTypeRepository.findAll());
     }
 
     @Override
     public FuelType delete(long id) throws FuelTypeNotFoundException {
         var fuelTypeEntity = getById(id);
         fuelTypeRepository.deleteById(id);
-        return FuelTypeMapper.entityToDto(fuelTypeEntity);
+        return fuelTypeMapper.entityToDto(fuelTypeEntity);
     }
 
     @Override
@@ -49,7 +50,7 @@ public class FuelTypeServiceImpl implements FuelTypeService {
         }
         fuelTypeEntity.setFuelTypeName(fuelType.getFuelTypeName());
         fuelTypeRepository.save(fuelTypeEntity);
-        return FuelTypeMapper.entityToDto(fuelTypeEntity);
+        return fuelTypeMapper.entityToDto(fuelTypeEntity);
     }
 
     @Override

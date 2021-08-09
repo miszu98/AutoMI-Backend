@@ -1,12 +1,10 @@
 package pl.malek.automi;
 
+import pl.malek.automi.DTO.FuelType;
 import pl.malek.automi.DTO.Mark;
 import pl.malek.automi.DTO.Model;
 import pl.malek.automi.DTO.User;
-import pl.malek.automi.Entities.MarkEntity;
-import pl.malek.automi.Entities.ModelEntity;
-import pl.malek.automi.Entities.RoleEntity;
-import pl.malek.automi.Entities.UserEntity;
+import pl.malek.automi.Entities.*;
 
 /**
  * Class with inner classes which represent data
@@ -170,7 +168,30 @@ public class Constants {
         }
     }
 
+    public static class FuelTypes {
+        public static class Labels {
+            public static final String GAS = "GAS";
+            public static final String DIESEL = "DIESEL";
+        }
+        public static class DataTransferObjects {
+            public static final FuelType GAS = FuelType.builder()
+                    .id(1L)
+                    .fuelTypeName(Labels.GAS)
+                    .build();
 
+            public static final FuelType DIESEL = FuelType.builder()
+                    .id(2L)
+                    .fuelTypeName(Labels.DIESEL)
+                    .build();
+        }
+
+        public static class Entities {
+            public static final FuelTypeEntity DIESEL = FuelTypeEntity.builder()
+                    .id(2L)
+                    .fuelTypeName(Labels.DIESEL)
+                    .build();
+        }
+    }
 }
 
 
