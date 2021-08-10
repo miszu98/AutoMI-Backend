@@ -27,8 +27,8 @@ public class ColorServiceImpl implements ColorService {
         if (result.hasErrors()) {
             extractErrors(result.getAllErrors());
         }
-        var drivingGearEntity = colorRepository.save(colorMapper.dtoToEntity(color));
-        return colorMapper.entityToDto(drivingGearEntity);
+        var colorEntity = colorRepository.save(colorMapper.dtoToEntity(color));
+        return colorMapper.entityToDto(colorEntity);
     }
 
     @Override

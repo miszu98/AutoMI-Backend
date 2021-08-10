@@ -22,7 +22,7 @@ public class CarServiceImpl implements CarService {
     private final CarMapper carMapper;
 
     @Override
-    public Car add(Car car, BindingResult result) throws ColorNotFoundException, MarkNotFoundException, ModelNotFoundException, GearboxNotFoundException, FuelTypeNotFoundException, CarCreationException {
+    public Car add(Car car, BindingResult result) throws ColorNotFoundException, MarkNotFoundException, ModelNotFoundException, GearboxNotFoundException, FuelTypeNotFoundException, CarCreationException, DrivingGearNotFoundException {
         if (result.hasErrors()) {
             extractErrors(result.getAllErrors());
         }
@@ -31,7 +31,7 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public Car add(Car car) throws ColorNotFoundException, MarkNotFoundException, ModelNotFoundException, GearboxNotFoundException, FuelTypeNotFoundException {
+    public Car add(Car car) throws ColorNotFoundException, MarkNotFoundException, ModelNotFoundException, GearboxNotFoundException, FuelTypeNotFoundException, DrivingGearNotFoundException {
         var carEntity = carRepository.save(carMapper.dtoToEntity(car));
         return carMapper.entityToDto(carEntity);
     }
@@ -49,7 +49,7 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public Car update(long id, Car car, BindingResult result) throws CarNotFoundException, CarCreationException, MarkNotFoundException, ColorNotFoundException, FuelTypeNotFoundException, ModelNotFoundException, GearboxNotFoundException {
+    public Car update(long id, Car car, BindingResult result) throws CarNotFoundException, CarCreationException, MarkNotFoundException, ColorNotFoundException, FuelTypeNotFoundException, ModelNotFoundException, GearboxNotFoundException, DrivingGearNotFoundException {
         if (!carRepository.existsById(id)) {
             throw new CarNotFoundException(String.format("Car with id: %d not found", id));
         }
