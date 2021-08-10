@@ -71,15 +71,27 @@ public class ApiHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessages());
     }
 
-    // Driving gears exceptions
+    // Gearboxes exceptions
 
     @ExceptionHandler(GearboxNotFoundException.class)
-    public ResponseEntity<String> handleDrivingGearNotFoundException(GearboxNotFoundException exception) {
+    public ResponseEntity<String> handleGearboxNotFoundException(GearboxNotFoundException exception) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessage());
     }
 
     @ExceptionHandler(GearboxCreationException.class)
-    public ResponseEntity<List<String>> handleCreationDrivingGearException(GearboxCreationException exception) {
+    public ResponseEntity<List<String>> handleCreationGearboxException(GearboxCreationException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessages());
+    }
+
+    // Driving gears exceptions
+
+    @ExceptionHandler(DrivingGearNotFoundException.class)
+    public ResponseEntity<String> handleDrivingGearNotFoundException(DrivingGearNotFoundException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessage());
+    }
+
+    @ExceptionHandler(DrivingGearCreationException.class)
+    public ResponseEntity<List<String>> handleCreationDrivingGearException(DrivingGearCreationException exception) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessages());
     }
 
@@ -94,6 +106,8 @@ public class ApiHandler {
     public ResponseEntity<List<String>> handleCreationColorException(ColorCreationException exception) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessages());
     }
+
+
 
     // Car exceptions
 

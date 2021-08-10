@@ -24,7 +24,7 @@ public class CarController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Car> add(@Valid @RequestBody Car car, BindingResult result) throws MarkNotFoundException, ColorNotFoundException, ModelNotFoundException, CarCreationException, FuelTypeNotFoundException, GearboxNotFoundException {
+    public ResponseEntity<Car> add(@Valid @RequestBody Car car, BindingResult result) throws MarkNotFoundException, ColorNotFoundException, ModelNotFoundException, CarCreationException, FuelTypeNotFoundException, GearboxNotFoundException, DrivingGearNotFoundException {
         System.out.println(car);
         return ResponseEntity.status(HttpStatus.OK).body(carService.add(car, result));
     }
@@ -35,7 +35,7 @@ public class CarController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Car> update(@PathVariable long id, @Valid @RequestBody Car car, BindingResult result) throws CarNotFoundException, MarkNotFoundException, ColorNotFoundException, ModelNotFoundException, CarCreationException, FuelTypeNotFoundException, GearboxNotFoundException {
+    public ResponseEntity<Car> update(@PathVariable long id, @Valid @RequestBody Car car, BindingResult result) throws CarNotFoundException, MarkNotFoundException, ColorNotFoundException, ModelNotFoundException, CarCreationException, FuelTypeNotFoundException, GearboxNotFoundException, DrivingGearNotFoundException {
         return ResponseEntity.status(HttpStatus.OK).body(carService.update(id, car, result));
     }
 }
