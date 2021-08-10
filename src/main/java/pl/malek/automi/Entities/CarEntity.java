@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.malek.automi.Enums.CarType;
+import pl.malek.automi.Enums.State;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -42,6 +44,18 @@ public class CarEntity {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "gearbox_id", referencedColumnName = "id")
     private GearboxEntity gearbox;
+
+    private Long mileage;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "driving_gear_id", referencedColumnName = "id")
+    private DrivingGearEntity drivingGear;
+
+    @Enumerated(EnumType.STRING)
+    private State state;
+
+    @Enumerated(EnumType.STRING)
+    private CarType carType;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "color_id", referencedColumnName = "id")
