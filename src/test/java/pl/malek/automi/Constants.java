@@ -174,20 +174,20 @@ public class Constants {
         }
     }
 
-    public static class DrivingGears {
+    public static class Gearboxes {
         public static class Labels {
             public static final String AUTOMATIC = "AUTOMATIC";
             public static final String MANUAL = "MANUAL";
         }
 
         public static class DataTransferObjects {
-            public static final Gearbox AUTOMATIC = Gearbox.builder()
+            public static final pl.malek.automi.DTO.Gearbox AUTOMATIC = Gearbox.builder()
                     .id(1L)
-                    .drivingGear(Labels.AUTOMATIC)
+                    .gearbox(Labels.AUTOMATIC)
                     .build();
-            public static final Gearbox MANUAL = Gearbox.builder()
+            public static final pl.malek.automi.DTO.Gearbox MANUAL = Gearbox.builder()
                     .id(2L)
-                    .drivingGear(Labels.MANUAL)
+                    .gearbox(Labels.MANUAL)
                     .build();
         }
     }

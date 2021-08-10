@@ -25,6 +25,7 @@ public class CarController {
 
     @PostMapping("/")
     public ResponseEntity<Car> add(@Valid @RequestBody Car car, BindingResult result) throws MarkNotFoundException, ColorNotFoundException, ModelNotFoundException, CarCreationException, FuelTypeNotFoundException, GearboxNotFoundException {
+        System.out.println(car);
         return ResponseEntity.status(HttpStatus.OK).body(carService.add(car, result));
     }
 

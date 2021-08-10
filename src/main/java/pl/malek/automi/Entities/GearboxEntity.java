@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "gearbox")
+@Table(name = "gearboxes")
 public class GearboxEntity {
 
     @Id

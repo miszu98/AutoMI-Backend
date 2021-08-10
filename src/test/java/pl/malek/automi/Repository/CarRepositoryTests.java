@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.springframework.boot.test.context.SpringBootTest;
 import pl.malek.automi.Entities.*;
-import pl.malek.automi.GenericCarTest;
+import pl.malek.automi.GenericTest;
 
 
 @SpringBootTest
@@ -23,7 +23,7 @@ public class CarRepositoryTests {
     @BeforeEach
     void setUp() {
         MarkEntity markEntity = MarkEntity.builder().mark("Mercedes-Benz").build();
-        ModelEntity modelEntity = ModelEntity.builder().model("C63s").build();
+        ModelEntity modelEntity = ModelEntity.builder().model("C63s").markEntity(markEntity).build();
         FuelTypeEntity fuelTypeEntity = FuelTypeEntity.builder().fuelTypeName("GAS").build();
         GearboxEntity gearboxEntity = GearboxEntity.builder().gearbox("AUTOMAT").build();
         ColorEntity colorEntity = ColorEntity.builder().colorName("BLACK").build();
@@ -46,11 +46,11 @@ public class CarRepositoryTests {
 
     @Test
     void shouldAddCarOffer() {
-        var markEntity = GenericCarTest.tryToGetEntityObject(markRepository.findMarkEntityByMark("Mercedes-Benz"));
-        var modelEntity = GenericCarTest.tryToGetEntityObject(modelRepository.findByModel("C63s"));
-        var fuelTypeEntity = GenericCarTest.tryToGetEntityObject(fuelTypeRepository.findFuelTypeEntityByFuelTypeName("GAS"));
-        var drivingGearEntity = GenericCarTest.tryToGetEntityObject(gearboxRepository.findGearboxEntitiesByGearbox("AUTOMAT"));
-        var colorEntity = GenericCarTest.tryToGetEntityObject(colorRepository.findColorEntityByColorName("BLACK"));
+        var markEntity = GenericTest.tryToGetEntityObject(markRepository.findMarkEntityByMark("Mercedes-Benz"));
+        var modelEntity = GenericTest.tryToGetEntityObject(modelRepository.findByModel("C63s"));
+        var fuelTypeEntity = GenericTest.tryToGetEntityObject(fuelTypeRepository.findFuelTypeEntityByFuelTypeName("GAS"));
+        var gearboxEntity = GenericTest.tryToGetEntityObject(gearboxRepository.findGearboxEntitiesByGearbox("AUTOMAT"));
+        var colorEntity = GenericTest.tryToGetEntityObject(colorRepository.findColorEntityByColorName("BLACK"));
 
 
         CarEntity carEntity = CarEntity.builder()
@@ -59,14 +59,16 @@ public class CarRepositoryTests {
                 .fuelType(fuelTypeEntity)
                 .power(625L)
                 .engineCapacity(4000L)
-                .gearbox(drivingGearEntity)
+                .gearbox(gearboxEntity)
                 .color(colorEntity)
                 .build();
+
         carRepository.save(carEntity);
+
 
         assertEquals(1, carRepository.findAll().size());
         assertEquals("BLACK",
-                GenericCarTest
+                GenericTest
                         .tryToGetEntityObject(carRepository.findCarEntityByModel(modelEntity))
                         .getColor()
                         .getColorName());

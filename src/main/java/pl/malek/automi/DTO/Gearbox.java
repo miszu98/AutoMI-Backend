@@ -17,5 +17,5 @@ public class Gearbox {
 
     @Size(min = 3, max = 10, message = "length (3-10)")
     @NotBlank(message = "Driving gear field may be not blank")
-    private String drivingGear;
+    private String gearbox;
 }

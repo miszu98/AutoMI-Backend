@@ -10,7 +10,7 @@ import pl.malek.automi.Repository.GearboxRepository;
 import pl.malek.automi.Service.Impl.GearboxServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
-public class GearboxServiceTests {
+public class GearboxesServiceTests {
 
     @Mock
     private GearboxRepository gearboxRepository;

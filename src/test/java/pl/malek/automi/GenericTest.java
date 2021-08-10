@@ -7,7 +7,7 @@ import java.util.Optional;
  * @author Michał Małek
  * @version 1.0
  */
-public class GenericCarTest {
+public class GenericTest {
     public static <T> T tryToGetEntityObject(Optional<T> optionalObject) {
         T objectEntity;
         var isExist = optionalObject.isPresent();

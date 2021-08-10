@@ -30,7 +30,6 @@ public class CarOffer {
 
     private User user;
 
-    @NotBlank(message = "Price field may be not blank")
     private BigDecimal price;
 
 }
