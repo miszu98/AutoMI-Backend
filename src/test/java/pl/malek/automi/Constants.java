@@ -211,6 +211,31 @@ public class Constants {
                     .build();
         }
     }
+
+    public static class Colors {
+        public static class Labels {
+            public static final String BLACK = "BLACK";
+            public static final String GREY = "GREY";
+            public static final String RED = "RED";
+        }
+        public static class DataTransferObjects {
+            public static final Color BLACK = Color.builder()
+                    .id(1L)
+                    .colorName(Labels.BLACK)
+                    .build();
+            public static final Color GREY = Color.builder()
+                    .id(2L)
+                    .colorName(Labels.GREY)
+                    .build();
+        }
+
+        public static class Entities {
+            public static final ColorEntity BLACK = ColorEntity.builder()
+                    .id(1L)
+                    .colorName(Labels.BLACK)
+                    .build();
+        }
+    }
 }
 
 
