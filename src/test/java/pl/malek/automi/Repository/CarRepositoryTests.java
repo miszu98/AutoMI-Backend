@@ -25,7 +25,7 @@ public class CarRepositoryTests {
         MarkEntity markEntity = MarkEntity.builder().mark("Mercedes-Benz").build();
         ModelEntity modelEntity = ModelEntity.builder().model("C63s").build();
         FuelTypeEntity fuelTypeEntity = FuelTypeEntity.builder().fuelTypeName("GAS").build();
-        GearboxEntity gearboxEntity = GearboxEntity.builder().drivingGearName("AUTOMAT").build();
+        GearboxEntity gearboxEntity = GearboxEntity.builder().gearbox("AUTOMAT").build();
         ColorEntity colorEntity = ColorEntity.builder().colorName("BLACK").build();
         markRepository.save(markEntity);
         modelRepository.save(modelEntity);
@@ -49,7 +49,7 @@ public class CarRepositoryTests {
         var markEntity = GenericCarTest.tryToGetEntityObject(markRepository.findMarkEntityByMark("Mercedes-Benz"));
         var modelEntity = GenericCarTest.tryToGetEntityObject(modelRepository.findByModel("C63s"));
         var fuelTypeEntity = GenericCarTest.tryToGetEntityObject(fuelTypeRepository.findFuelTypeEntityByFuelTypeName("GAS"));
-        var drivingGearEntity = GenericCarTest.tryToGetEntityObject(gearboxRepository.findDrivingGearEntityByDrivingGearName("AUTOMAT"));
+        var drivingGearEntity = GenericCarTest.tryToGetEntityObject(gearboxRepository.findGearboxEntitiesByGearbox("AUTOMAT"));
         var colorEntity = GenericCarTest.tryToGetEntityObject(colorRepository.findColorEntityByColorName("BLACK"));
 
 
@@ -59,7 +59,7 @@ public class CarRepositoryTests {
                 .fuelType(fuelTypeEntity)
                 .power(625L)
                 .engineCapacity(4000L)
-                .drivingGear(drivingGearEntity)
+                .gearbox(drivingGearEntity)
                 .color(colorEntity)
                 .build();
         carRepository.save(carEntity);

@@ -22,7 +22,7 @@ public class GearboxServiceTests {
     private GearboxServiceImpl gearboxService;
 
     @Test
-    void shouldReturnAllDrivingGears() {
+    void shouldReturnAllGearbox() {
 
     }
 }

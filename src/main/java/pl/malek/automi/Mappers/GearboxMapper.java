@@ -17,14 +17,14 @@ public class GearboxMapper {
         return Gearbox
                 .builder()
                 .id(gearboxEntity.getId())
-                .drivingGear(gearboxEntity.getDrivingGearName())
+                .drivingGear(gearboxEntity.getGearbox())
                 .build();
     }
 
     public GearboxEntity dtoToEntity(Gearbox gearbox) {
         return GearboxEntity
                 .builder()
-                .drivingGearName(gearbox.getDrivingGear())
+                .gearbox(gearbox.getDrivingGear())
                 .build();
     }
 
@@ -35,7 +35,7 @@ public class GearboxMapper {
                         drivingGearEntity -> Gearbox
                                 .builder()
                                 .id(drivingGearEntity.getId())
-                                .drivingGear(drivingGearEntity.getDrivingGearName())
+                                .drivingGear(drivingGearEntity.getGearbox())
                                 .build()
                 ).collect(Collectors.toList());
     }

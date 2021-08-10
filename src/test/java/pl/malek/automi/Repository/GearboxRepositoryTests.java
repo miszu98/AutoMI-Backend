@@ -19,7 +19,7 @@ public class GearboxRepositoryTests {
 
     @BeforeEach
     void setUp() {
-        GearboxEntity automat = GearboxEntity.builder().drivingGearName("AUTOMAT").build();
+        GearboxEntity automat = GearboxEntity.builder().gearbox("AUTOMAT").build();
         gearboxRepository.save(automat);
     }
 
@@ -30,13 +30,13 @@ public class GearboxRepositoryTests {
 
     @Test
     void shouldAddNewDrivingGear() {
-        GearboxEntity manual = GearboxEntity.builder().drivingGearName("MANUAL").build();
+        GearboxEntity manual = GearboxEntity.builder().gearbox("MANUAL").build();
         gearboxRepository.save(manual);
 
         List<GearboxEntity> drivingGears = gearboxRepository.findAll();
 
         assertEquals(2, drivingGears.size());
-        assertEquals("MANUAL", drivingGears.get(1).getDrivingGearName());
+        assertEquals("MANUAL", drivingGears.get(1).getGearbox());
     }
 
     @Test

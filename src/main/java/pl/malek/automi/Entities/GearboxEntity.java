@@ -13,13 +13,13 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "driving_gears")
+@Table(name = "gearbox")
 public class GearboxEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String drivingGearName;
+    private String gearbox;
 
 }

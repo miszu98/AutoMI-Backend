@@ -35,7 +35,7 @@ public class CarMapper {
                 .fuelType(fuelTypeService.getById(car.getFuelType().getId()))
                 .power(car.getPower())
                 .engineCapacity(car.getEngineCapacity())
-                .drivingGear(gearboxService.getById(car.getGearbox().getId()))
+                .gearbox(gearboxService.getById(car.getGearbox().getId()))
                 .color(colorService.getById(car.getColor().getId()))
                 .build();
     }
@@ -49,7 +49,7 @@ public class CarMapper {
                 .fuelType(fuelTypeMapper.entityToDto(carEntity.getFuelType()))
                 .power(carEntity.getPower())
                 .engineCapacity(carEntity.getEngineCapacity())
-                .gearbox(gearboxMapper.entityToDto(carEntity.getDrivingGear()))
+                .gearbox(gearboxMapper.entityToDto(carEntity.getGearbox()))
                 .color(colorMapper.entityToDto(carEntity.getColor()))
                 .build();
     }
@@ -66,7 +66,7 @@ public class CarMapper {
                                         .fuelType(fuelTypeMapper.entityToDto(carEntity.getFuelType()))
                                         .power(carEntity.getPower())
                                         .engineCapacity(carEntity.getEngineCapacity())
-                                        .gearbox(gearboxMapper.entityToDto(carEntity.getDrivingGear()))
+                                        .gearbox(gearboxMapper.entityToDto(carEntity.getGearbox()))
                                         .color(colorMapper.entityToDto(carEntity.getColor()))
                                         .yearOfProduction(carEntity.getYearOfProduction().toString())
                                         .build()
