@@ -178,16 +178,36 @@ public class Constants {
         public static class Labels {
             public static final String AUTOMATIC = "AUTOMATIC";
             public static final String MANUAL = "MANUAL";
+            public static final String TIPTRONIC = "TIPTRONIC";
         }
 
         public static class DataTransferObjects {
-            public static final pl.malek.automi.DTO.Gearbox AUTOMATIC = Gearbox.builder()
+            public static final Gearbox AUTOMATIC = Gearbox.builder()
                     .id(1L)
                     .gearbox(Labels.AUTOMATIC)
                     .build();
-            public static final pl.malek.automi.DTO.Gearbox MANUAL = Gearbox.builder()
+            public static final Gearbox MANUAL = Gearbox.builder()
                     .id(2L)
                     .gearbox(Labels.MANUAL)
+                    .build();
+            public static final Gearbox TIPTRONIC = Gearbox.builder()
+                    .id(3L)
+                    .gearbox(Labels.TIPTRONIC)
+                    .build();
+        }
+
+        public static class Entities {
+            public static final GearboxEntity AUTOMATIC = GearboxEntity.builder()
+                    .id(1L)
+                    .gearbox(Labels.AUTOMATIC)
+                    .build();
+            public static final GearboxEntity MANUAL = GearboxEntity.builder()
+                    .id(2L)
+                    .gearbox(Labels.MANUAL)
+                    .build();
+            public static final GearboxEntity TIPTRONIC = GearboxEntity.builder()
+                    .id(3L)
+                    .gearbox(Labels.TIPTRONIC)
                     .build();
         }
     }
