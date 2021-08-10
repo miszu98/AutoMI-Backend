@@ -40,8 +40,8 @@ public class CarEntity {
     private Long engineCapacity;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "driving_gear_id", referencedColumnName = "id")
-    private GearboxEntity drivingGear;
+    @JoinColumn(name = "gearbox_id", referencedColumnName = "id")
+    private GearboxEntity gearbox;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "color_id", referencedColumnName = "id")

@@ -48,7 +48,7 @@ public class GearboxServiceImpl implements GearboxService {
         if (result.hasErrors()) {
             extractErrors(result.getAllErrors());
         }
-        drivingGearEntity.setDrivingGearName(gearbox.getDrivingGear());
+        drivingGearEntity.setGearbox(gearbox.getGearbox());
         gearboxRepository.save(drivingGearEntity);
         return gearboxMapper.entityToDto(drivingGearEntity);
     }

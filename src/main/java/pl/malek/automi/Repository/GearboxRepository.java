@@ -8,6 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface GearboxRepository extends JpaRepository<GearboxEntity, Long> {
-    Optional<GearboxEntity> findDrivingGearEntityByDrivingGearName(String drivingGearName);
+    Optional<GearboxEntity> findGearboxEntitiesByGearbox(String drivingGearName);
 
 }

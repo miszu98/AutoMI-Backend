@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/driving-gears")
+@RequestMapping("/gearbox")
 public class GearboxController {
 
     private final GearboxService gearboxService;
