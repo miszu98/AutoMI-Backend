@@ -16,18 +16,18 @@ public class CarMapper {
     private final MarkService markService;
     private final ModelService modelService;
     private final FuelTypeService fuelTypeService;
-    private final DrivingGearService drivingGearService;
+    private final GearboxService gearboxService;
     private final ColorService colorService;
 
 
-    private final DrivingGearMapper drivingGearMapper;
+    private final GearboxMapper gearboxMapper;
     private final ColorMapper colorMapper;
     private final MarkMapper markMapper;
     private final ModelMapper modelMapper;
     private final FuelTypeMapper fuelTypeMapper;
 
 
-    public CarEntity dtoToEntity(Car car) throws MarkNotFoundException, ModelNotFoundException, FuelTypeNotFoundException, DrivingGearNotFoundException, ColorNotFoundException {
+    public CarEntity dtoToEntity(Car car) throws MarkNotFoundException, ModelNotFoundException, FuelTypeNotFoundException, GearboxNotFoundException, ColorNotFoundException {
         return CarEntity
                 .builder()
                 .mark(markService.getById(car.getMark().getId()))
@@ -35,7 +35,7 @@ public class CarMapper {
                 .fuelType(fuelTypeService.getById(car.getFuelType().getId()))
                 .power(car.getPower())
                 .engineCapacity(car.getEngineCapacity())
-                .drivingGear(drivingGearService.getById(car.getDrivingGear().getId()))
+                .drivingGear(gearboxService.getById(car.getGearbox().getId()))
                 .color(colorService.getById(car.getColor().getId()))
                 .build();
     }
@@ -49,7 +49,7 @@ public class CarMapper {
                 .fuelType(fuelTypeMapper.entityToDto(carEntity.getFuelType()))
                 .power(carEntity.getPower())
                 .engineCapacity(carEntity.getEngineCapacity())
-                .drivingGear(drivingGearMapper.entityToDto(carEntity.getDrivingGear()))
+                .gearbox(gearboxMapper.entityToDto(carEntity.getDrivingGear()))
                 .color(colorMapper.entityToDto(carEntity.getColor()))
                 .build();
     }
@@ -66,7 +66,7 @@ public class CarMapper {
                                         .fuelType(fuelTypeMapper.entityToDto(carEntity.getFuelType()))
                                         .power(carEntity.getPower())
                                         .engineCapacity(carEntity.getEngineCapacity())
-                                        .drivingGear(drivingGearMapper.entityToDto(carEntity.getDrivingGear()))
+                                        .gearbox(gearboxMapper.entityToDto(carEntity.getDrivingGear()))
                                         .color(colorMapper.entityToDto(carEntity.getColor()))
                                         .yearOfProduction(carEntity.getYearOfProduction().toString())
                                         .build()

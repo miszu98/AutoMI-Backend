@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DrivingGear {
+public class Gearbox {
     private Long id;
 
     @Size(min = 3, max = 10, message = "length (3-10)")
