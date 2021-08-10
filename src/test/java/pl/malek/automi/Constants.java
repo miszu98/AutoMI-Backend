@@ -227,12 +227,20 @@ public class Constants {
                     .id(2L)
                     .colorName(Labels.GREY)
                     .build();
+            public static final Color RED = Color.builder()
+                    .id(3L)
+                    .colorName(Labels.RED)
+                    .build();
         }
 
         public static class Entities {
             public static final ColorEntity BLACK = ColorEntity.builder()
                     .id(1L)
                     .colorName(Labels.BLACK)
+                    .build();
+            public static final ColorEntity RED = ColorEntity.builder()
+                    .id(3L)
+                    .colorName(Labels.RED)
                     .build();
         }
     }
