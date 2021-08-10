@@ -73,13 +73,13 @@ public class ApiHandler {
 
     // Driving gears exceptions
 
-    @ExceptionHandler(DrivingGearNotFoundException.class)
-    public ResponseEntity<String> handleDrivingGearNotFoundException(DrivingGearNotFoundException exception) {
+    @ExceptionHandler(GearboxNotFoundException.class)
+    public ResponseEntity<String> handleDrivingGearNotFoundException(GearboxNotFoundException exception) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessage());
     }
 
-    @ExceptionHandler(DrivinGearCreationException.class)
-    public ResponseEntity<List<String>> handleCreationDrivingGearException(DrivinGearCreationException exception) {
+    @ExceptionHandler(GearboxCreationException.class)
+    public ResponseEntity<List<String>> handleCreationDrivingGearException(GearboxCreationException exception) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessages());
     }
 

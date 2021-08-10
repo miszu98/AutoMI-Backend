@@ -23,7 +23,7 @@ public class CarOfferServiceImpl implements CarOfferService {
     private final CarService carService;
 
     @Override
-    public CarOffer add(CarOffer carOffer, BindingResult result) throws CarNotFoundException, UserNotFoundException, CarOfferCreationException, ColorNotFoundException, MarkNotFoundException, ModelNotFoundException, DrivingGearNotFoundException, FuelTypeNotFoundException {
+    public CarOffer add(CarOffer carOffer, BindingResult result) throws CarNotFoundException, UserNotFoundException, CarOfferCreationException, ColorNotFoundException, MarkNotFoundException, ModelNotFoundException, GearboxNotFoundException, FuelTypeNotFoundException {
         if (result.hasErrors()) {
             extractErrors(result.getAllErrors());
         }

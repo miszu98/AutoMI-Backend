@@ -2,8 +2,8 @@ package pl.malek.automi.Mappers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.malek.automi.DTO.DrivingGear;
-import pl.malek.automi.Entities.DrivingGearEntity;
+import pl.malek.automi.DTO.Gearbox;
+import pl.malek.automi.Entities.GearboxEntity;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,28 +11,28 @@ import java.util.stream.Collectors;
 
 @Component
 @AllArgsConstructor
-public class DrivingGearMapper {
+public class GearboxMapper {
 
-    public DrivingGear entityToDto(DrivingGearEntity drivingGearEntity) {
-        return DrivingGear
+    public Gearbox entityToDto(GearboxEntity gearboxEntity) {
+        return Gearbox
                 .builder()
-                .id(drivingGearEntity.getId())
-                .drivingGear(drivingGearEntity.getDrivingGearName())
+                .id(gearboxEntity.getId())
+                .drivingGear(gearboxEntity.getDrivingGearName())
                 .build();
     }
 
-    public DrivingGearEntity dtoToEntity(DrivingGear drivingGear) {
-        return DrivingGearEntity
+    public GearboxEntity dtoToEntity(Gearbox gearbox) {
+        return GearboxEntity
                 .builder()
-                .drivingGearName(drivingGear.getDrivingGear())
+                .drivingGearName(gearbox.getDrivingGear())
                 .build();
     }
 
-    public List<DrivingGear> entitiesToDto(List<DrivingGearEntity> drivingGearEntities) {
+    public List<Gearbox> entitiesToDto(List<GearboxEntity> drivingGearEntities) {
         return drivingGearEntities
                 .stream()
                 .map(
-                        drivingGearEntity -> DrivingGear
+                        drivingGearEntity -> Gearbox
                                 .builder()
                                 .id(drivingGearEntity.getId())
                                 .drivingGear(drivingGearEntity.getDrivingGearName())

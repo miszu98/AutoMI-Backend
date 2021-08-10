@@ -1,9 +1,6 @@
 package pl.malek.automi;
 
-import pl.malek.automi.DTO.FuelType;
-import pl.malek.automi.DTO.Mark;
-import pl.malek.automi.DTO.Model;
-import pl.malek.automi.DTO.User;
+import pl.malek.automi.DTO.*;
 import pl.malek.automi.Entities.*;
 
 /**
@@ -12,6 +9,8 @@ import pl.malek.automi.Entities.*;
  * {@link Users}
  * {@link Roles}
  * {@link Marks}
+ * {@link Models}
+ * {@link FuelTypes}
  * @author Michał Małek
  * @version 1.0
  */
@@ -19,10 +18,6 @@ public class Constants {
 
     /**
      * Class with Users data for tests
-     * {@link DataTransferObjects}
-     * {@link Entities}
-     * @author Michał Małek
-     * @version 1.0
      */
     public static class Users {
 
@@ -58,10 +53,6 @@ public class Constants {
 
     /**
      * Class with Roles data for tests
-     * {@link Labels}
-     * {@link Entities}
-     * @author Michał Małek
-     * @version 1.0
      */
     public static class Roles {
 
@@ -79,11 +70,6 @@ public class Constants {
 
     /**
      * Class with car Marks data for tests
-     * {@link Labels}
-     * {@link Entities}
-     * {@link DataTransferObjects}
-     * @author Michał Małek
-     * @version 1.0
      */
     public static class Marks {
 
@@ -126,11 +112,6 @@ public class Constants {
 
     /**
      * Class with car Models data for tests
-     * {@link Labels}
-     * {@link Entities}
-     * {@link DataTransferObjects}
-     * @author Michał Małek
-     * @version 1.0
      */
     public static class Models {
         public static class Labels {
@@ -189,6 +170,24 @@ public class Constants {
             public static final FuelTypeEntity DIESEL = FuelTypeEntity.builder()
                     .id(2L)
                     .fuelTypeName(Labels.DIESEL)
+                    .build();
+        }
+    }
+
+    public static class DrivingGears {
+        public static class Labels {
+            public static final String AUTOMATIC = "AUTOMATIC";
+            public static final String MANUAL = "MANUAL";
+        }
+
+        public static class DataTransferObjects {
+            public static final Gearbox AUTOMATIC = Gearbox.builder()
+                    .id(1L)
+                    .drivingGear(Labels.AUTOMATIC)
+                    .build();
+            public static final Gearbox MANUAL = Gearbox.builder()
+                    .id(2L)
+                    .drivingGear(Labels.MANUAL)
                     .build();
         }
     }

@@ -28,7 +28,7 @@ public class Car {
     @NotNull(message = "Engine capactiy field may be not null")
     private Long engineCapacity;
 
-    private DrivingGear drivingGear;
+    private Gearbox gearbox;
 
     private Color color;
 

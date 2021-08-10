@@ -16,7 +16,7 @@ public class CarRepositoryTests {
     @Autowired private MarkRepository markRepository;
     @Autowired private ModelRepository modelRepository;
     @Autowired private FuelTypeRepository fuelTypeRepository;
-    @Autowired private DrivingGearRepository drivingGearRepository;
+    @Autowired private GearboxRepository gearboxRepository;
     @Autowired private ColorRepository colorRepository;
     @Autowired private CarRepository carRepository;
 
@@ -25,12 +25,12 @@ public class CarRepositoryTests {
         MarkEntity markEntity = MarkEntity.builder().mark("Mercedes-Benz").build();
         ModelEntity modelEntity = ModelEntity.builder().model("C63s").build();
         FuelTypeEntity fuelTypeEntity = FuelTypeEntity.builder().fuelTypeName("GAS").build();
-        DrivingGearEntity drivingGearEntity = DrivingGearEntity.builder().drivingGearName("AUTOMAT").build();
+        GearboxEntity gearboxEntity = GearboxEntity.builder().drivingGearName("AUTOMAT").build();
         ColorEntity colorEntity = ColorEntity.builder().colorName("BLACK").build();
         markRepository.save(markEntity);
         modelRepository.save(modelEntity);
         fuelTypeRepository.save(fuelTypeEntity);
-        drivingGearRepository.save(drivingGearEntity);
+        gearboxRepository.save(gearboxEntity);
         colorRepository.save(colorEntity);
     }
 
@@ -39,7 +39,7 @@ public class CarRepositoryTests {
         markRepository.deleteAll();
         modelRepository.deleteAll();
         fuelTypeRepository.deleteAll();
-        drivingGearRepository.deleteAll();
+        gearboxRepository.deleteAll();
         colorRepository.deleteAll();
     }
 
@@ -49,7 +49,7 @@ public class CarRepositoryTests {
         var markEntity = GenericCarTest.tryToGetEntityObject(markRepository.findMarkEntityByMark("Mercedes-Benz"));
         var modelEntity = GenericCarTest.tryToGetEntityObject(modelRepository.findByModel("C63s"));
         var fuelTypeEntity = GenericCarTest.tryToGetEntityObject(fuelTypeRepository.findFuelTypeEntityByFuelTypeName("GAS"));
-        var drivingGearEntity = GenericCarTest.tryToGetEntityObject(drivingGearRepository.findDrivingGearEntityByDrivingGearName("AUTOMAT"));
+        var drivingGearEntity = GenericCarTest.tryToGetEntityObject(gearboxRepository.findDrivingGearEntityByDrivingGearName("AUTOMAT"));
         var colorEntity = GenericCarTest.tryToGetEntityObject(colorRepository.findColorEntityByColorName("BLACK"));
 
 

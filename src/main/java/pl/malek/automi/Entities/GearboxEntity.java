@@ -14,7 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "driving_gears")
-public class DrivingGearEntity {
+public class GearboxEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
