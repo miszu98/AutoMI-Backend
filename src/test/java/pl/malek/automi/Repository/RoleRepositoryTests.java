@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import pl.malek.automi.Entities.RoleEntity;
+import pl.malek.automi.GenericTest;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -47,28 +49,14 @@ public class RoleRepositoryTests {
 
     @Test
     void shouldCheckIfAdminRoleExist() {
-        Optional<RoleEntity> optionalRoleEntity = roleRepository.findByRoleName("ADMIN");
-        boolean isExist = optionalRoleEntity.isPresent();
-        RoleEntity roleAdmin;
-        if (isExist) {
-            roleAdmin = optionalRoleEntity.get();
-        } else {
-            roleAdmin = new RoleEntity();
-        }
-        assertEquals("ADMIN", roleAdmin.getRoleName());
+        RoleEntity roleEntity = GenericTest.tryToGetEntityObject(roleRepository.findByRoleName("ADMIN"));
+        assertEquals("ADMIN", roleEntity.getRoleName());
     }
 
     @Test
     void shouldCheckIfUserRoleExist() {
-        Optional<RoleEntity> optionalRoleEntity = roleRepository.findByRoleName("USER");
-        boolean isExist = optionalRoleEntity.isPresent();
-        RoleEntity roleUser;
-        if (isExist) {
-            roleUser = optionalRoleEntity.get();
-        } else {
-            roleUser = new RoleEntity();
-        }
-        assertEquals("USER", roleUser.getRoleName());
+        RoleEntity roleEntity = GenericTest.tryToGetEntityObject(roleRepository.findByRoleName("USER"));
+        assertEquals("USER", roleEntity.getRoleName());
     }
 
     @Test
