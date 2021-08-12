@@ -22,11 +22,11 @@ public class RoleRepositoryTests {
 
     @BeforeEach
     void setUp() {
-        RoleEntity userRole = RoleEntity
+        var userRole = RoleEntity
                                     .builder()
                                     .roleName("USER")
                                     .build();
-        RoleEntity adminRole = RoleEntity
+        var adminRole = RoleEntity
                                     .builder()
                                     .roleName("ADMIN")
                                     .build();
@@ -49,25 +49,25 @@ public class RoleRepositoryTests {
 
     @Test
     void shouldCheckIfAdminRoleExist() {
-        RoleEntity roleEntity = GenericTest.tryToGetEntityObject(roleRepository.findByRoleName("ADMIN"));
+        var roleEntity = GenericTest.tryToGetEntityObject(roleRepository.findByRoleName("ADMIN"));
         assertEquals("ADMIN", roleEntity.getRoleName());
     }
 
     @Test
     void shouldCheckIfUserRoleExist() {
-        RoleEntity roleEntity = GenericTest.tryToGetEntityObject(roleRepository.findByRoleName("USER"));
+        var roleEntity = GenericTest.tryToGetEntityObject(roleRepository.findByRoleName("USER"));
         assertEquals("USER", roleEntity.getRoleName());
     }
 
     @Test
     void shouldAddRole() {
-        RoleEntity moderatorRole = RoleEntity
+        var moderatorRole = RoleEntity
                                         .builder()
                                         .roleName("MODERATOR")
                                         .build();
         roleRepository.save(moderatorRole);
 
-        List<RoleEntity> roles = roleRepository.findAll();
+        var roles = roleRepository.findAll();
 
         assertEquals(3, roles.size());
     }

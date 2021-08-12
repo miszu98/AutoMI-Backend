@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import pl.malek.automi.Entities.MarkEntity;
+import pl.malek.automi.GenericTest;
 
 import java.util.Optional;
 
@@ -22,7 +23,7 @@ public class MarkRepositoryTests {
 
     @BeforeEach
     void setUp() {
-        MarkEntity markEntity = MarkEntity
+        var markEntity = MarkEntity
                                     .builder()
                                     .mark("Mercedes-Benz")
                                     .build();
@@ -36,35 +37,29 @@ public class MarkRepositoryTests {
 
     @Test
     void shouldCheckIfMarkWithNameExist() {
-        MarkEntity markEntity = markRepository.findMarkEntityByMark("Mercedes-Benz").get();
+        var markEntity = GenericTest.tryToGetEntityObject(markRepository.findMarkEntityByMark("Mercedes-Benz"));
         assertEquals("Mercedes-Benz", markEntity.getMark());
     }
 
     @Test
     void shouldCheckIfMarkWithNameNotExist() {
-        boolean isExist = markRepository.findMarkEntityByMark("AUDI").isPresent();
+        var isExist = markRepository.findMarkEntityByMark("AUDI").isPresent();
         assertFalse(isExist);
     }
 
     @Test
     void shouldAddNewMark() {
-        MarkEntity markEntity = MarkEntity.builder().mark("BMW").build();
+        var markEntity = MarkEntity.builder().mark("BMW").build();
         markRepository.save(markEntity);
         assertEquals(2, markRepository.findAll().size());
     }
 
     @Test
     void shouldUpdateMarkName() {
-        Optional<MarkEntity> optionalMarkEntity = markRepository.findMarkEntityByMark("Mercedes-Benz");
-        boolean isExist = optionalMarkEntity.isPresent();
-        MarkEntity markEntity;
-        if (isExist) {
-            markEntity = optionalMarkEntity.get();
-        } else {
-            markEntity = new MarkEntity();
-        }
+        var markEntity = GenericTest.tryToGetEntityObject(markRepository.findMarkEntityByMark("Mercedes-Benz"));
         markEntity.setMark("Mercedes-Updated");
         markRepository.save(markEntity);
+
         assertEquals(1, markRepository.findAll().size());
         assertEquals("Mercedes-Updated", markRepository.findMarkEntityByMark("Mercedes-Updated").orElse(new MarkEntity()).getMark());
     }
