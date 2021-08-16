@@ -8,7 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.validation.BindingResult;
-import pl.malek.automi.Constants;
+import pl.malek.automi.UtilsMI.Constants;
 import pl.malek.automi.DTO.Gearbox;
 import pl.malek.automi.Entities.GearboxEntity;
 import pl.malek.automi.Exceptions.GearboxCreationException;
