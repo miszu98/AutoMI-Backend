@@ -5,7 +5,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.validation.BindingResult;
-import pl.malek.automi.Constants;
+import pl.malek.automi.UtilsMI.Constants;
 import pl.malek.automi.DTO.Model;
 import pl.malek.automi.Entities.ModelEntity;
 import pl.malek.automi.Exceptions.MarkNotFoundException;

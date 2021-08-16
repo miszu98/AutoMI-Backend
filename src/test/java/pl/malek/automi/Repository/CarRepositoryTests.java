@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.springframework.boot.test.context.SpringBootTest;
 import pl.malek.automi.Entities.*;
-import pl.malek.automi.GenericTest;
+import pl.malek.automi.UtilsMI.GenericTest;
 
 
 @SpringBootTest

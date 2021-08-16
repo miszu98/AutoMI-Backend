@@ -8,7 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.validation.BindingResult;
-import pl.malek.automi.Constants;
+import pl.malek.automi.UtilsMI.Constants;
 import pl.malek.automi.DTO.FuelType;
 import pl.malek.automi.Entities.FuelTypeEntity;
 import pl.malek.automi.Exceptions.FuelTypeCreationException;

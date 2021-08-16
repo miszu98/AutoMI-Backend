@@ -8,7 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.validation.BindingResult;
-import pl.malek.automi.Constants;
+import pl.malek.automi.UtilsMI.Constants;
 import pl.malek.automi.DTO.Color;
 import pl.malek.automi.Entities.ColorEntity;
 import pl.malek.automi.Exceptions.ColorCreationException;

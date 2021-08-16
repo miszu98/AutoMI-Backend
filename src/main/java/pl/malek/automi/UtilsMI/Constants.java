@@ -1,4 +1,4 @@
-package pl.malek.automi;
+package pl.malek.automi.UtilsMI;
 
 import pl.malek.automi.DTO.*;
 import pl.malek.automi.Entities.*;

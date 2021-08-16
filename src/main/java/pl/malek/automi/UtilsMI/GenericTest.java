@@ -1,4 +1,4 @@
-package pl.malek.automi;
+package pl.malek.automi.UtilsMI;
 
 import java.util.Optional;
 
