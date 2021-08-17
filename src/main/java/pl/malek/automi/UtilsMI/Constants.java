@@ -346,6 +346,22 @@ public class Constants {
                     .color(Colors.Entities.BLACK)
                     .yearOfProduction(LocalDate.of(2021, 1,1))
                     .build();
+
+            public static final CarEntity MERCEDES_BENZ_UPDATED = CarEntity.builder()
+                    .id(2L)
+                    .mark(Marks.Entities.MERCEDES_BENZ)
+                    .model(Models.Entities.C63S)
+                    .fuelType(FuelTypes.Entities.GAS)
+                    .power(700L)
+                    .engineCapacity(4000L)
+                    .gearbox(Gearboxes.Entities.AUTOMATIC)
+                    .mileage(0L)
+                    .drivingGear(DrivingGears.Entities.AWD)
+                    .state(State.BRAND_NEW)
+                    .carType(CarType.COUPE)
+                    .color(Colors.Entities.RED)
+                    .yearOfProduction(LocalDate.of(2021, 1,1))
+                    .build();
         }
     }
 }
