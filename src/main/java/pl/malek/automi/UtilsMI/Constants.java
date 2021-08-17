@@ -5,6 +5,8 @@ import pl.malek.automi.Entities.*;
 import pl.malek.automi.Enums.CarType;
 import pl.malek.automi.Enums.State;
 
+import java.time.LocalDate;
+
 /**
  * Class with inner classes which represent data
  * for tests for all objects:
@@ -172,6 +174,10 @@ public class Constants {
         }
 
         public static class Entities {
+            public static final FuelTypeEntity GAS = FuelTypeEntity.builder()
+                    .id(1L)
+                    .fuelTypeName(Labels.GAS)
+                    .build();
             public static final FuelTypeEntity DIESEL = FuelTypeEntity.builder()
                     .id(2L)
                     .fuelTypeName(Labels.DIESEL)
@@ -277,6 +283,13 @@ public class Constants {
             public static final String FWD = "FWD";
             public static final String AWD = "AWD";
         }
+
+        public static class Entities {
+            public static final DrivingGearEntity AWD = DrivingGearEntity.builder()
+                    .id(3L)
+                    .drivingGear(Labels.AWD)
+                    .build();
+        }
     }
 
     /**
@@ -314,6 +327,24 @@ public class Constants {
                     .carType(CarType.COUPE)
                     .color(Colors.DataTransferObjects.BLACK)
                     .yearOfProduction("2021")
+                    .build();
+        }
+
+        public static class Entities {
+            public static final CarEntity MERCEDES_BENZ = CarEntity.builder()
+                    .id(1L)
+                    .mark(Marks.Entities.MERCEDES_BENZ)
+                    .model(Models.Entities.C63S)
+                    .fuelType(FuelTypes.Entities.GAS)
+                    .power(500L)
+                    .engineCapacity(4000L)
+                    .gearbox(Gearboxes.Entities.AUTOMATIC)
+                    .mileage(0L)
+                    .drivingGear(DrivingGears.Entities.AWD)
+                    .state(State.BRAND_NEW)
+                    .carType(CarType.COUPE)
+                    .color(Colors.Entities.BLACK)
+                    .yearOfProduction(LocalDate.of(2021, 1,1))
                     .build();
         }
     }
