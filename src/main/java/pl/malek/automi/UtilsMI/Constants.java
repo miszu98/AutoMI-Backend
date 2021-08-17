@@ -1,5 +1,7 @@
 package pl.malek.automi.UtilsMI;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import pl.malek.automi.DTO.*;
 import pl.malek.automi.Entities.*;
 import pl.malek.automi.Enums.CarType;
@@ -18,38 +20,54 @@ import java.time.LocalDate;
  * @author Michał Małek
  * @version 1.0
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Constants {
 
     /**
      * Class with Users data for tests
      */
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Users {
 
+        @NoArgsConstructor(access = AccessLevel.PRIVATE)
+        private static class Passwords {
+            private static final String PASSWORD = "Jakiestam1.";
+        }
+
+        @NoArgsConstructor(access = AccessLevel.PRIVATE)
+        private static class Emails {
+            private static final String EMAIL_A = "r.nowak@automi.com";
+            private static final String EMAIL_B = "admin@automi.com";
+            private static final String EMAIL_C = "r.nowak@automi-office.com";
+        }
+
+        @NoArgsConstructor(access = AccessLevel.PRIVATE)
         public static class DataTransferObjects {
             public static final User USER = User.builder()
-                    .email("r.nowak@automi.com")
-                    .password("Jakiestam1.")
+                    .email(Emails.EMAIL_A)
+                    .password(Passwords.PASSWORD)
                     .role(Roles.Labels.ROLE_USER)
                     .build();
 
             public static final User ADMIN = User.builder()
-                    .email("admin@automi.com")
-                    .password("Jakiestam1.")
+                    .email(Emails.EMAIL_B)
+                    .password(Passwords.PASSWORD)
                     .role(Roles.Labels.ROLE_ADMIN)
                     .build();
 
             public static final User UPDATED_USER = User.builder()
-                    .email("r.nowak@automi-office.com")
-                    .password("Jakiestam1.")
+                    .email(Emails.EMAIL_C)
+                    .password(Passwords.PASSWORD)
                     .role(Roles.Labels.ROLE_USER)
                     .build();
         }
 
+        @NoArgsConstructor(access = AccessLevel.PRIVATE)
         public static class Entities {
             public static final UserEntity USER_ENTITY = UserEntity.builder()
                     .id(1L)
-                    .email("r.nowak@automi.com")
-                    .password("Jakiestam1.")
+                    .email(Emails.EMAIL_A)
+                    .password(Passwords.PASSWORD)
                     .roleEntity(Roles.Entities.ROLE_USER_ENTITY)
                     .build();
         }
@@ -58,13 +76,16 @@ public class Constants {
     /**
      * Class with Roles data for tests
      */
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Roles {
 
+        @NoArgsConstructor(access = AccessLevel.PRIVATE)
         public static class Labels {
             public static final String ROLE_USER = "USER";
             public static final String ROLE_ADMIN = "ADMIN";
         }
 
+        @NoArgsConstructor(access = AccessLevel.PRIVATE)
         public static class Entities {
             public static final RoleEntity ROLE_USER_ENTITY = RoleEntity.builder()
                     .roleName(Labels.ROLE_USER).build();
@@ -75,14 +96,17 @@ public class Constants {
     /**
      * Class with car Marks data for tests
      */
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Marks {
 
+        @NoArgsConstructor(access = AccessLevel.PRIVATE)
         public static class Labels {
             public static final String BMW = "BMW";
             public static final String AUDI = "AUDI";
             public static final String MERCEDES_BENZ = "Mercedes-Benz";
         }
 
+        @NoArgsConstructor(access = AccessLevel.PRIVATE)
         public static class DataTransferObjects {
             public static final Mark BMW = Mark.builder()
                     .id(1L)
@@ -100,6 +124,7 @@ public class Constants {
                     .build();
         }
 
+        @NoArgsConstructor(access = AccessLevel.PRIVATE)
         public static class Entities {
             public static final MarkEntity BMW_ENTITY = MarkEntity.builder()
                     .id(1L)
@@ -117,13 +142,17 @@ public class Constants {
     /**
      * Class with car Models data for tests
      */
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Models {
+
+        @NoArgsConstructor(access = AccessLevel.PRIVATE)
         public static class Labels {
             public static final String M5 = "M5";
             public static final String C63S = "C63s";
             public static final String M5CS = "M5 CS";
         }
 
+        @NoArgsConstructor(access = AccessLevel.PRIVATE)
         public static class DataTransferObjects {
             public static final Model C63S = Model.builder()
                     .id(1L)
@@ -138,6 +167,7 @@ public class Constants {
                     .build();
         }
 
+        @NoArgsConstructor(access = AccessLevel.PRIVATE)
         public static class Entities {
             public static final ModelEntity C63S = ModelEntity.builder()
                     .id(1L)
@@ -156,11 +186,16 @@ public class Constants {
     /**
      * Class with car Fuel types data for tests
      */
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class FuelTypes {
+
+        @NoArgsConstructor(access = AccessLevel.PRIVATE)
         public static class Labels {
             public static final String GAS = "GAS";
             public static final String DIESEL = "DIESEL";
         }
+
+        @NoArgsConstructor(access = AccessLevel.PRIVATE)
         public static class DataTransferObjects {
             public static final FuelType GAS = FuelType.builder()
                     .id(1L)
@@ -173,6 +208,7 @@ public class Constants {
                     .build();
         }
 
+        @NoArgsConstructor(access = AccessLevel.PRIVATE)
         public static class Entities {
             public static final FuelTypeEntity GAS = FuelTypeEntity.builder()
                     .id(1L)
@@ -188,13 +224,17 @@ public class Constants {
     /**
      * Class with car Gearboxes data for tests
      */
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Gearboxes {
+
+        @NoArgsConstructor(access = AccessLevel.PRIVATE)
         public static class Labels {
             public static final String AUTOMATIC = "AUTOMATIC";
             public static final String MANUAL = "MANUAL";
             public static final String TIPTRONIC = "TIPTRONIC";
         }
 
+        @NoArgsConstructor(access = AccessLevel.PRIVATE)
         public static class DataTransferObjects {
             public static final Gearbox AUTOMATIC = Gearbox.builder()
                     .id(1L)
@@ -210,6 +250,7 @@ public class Constants {
                     .build();
         }
 
+        @NoArgsConstructor(access = AccessLevel.PRIVATE)
         public static class Entities {
             public static final GearboxEntity AUTOMATIC = GearboxEntity.builder()
                     .id(1L)
@@ -229,12 +270,17 @@ public class Constants {
     /**
      * Class with car colors data for tests
      */
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Colors {
+
+        @NoArgsConstructor(access = AccessLevel.PRIVATE)
         public static class Labels {
             public static final String BLACK = "BLACK";
             public static final String GREY = "GREY";
             public static final String RED = "RED";
         }
+
+        @NoArgsConstructor(access = AccessLevel.PRIVATE)
         public static class DataTransferObjects {
             public static final Color BLACK = Color.builder()
                     .id(1L)
@@ -250,6 +296,7 @@ public class Constants {
                     .build();
         }
 
+        @NoArgsConstructor(access = AccessLevel.PRIVATE)
         public static class Entities {
             public static final ColorEntity BLACK = ColorEntity.builder()
                     .id(1L)
@@ -262,7 +309,13 @@ public class Constants {
         }
     }
 
+    /**
+     * Class with Driving gears data for tests
+     */
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class DrivingGears {
+
+        @NoArgsConstructor(access = AccessLevel.PRIVATE)
         public static class DataTransferObjects {
             public static final DrivingGear RWD = DrivingGear.builder()
                     .id(1L)
@@ -278,12 +331,14 @@ public class Constants {
                     .build();
         }
 
+        @NoArgsConstructor(access = AccessLevel.PRIVATE)
         public static class Labels {
             public static final String RWD = "RWD";
             public static final String FWD = "FWD";
             public static final String AWD = "AWD";
         }
 
+        @NoArgsConstructor(access = AccessLevel.PRIVATE)
         public static class Entities {
             public static final DrivingGearEntity AWD = DrivingGearEntity.builder()
                     .id(3L)
@@ -295,7 +350,10 @@ public class Constants {
     /**
      * Class with car Cars data for tests
      */
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Cars {
+
+        @NoArgsConstructor(access = AccessLevel.PRIVATE)
         public static class DataTransferObjects {
             public static final Car BMW = Car.builder()
                     .id(1L)
@@ -330,6 +388,7 @@ public class Constants {
                     .build();
         }
 
+        @NoArgsConstructor(access = AccessLevel.PRIVATE)
         public static class Entities {
             public static final CarEntity MERCEDES_BENZ = CarEntity.builder()
                     .id(2L)
