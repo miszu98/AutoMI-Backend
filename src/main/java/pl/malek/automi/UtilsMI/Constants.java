@@ -2,6 +2,10 @@ package pl.malek.automi.UtilsMI;
 
 import pl.malek.automi.DTO.*;
 import pl.malek.automi.Entities.*;
+import pl.malek.automi.Enums.CarType;
+import pl.malek.automi.Enums.State;
+
+import java.time.LocalDate;
 
 /**
  * Class with inner classes which represent data
@@ -149,6 +153,9 @@ public class Constants {
         }
     }
 
+    /**
+     * Class with car Fuel types data for tests
+     */
     public static class FuelTypes {
         public static class Labels {
             public static final String GAS = "GAS";
@@ -167,6 +174,10 @@ public class Constants {
         }
 
         public static class Entities {
+            public static final FuelTypeEntity GAS = FuelTypeEntity.builder()
+                    .id(1L)
+                    .fuelTypeName(Labels.GAS)
+                    .build();
             public static final FuelTypeEntity DIESEL = FuelTypeEntity.builder()
                     .id(2L)
                     .fuelTypeName(Labels.DIESEL)
@@ -174,6 +185,9 @@ public class Constants {
         }
     }
 
+    /**
+     * Class with car Gearboxes data for tests
+     */
     public static class Gearboxes {
         public static class Labels {
             public static final String AUTOMATIC = "AUTOMATIC";
@@ -212,6 +226,9 @@ public class Constants {
         }
     }
 
+    /**
+     * Class with car colors data for tests
+     */
     public static class Colors {
         public static class Labels {
             public static final String BLACK = "BLACK";
@@ -241,6 +258,109 @@ public class Constants {
             public static final ColorEntity RED = ColorEntity.builder()
                     .id(3L)
                     .colorName(Labels.RED)
+                    .build();
+        }
+    }
+
+    public static class DrivingGears {
+        public static class DataTransferObjects {
+            public static final DrivingGear RWD = DrivingGear.builder()
+                    .id(1L)
+                    .drivingGear(Labels.RWD)
+                    .build();
+            public static final DrivingGear FWD = DrivingGear.builder()
+                    .id(2L)
+                    .drivingGear(Labels.FWD)
+                    .build();
+            public static final DrivingGear AWD = DrivingGear.builder()
+                    .id(3L)
+                    .drivingGear(Labels.AWD)
+                    .build();
+        }
+
+        public static class Labels {
+            public static final String RWD = "RWD";
+            public static final String FWD = "FWD";
+            public static final String AWD = "AWD";
+        }
+
+        public static class Entities {
+            public static final DrivingGearEntity AWD = DrivingGearEntity.builder()
+                    .id(3L)
+                    .drivingGear(Labels.AWD)
+                    .build();
+        }
+    }
+
+    /**
+     * Class with car Cars data for tests
+     */
+    public static class Cars {
+        public static class DataTransferObjects {
+            public static final Car BMW = Car.builder()
+                    .id(1L)
+                    .mark(Marks.DataTransferObjects.BMW)
+                    .model(Models.DataTransferObjects.M5)
+                    .fuelType(FuelTypes.DataTransferObjects.GAS)
+                    .power(550L)
+                    .engineCapacity(4300L)
+                    .gearbox(Gearboxes.DataTransferObjects.AUTOMATIC)
+                    .mileage(0L)
+                    .drivingGear(DrivingGears.DataTransferObjects.RWD)
+                    .state(State.BRAND_NEW)
+                    .carType(CarType.SEDAN)
+                    .color(Colors.DataTransferObjects.GREY)
+                    .yearOfProduction("2021")
+                    .build();
+
+            public static final Car MERCEDES_BENZ = Car.builder()
+                    .id(2L)
+                    .mark(Marks.DataTransferObjects.MERCEDES_BENZ)
+                    .model(Models.DataTransferObjects.C63S)
+                    .fuelType(FuelTypes.DataTransferObjects.GAS)
+                    .power(500L)
+                    .engineCapacity(4000L)
+                    .gearbox(Gearboxes.DataTransferObjects.AUTOMATIC)
+                    .mileage(0L)
+                    .drivingGear(DrivingGears.DataTransferObjects.AWD)
+                    .state(State.BRAND_NEW)
+                    .carType(CarType.COUPE)
+                    .color(Colors.DataTransferObjects.BLACK)
+                    .yearOfProduction("2021")
+                    .build();
+        }
+
+        public static class Entities {
+            public static final CarEntity MERCEDES_BENZ = CarEntity.builder()
+                    .id(2L)
+                    .mark(Marks.Entities.MERCEDES_BENZ)
+                    .model(Models.Entities.C63S)
+                    .fuelType(FuelTypes.Entities.GAS)
+                    .power(500L)
+                    .engineCapacity(4000L)
+                    .gearbox(Gearboxes.Entities.AUTOMATIC)
+                    .mileage(0L)
+                    .drivingGear(DrivingGears.Entities.AWD)
+                    .state(State.BRAND_NEW)
+                    .carType(CarType.COUPE)
+                    .color(Colors.Entities.BLACK)
+                    .yearOfProduction(LocalDate.of(2021, 1,1))
+                    .build();
+
+            public static final CarEntity MERCEDES_BENZ_UPDATED = CarEntity.builder()
+                    .id(2L)
+                    .mark(Marks.Entities.MERCEDES_BENZ)
+                    .model(Models.Entities.C63S)
+                    .fuelType(FuelTypes.Entities.GAS)
+                    .power(700L)
+                    .engineCapacity(4000L)
+                    .gearbox(Gearboxes.Entities.AUTOMATIC)
+                    .mileage(0L)
+                    .drivingGear(DrivingGears.Entities.AWD)
+                    .state(State.BRAND_NEW)
+                    .carType(CarType.COUPE)
+                    .color(Colors.Entities.RED)
+                    .yearOfProduction(LocalDate.of(2021, 1,1))
                     .build();
         }
     }
