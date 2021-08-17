@@ -314,7 +314,7 @@ public class Constants {
                     .build();
 
             public static final Car MERCEDES_BENZ = Car.builder()
-                    .id(1L)
+                    .id(2L)
                     .mark(Marks.DataTransferObjects.MERCEDES_BENZ)
                     .model(Models.DataTransferObjects.C63S)
                     .fuelType(FuelTypes.DataTransferObjects.GAS)
@@ -332,7 +332,7 @@ public class Constants {
 
         public static class Entities {
             public static final CarEntity MERCEDES_BENZ = CarEntity.builder()
-                    .id(1L)
+                    .id(2L)
                     .mark(Marks.Entities.MERCEDES_BENZ)
                     .model(Models.Entities.C63S)
                     .fuelType(FuelTypes.Entities.GAS)
