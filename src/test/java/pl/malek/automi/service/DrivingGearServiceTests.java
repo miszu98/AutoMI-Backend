@@ -1,4 +1,4 @@
-package pl.malek.automi.Service;
+package pl.malek.automi.service;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -8,14 +8,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.validation.BindingResult;
-import pl.malek.automi.DTO.DrivingGear;
-import pl.malek.automi.Entities.DrivingGearEntity;
-import pl.malek.automi.Exceptions.DrivingGearCreationException;
-import pl.malek.automi.Exceptions.DrivingGearNotFoundException;
-import pl.malek.automi.Mappers.DrivingGearMapper;
-import pl.malek.automi.Repository.DrivingGearRepository;
-import pl.malek.automi.Service.Impl.DrivingGearServiceImpl;
-import pl.malek.automi.UtilsMI.Constants;
+import pl.malek.automi.dto.DrivingGear;
+import pl.malek.automi.entity.DrivingGearEntity;
+import pl.malek.automi.exception.DrivingGearCreationException;
+import pl.malek.automi.exception.DrivingGearNotFoundException;
+import pl.malek.automi.mapper.DrivingGearMapper;
+import pl.malek.automi.repository.DrivingGearRepository;
+import pl.malek.automi.service.Impl.DrivingGearServiceImpl;
+import pl.malek.automi.utils.Constants;
 import java.util.List;
 import java.util.Optional;
 
@@ -77,7 +77,7 @@ public class DrivingGearServiceTests {
         var arg = drivingGearCaptor.getValue();
 
         assertThat(arg).isEqualTo(newDrivingGearEntity);
-        assertEquals(Constants.DrivingGears.Labels.AWD, arg.getDrivingGear());
+        assertEquals(3L, arg.getId());
     }
 
     @Test
