@@ -7,6 +7,7 @@ import pl.malek.automi.entity.*;
 import pl.malek.automi.enums.CarType;
 import pl.malek.automi.enums.State;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 /**
@@ -423,6 +424,66 @@ public class Constants {
                     .build();
         }
     }
+
+    /**
+     * Class with car offers data for tests
+     */
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    public static class CarOffers {
+
+        @NoArgsConstructor(access = AccessLevel.PRIVATE)
+        public static class DataTransferObjects {
+            public static final CarOffer CAR_OFFER = CarOffer.builder()
+                    .id(1L)
+                    .car(Cars.DataTransferObjects.MERCEDES_BENZ)
+                    .description(Descriptions.DESCRIPTION)
+                    .price(new BigDecimal(330000))
+                    .title(Titles.TITLE)
+                    .user(Users.DataTransferObjects.USER)
+                    .build();
+
+            public static final CarOffer UPDATED_CAR_OFFER = CarOffer.builder()
+                    .id(1L)
+                    .car(Cars.DataTransferObjects.MERCEDES_BENZ)
+                    .description(Descriptions.DESCRIPTION)
+                    .price(new BigDecimal(330000))
+                    .title(Titles.UPDATED_TITLE)
+                    .user(Users.DataTransferObjects.USER)
+                    .build();
+        }
+
+        @NoArgsConstructor(access = AccessLevel.PRIVATE)
+        public static class Entities {
+            public static final CarOfferEntity CAR_OFFER = CarOfferEntity.builder()
+                    .id(1L)
+                    .carEntity(Cars.Entities.MERCEDES_BENZ)
+                    .description(Descriptions.DESCRIPTION)
+                    .price(new BigDecimal(330000))
+                    .title(Titles.TITLE)
+                    .userEntity(Users.Entities.USER_ENTITY)
+                    .build();
+            public static final CarOfferEntity UPDATED_CAR_OFFER = CarOfferEntity.builder()
+                    .id(1L)
+                    .carEntity(Cars.Entities.MERCEDES_BENZ)
+                    .description(Descriptions.DESCRIPTION)
+                    .price(new BigDecimal(330000))
+                    .title(Titles.UPDATED_TITLE)
+                    .userEntity(Users.Entities.USER_ENTITY)
+                    .build();
+        }
+
+        @NoArgsConstructor(access = AccessLevel.PRIVATE)
+        public static class Descriptions {
+            public static final String DESCRIPTION = "Example description...";
+        }
+
+        @NoArgsConstructor(access = AccessLevel.PRIVATE)
+        public static class Titles {
+            public static final String TITLE = "Mercedes-Benz 500km AMG";
+            public static final String UPDATED_TITLE = "Mercedes-Benz AMG 500km";
+        }
+    }
+
 }
 
 
