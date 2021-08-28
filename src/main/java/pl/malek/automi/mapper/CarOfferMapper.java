@@ -2,6 +2,7 @@ package pl.malek.automi.mapper;
 
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import pl.malek.automi.dto.CarOffer;
 import pl.malek.automi.entity.CarOfferEntity;
@@ -46,7 +47,7 @@ public class CarOfferMapper {
                 .build();
     }
 
-    public List<CarOffer> entitiesToDto(List<CarOfferEntity> carOffers) {
+    public List<CarOffer> entitiesToDto(Page<CarOfferEntity> carOffers) {
         return carOffers
                 .stream()
                 .map(
