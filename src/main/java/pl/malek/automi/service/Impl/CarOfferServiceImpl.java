@@ -1,6 +1,9 @@
 package pl.malek.automi.service.Impl;
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -34,8 +37,8 @@ public class CarOfferServiceImpl implements CarOfferService {
     }
 
     @Override
-    public List<CarOffer> getAll() {
-        return carOfferMapper.entitiesToDto(carOfferRepository.findAll());
+    public List<CarOffer> getAll(Pageable pageable) {
+        return carOfferMapper.entitiesToDto(carOfferRepository.findAll(pageable));
     }
 
     @Override

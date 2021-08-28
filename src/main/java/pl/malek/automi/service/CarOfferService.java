@@ -1,5 +1,7 @@
 package pl.malek.automi.service;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import pl.malek.automi.dto.CarOffer;
@@ -11,7 +13,9 @@ import java.util.List;
 public interface CarOfferService {
     CarOffer add(CarOffer carOffer, BindingResult result) throws CarNotFoundException, UserNotFoundException, CarOfferCreationException, ColorNotFoundException, MarkNotFoundException, ModelNotFoundException, GearboxNotFoundException, FuelTypeNotFoundException, DrivingGearNotFoundException;
 
-    List<CarOffer> getAll();
+//    List<CarOffer> getAll();
+
+    List<CarOffer> getAll(Pageable pageable);
 
     CarOffer delete(long id) throws CarOfferNotFoundException;
 
