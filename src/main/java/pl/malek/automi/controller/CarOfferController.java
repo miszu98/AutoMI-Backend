@@ -1,6 +1,7 @@
 package pl.malek.automi.controller;
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -8,9 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.malek.automi.dto.CarOffer;
 import pl.malek.automi.exception.*;
 import pl.malek.automi.service.CarOfferService;
-
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -19,9 +18,10 @@ public class CarOfferController {
 
     private final CarOfferService carOfferService;
 
-    @GetMapping("/")
-    public ResponseEntity<List<CarOffer>> getAll() {
-        return ResponseEntity.status(HttpStatus.OK).body(carOfferService.getAll());
+    @GetMapping("/{count}/page={page}/")
+    public ResponseEntity<Iterable<CarOffer>> getOffers(@PathVariable int page, @PathVariable int count) {
+        PageRequest pageRequest = PageRequest.of(page, count);
+        return ResponseEntity.status(HttpStatus.OK).body(carOfferService.getAll(pageRequest));
     }
 
     @PostMapping("/")
