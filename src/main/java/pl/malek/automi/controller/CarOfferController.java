@@ -10,6 +10,7 @@ import pl.malek.automi.dto.CarOffer;
 import pl.malek.automi.exception.*;
 import pl.malek.automi.service.CarOfferService;
 import javax.validation.Valid;
+import java.util.Map;
 
 @RestController
 @AllArgsConstructor
@@ -22,6 +23,11 @@ public class CarOfferController {
     public ResponseEntity<Iterable<CarOffer>> getOffers(@PathVariable int page, @PathVariable int count) {
         PageRequest pageRequest = PageRequest.of(page, count);
         return ResponseEntity.status(HttpStatus.OK).body(carOfferService.getAll(pageRequest));
+    }
+
+    @PostMapping("/filter")
+    public ResponseEntity<?> filterOffers(@RequestBody Map<String, Long> params) {
+        return ResponseEntity.status(HttpStatus.OK).body(carOfferService.filter(params));
     }
 
     @PostMapping("/")
