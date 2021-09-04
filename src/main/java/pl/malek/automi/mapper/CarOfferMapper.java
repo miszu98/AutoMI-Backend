@@ -64,5 +64,22 @@ public class CarOfferMapper {
                 ).collect(Collectors.toList());
     }
 
+    public List<CarOffer> entitiesToDto(List<CarOfferEntity> carOffers) {
+        return carOffers
+                .stream()
+                .map(
+                        carOfferEntity
+                                -> CarOffer
+                                .builder()
+                                .id(carOfferEntity.getId())
+                                .title(carOfferEntity.getTitle())
+                                .description(carOfferEntity.getDescription())
+                                .car(carMapper.entityToDto(carOfferEntity.getCarEntity()))
+                                .user(userMapper.entityToDto(carOfferEntity.getUserEntity()))
+                                .price(carOfferEntity.getPrice())
+                                .build()
+                ).collect(Collectors.toList());
+    }
+
 
 }
