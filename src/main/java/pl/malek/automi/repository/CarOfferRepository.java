@@ -1,5 +1,6 @@
 package pl.malek.automi.repository;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
@@ -20,6 +21,7 @@ public interface CarOfferRepository extends PagingAndSortingRepository<CarOfferE
             @Param("modelId") Long modelId,
             @Param("fuelTypeId") Long fuelTypeId,
             @Param("gearboxId") Long gearboxId,
-            @Param("drivingGearId") Long drivingGearId
+            @Param("drivingGearId") Long drivingGearId,
+            Pageable pageable
     );
 }
