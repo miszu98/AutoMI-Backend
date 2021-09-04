@@ -86,14 +86,15 @@ public class CarOfferServiceImpl implements CarOfferService {
     }
 
     @Override
-    public List<CarOffer> filter(Map<String, Long> params) {
+    public List<CarOffer> filter(Map<String, Long> params, Pageable pageable) {
         return carOfferMapper.entitiesToDto(carOfferRepository
                 .findCarOfferEntitiesByParams(
                         params.get("mark"),
                         params.get("model"),
                         params.get("fuelType"),
                         params.get("gearbox"),
-                        params.get("drivingGear")
+                        params.get("drivingGear"),
+                        pageable
                 ));
     }
 }

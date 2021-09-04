@@ -25,9 +25,11 @@ public class CarOfferController {
         return ResponseEntity.status(HttpStatus.OK).body(carOfferService.getAll(pageRequest));
     }
 
-    @PostMapping("/filter")
-    public ResponseEntity<?> filterOffers(@RequestBody Map<String, Long> params) {
-        return ResponseEntity.status(HttpStatus.OK).body(carOfferService.filter(params));
+    @PostMapping("/filter/{size}/page={page}")
+    public ResponseEntity<?> filterOffers(@RequestBody Map<String, Long> params, @PathVariable int size, @PathVariable int page) {
+        System.out.println(size);
+        System.out.println(page);
+        return ResponseEntity.status(HttpStatus.OK).body(carOfferService.filter(params, PageRequest.of(page, size)));
     }
 
     @PostMapping("/")
