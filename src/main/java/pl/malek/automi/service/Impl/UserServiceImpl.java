@@ -1,6 +1,7 @@
 package pl.malek.automi.service.Impl;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -24,6 +25,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final RoleService roleService;
+    private final PasswordEncoder passwordEncoder;
 
 
     @Override
@@ -31,6 +33,8 @@ public class UserServiceImpl implements UserService {
         if (result.hasErrors()) {
             extractErrors(result.getAllErrors());
         }
+        user.setRole("USER");
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         var userEntity = userRepository.save(userMapper.dtoToEntity(user));
         return userMapper.entityToDto(userEntity);
     }
