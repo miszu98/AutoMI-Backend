@@ -25,5 +25,5 @@ public interface CarOfferService {
 
     CarOfferEntity getById(Long id) throws CarOfferNotFoundException;
 
-    List<CarOffer> filter(Map<String, Long> params);
+    List<CarOffer> filter(Map<String, Long> params, Pageable pageable);
 }
