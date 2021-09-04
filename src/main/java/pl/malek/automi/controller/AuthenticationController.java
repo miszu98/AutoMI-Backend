@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.malek.automi.configuration.JwtTokenUtil;
 import pl.malek.automi.dto.JwtRequest;
 import pl.malek.automi.dto.JwtResponse;
@@ -27,7 +24,6 @@ public class AuthenticationController {
 
     @PostMapping("/")
     public ResponseEntity<JwtResponse> createAuthenticationToken(@RequestBody JwtRequest authRequest) throws Exception {
-        System.out.println(authRequest);
         authenticationService.authenticate(authRequest.getEmail(), authRequest.getPassword());
 
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.getEmail());
