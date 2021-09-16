@@ -5,6 +5,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import pl.malek.automi.dto.CarOffer;
 import pl.malek.automi.entity.CarOfferEntity;
+import pl.malek.automi.enums.CarType;
+import pl.malek.automi.enums.State;
 import pl.malek.automi.exception.*;
 
 import java.util.List;
@@ -25,5 +27,13 @@ public interface CarOfferService {
 
     CarOfferEntity getById(Long id) throws CarOfferNotFoundException;
 
-    List<CarOffer> filter(Map<String, Long> params, Pageable pageable);
+    CarOffer getOfferById(Long id) throws CarOfferNotFoundException;
+
+    List<CarOffer> filter(Map<String, Object> params, Pageable pageable);
+
+    Long transformId(Object id);
+
+    CarType transformCarType(Object id);
+
+    State transformState(Object id);
 }

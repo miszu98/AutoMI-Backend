@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import pl.malek.automi.dto.CarOffer;
 import pl.malek.automi.entity.CarOfferEntity;
+import pl.malek.automi.entity.ImageEntity;
 import pl.malek.automi.exception.CarNotFoundException;
 import pl.malek.automi.exception.UserNotFoundException;
 import pl.malek.automi.service.CarService;
@@ -33,6 +34,7 @@ public class CarOfferMapper {
                 .car(carMapper.entityToDto(carOfferEntity.getCarEntity()))
                 .user(userMapper.entityToDto(carOfferEntity.getUserEntity()))
                 .price(carOfferEntity.getPrice())
+                .city(carOfferEntity.getCity())
                 .build();
     }
 
@@ -44,6 +46,7 @@ public class CarOfferMapper {
                 .carEntity(carService.getById(carOffer.getCar().getId()))
                 .userEntity(userService.getById(carOffer.getUser().getId()))
                 .price(carOffer.getPrice())
+                .city(carOffer.getCity())
                 .build();
     }
 
@@ -60,6 +63,7 @@ public class CarOfferMapper {
                                     .car(carMapper.entityToDto(carOfferEntity.getCarEntity()))
                                     .user(userMapper.entityToDto(carOfferEntity.getUserEntity()))
                                     .price(carOfferEntity.getPrice())
+                                    .city(carOfferEntity.getCity())
                                     .build()
                 ).collect(Collectors.toList());
     }
@@ -77,6 +81,7 @@ public class CarOfferMapper {
                                 .car(carMapper.entityToDto(carOfferEntity.getCarEntity()))
                                 .user(userMapper.entityToDto(carOfferEntity.getUserEntity()))
                                 .price(carOfferEntity.getPrice())
+                                .city(carOfferEntity.getCity())
                                 .build()
                 ).collect(Collectors.toList());
     }

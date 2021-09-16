@@ -26,10 +26,13 @@ public class CarOfferController {
     }
 
     @PostMapping("/filter/{size}/page={page}")
-    public ResponseEntity<?> filterOffers(@RequestBody Map<String, Long> params, @PathVariable int size, @PathVariable int page) {
-        System.out.println(size);
-        System.out.println(page);
+    public ResponseEntity<?> filterOffers(@RequestBody Map<String, Object> params, @PathVariable int size, @PathVariable int page) {
         return ResponseEntity.status(HttpStatus.OK).body(carOfferService.filter(params, PageRequest.of(page, size)));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CarOffer> getOffer(@PathVariable long id) throws CarOfferNotFoundException {
+        return ResponseEntity.status(HttpStatus.OK).body(carOfferService.getOfferById(id));
     }
 
     @PostMapping("/")

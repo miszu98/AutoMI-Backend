@@ -11,6 +11,9 @@ import pl.malek.automi.dto.JwtResponse;
 import pl.malek.automi.service.AuthenticationService;
 import pl.malek.automi.service.Impl.JwtUserDetailsServiceImpl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @AllArgsConstructor
 @RequestMapping("/auth")
@@ -29,7 +32,7 @@ public class AuthenticationController {
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.getEmail());
 
         final String token = jwtTokenUtil.generateToken(userDetails);
-
-        return ResponseEntity.status(HttpStatus.OK).body(new JwtResponse(token));
+        List<String> roles = userDetails.getAuthorities().stream().map(role -> role.getAuthority()).collect(Collectors.toList());
+        return ResponseEntity.status(HttpStatus.OK).body(new JwtResponse(token, userDetails.getUsername(), roles.get(0)));
     }
 }

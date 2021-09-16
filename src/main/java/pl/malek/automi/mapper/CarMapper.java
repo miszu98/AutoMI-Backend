@@ -44,6 +44,7 @@ public class CarMapper {
                 .carType(car.getCarType())
                 .drivingGear(drivingGearService.getById(car.getDrivingGear().getId()))
                 .color(colorService.getById(car.getColor().getId()))
+                .yearOfProduction(car.getYearOfProduction())
                 .build();
     }
 
@@ -62,6 +63,7 @@ public class CarMapper {
                 .carType(carEntity.getCarType())
                 .drivingGear(drivingGearMapper.entityToDto(carEntity.getDrivingGear()))
                 .color(colorMapper.entityToDto(carEntity.getColor()))
+                .yearOfProduction(carEntity.getYearOfProduction())
                 .build();
     }
 

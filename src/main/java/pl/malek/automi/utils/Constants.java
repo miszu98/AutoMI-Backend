@@ -404,7 +404,7 @@ public class Constants {
                     .state(State.BRAND_NEW)
                     .carType(CarType.COUPE)
                     .color(Colors.Entities.BLACK)
-                    .yearOfProduction(LocalDate.of(2021, 1,1))
+                    .yearOfProduction("1999")
                     .build();
 
             public static final CarEntity MERCEDES_BENZ_UPDATED = CarEntity.builder()
@@ -420,7 +420,7 @@ public class Constants {
                     .state(State.BRAND_NEW)
                     .carType(CarType.COUPE)
                     .color(Colors.Entities.RED)
-                    .yearOfProduction(LocalDate.of(2021, 1,1))
+                    .yearOfProduction("2021")
                     .build();
         }
     }

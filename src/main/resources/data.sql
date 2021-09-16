@@ -1,6 +1,5 @@
 
 -- Roles
-
 insert into roles values (1, 'USER');
 insert into roles values (2, 'ADMIN');
 
@@ -120,7 +119,7 @@ insert into models values (13, 'RS5', 3);
 
 -- Cars
 
-insert into cars values (1, 'COUPE', 4300, 0, 550, 'BRAND_NEW', '2021-01-01', 1, 1, 1, 1, 1, 1);
+-- insert into cars values (1, 'COUPE', 4300, 0, 550, 'BRAND_NEW', '2021-01-01', 1, 1, 1, 1, 1, 1);
 
 
 

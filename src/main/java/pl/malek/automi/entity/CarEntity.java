@@ -61,6 +61,5 @@ public class CarEntity {
     @JoinColumn(name = "color_id", referencedColumnName = "id")
     private ColorEntity color;
 
-    @JsonFormat()
-    private LocalDate yearOfProduction;
+    private String yearOfProduction;
 }
