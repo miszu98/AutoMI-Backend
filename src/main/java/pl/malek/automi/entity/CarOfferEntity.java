@@ -4,9 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -23,7 +25,7 @@ public class CarOfferEntity {
 
     private String title;
 
-//    @Lob
+    @Lob
     private String description;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "carOfferEntity")
@@ -38,6 +40,11 @@ public class CarOfferEntity {
     private UserEntity userEntity;
 
     private BigDecimal price;
+
+    @CreationTimestamp
+    private LocalDate createdAt;
+
+    private String city;
 
 
 }

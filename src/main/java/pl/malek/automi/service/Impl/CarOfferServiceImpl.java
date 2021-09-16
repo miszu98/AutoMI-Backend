@@ -8,6 +8,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import pl.malek.automi.dto.CarOffer;
 import pl.malek.automi.entity.CarOfferEntity;
+import pl.malek.automi.enums.CarType;
+import pl.malek.automi.enums.State;
 import pl.malek.automi.exception.*;
 import pl.malek.automi.mapper.CarOfferMapper;
 import pl.malek.automi.repository.CarOfferRepository;
@@ -86,15 +88,67 @@ public class CarOfferServiceImpl implements CarOfferService {
     }
 
     @Override
-    public List<CarOffer> filter(Map<String, Long> params, Pageable pageable) {
+    public CarOffer getOfferById(Long id) throws CarOfferNotFoundException {
+        return carOfferMapper.entityToDto(carOfferRepository.findById(id).orElseThrow(
+                () -> new CarOfferNotFoundException(
+                        String.format("Car offer with id: %d not found", id)
+                )
+        ));
+    }
+
+    @Override
+    public List<CarOffer> filter(Map<String, Object> params, Pageable pageable) {
         return carOfferMapper.entitiesToDto(carOfferRepository
                 .findCarOfferEntitiesByParams(
-                        params.get("mark"),
-                        params.get("model"),
-                        params.get("fuelType"),
-                        params.get("gearbox"),
-                        params.get("drivingGear"),
+                        transformId(params.get("mark")),
+                        transformId(params.get("model")),
+                        transformId(params.get("fuelType")),
+                        transformId(params.get("gearbox")),
+                        transformId(params.get("drivingGear")),
+                        transformCarType(params.get("carType")),
+                        transformState(params.get("state")),
                         pageable
                 ));
+    }
+
+    @Override
+    public Long transformId(Object id) {
+        if (id == null) {
+            return null;
+        } else {
+            return Long.valueOf(String.valueOf(id));
+        }
+    }
+
+    @Override
+    public CarType transformCarType(Object id) {
+        if (id == null) {
+            return null;
+        } else {
+            CarType carType;
+            try {
+                carType = CarType.values()[Integer.parseInt(String.valueOf(id))];
+                return carType;
+            } catch (Exception e) {
+                carType = null;
+            }
+            return carType;
+        }
+    }
+
+    @Override
+    public State transformState(Object id) {
+        if (id == null) {
+            return null;
+        } else {
+            State state;
+            try {
+                state = State.values()[Integer.parseInt(String.valueOf(id))];
+                return state;
+            } catch (Exception e) {
+                state = null;
+            }
+            return state;
+        }
     }
 }
