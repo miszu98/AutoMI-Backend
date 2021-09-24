@@ -7,12 +7,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import pl.malek.automi.dto.CarOffer;
+import pl.malek.automi.dto.Image;
 import pl.malek.automi.entity.CarOfferEntity;
+import pl.malek.automi.entity.ImageEntity;
 import pl.malek.automi.enums.CarType;
 import pl.malek.automi.enums.State;
 import pl.malek.automi.exception.*;
+import pl.malek.automi.mapper.CarMapper;
 import pl.malek.automi.mapper.CarOfferMapper;
 import pl.malek.automi.repository.CarOfferRepository;
+import pl.malek.automi.repository.ImageRepository;
 import pl.malek.automi.service.CarOfferService;
 import pl.malek.automi.service.CarService;
 import java.util.ArrayList;
@@ -25,6 +29,7 @@ public class CarOfferServiceImpl implements CarOfferService {
 
     private final CarOfferRepository carOfferRepository;
     private final CarOfferMapper carOfferMapper;
+    private final CarMapper carMapper;
     private final CarService carService;
 
     @Override
@@ -56,16 +61,29 @@ public class CarOfferServiceImpl implements CarOfferService {
     }
 
     @Override
-    public CarOffer update(long id, CarOffer carOffer, BindingResult result) throws CarOfferNotFoundException, CarOfferCreationException, CarNotFoundException, UserNotFoundException {
-        if (!carOfferRepository.existsById(id)) {
-            throw new CarOfferNotFoundException(String.format("Car offer with id: %d not found", id));
-        }
+    public CarOffer update(long id, CarOffer carOffer, BindingResult result) throws CarOfferNotFoundException, CarOfferCreationException, CarNotFoundException, UserNotFoundException, ColorNotFoundException, MarkNotFoundException, DrivingGearNotFoundException, ModelNotFoundException, FuelTypeNotFoundException, GearboxNotFoundException, CarCreationException {
         if (result.hasErrors()) {
             extractErrors(result.getAllErrors());
         }
-        var carOfferEntity = carOfferMapper.dtoToEntity(carOffer);
-        carOfferRepository.save(carOfferEntity);
-        return carOfferMapper.entityToDto(carOfferEntity);
+        var foundedCarOfferEntity = carOfferRepository.findById(id).orElseThrow(
+                () -> new CarOfferNotFoundException(String.format("Car offer with id: %d not found", id))
+        );
+
+        var updatedCar = carService.update(carOffer.getCar().getId(), carOffer.getCar(), result);
+
+        foundedCarOfferEntity.setTitle(carOffer.getTitle());
+        foundedCarOfferEntity.setDescription(carOffer.getDescription());
+        foundedCarOfferEntity.setCity(carOffer.getCity());
+//        foundedCarOfferEntity.setImages(
+//                carOffer.getImages().stream()
+//                        .map(image -> ImageEntity.builder().url(image.getUrl()).build()).collect(Collectors.toList()));
+        foundedCarOfferEntity.setPrice(carOffer.getPrice());
+        foundedCarOfferEntity.setCarEntity(carMapper.dtoToEntity(updatedCar));
+
+        carOfferRepository.save(foundedCarOfferEntity);
+
+
+        return carOfferMapper.entityToDto(foundedCarOfferEntity);
     }
 
 
@@ -94,6 +112,12 @@ public class CarOfferServiceImpl implements CarOfferService {
                         String.format("Car offer with id: %d not found", id)
                 )
         ));
+    }
+
+    @Override
+    public List<CarOffer> getOffersByUser(Long id) {
+        return carOfferMapper
+                .entitiesToDto(carOfferRepository.findCarOfferEntitiesByUserEntityId(id));
     }
 
     @Override
