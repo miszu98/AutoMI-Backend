@@ -10,14 +10,16 @@ import java.io.Serializable;
 public class JwtResponse implements Serializable {
     private static final long serialVersionUID = 1;
 
+    private Long id;
     private String email;
     private String token;
     private String role;
 
-    public JwtResponse(String token, String email, String role) {
+    public JwtResponse(String token, String email, String role, Long id) {
         this.email = email;
         this.token = token;
         this.role = role;
+        this.id = id;
     }
 
 }
