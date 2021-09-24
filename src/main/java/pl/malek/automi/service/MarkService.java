@@ -14,6 +14,8 @@ import java.util.List;
 public interface MarkService {
     List<Model> getByMark(String mark);
 
+    List<Model> getByMarkId(Long id);
+
     Mark add(Mark mark, BindingResult result) throws MarkCreationException;
 
     List<Mark> getAll();
