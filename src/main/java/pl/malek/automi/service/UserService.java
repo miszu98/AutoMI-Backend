@@ -22,4 +22,6 @@ public interface UserService {
     void extractErrors(List<ObjectError> errors) throws UserCreationException;
 
     UserEntity getById(long id) throws UserNotFoundException;
+
+    Long getIdByEmail(String email);
 }
