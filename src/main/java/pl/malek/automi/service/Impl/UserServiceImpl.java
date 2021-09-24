@@ -1,6 +1,7 @@
 package pl.malek.automi.service.Impl;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
@@ -80,5 +81,12 @@ public class UserServiceImpl implements UserService {
                         String.format("User with id: %d not found", id)
                 )
         );
+    }
+
+    @Override
+    public Long getIdByEmail(String email) {
+        return userRepository.findByEmail(email).orElseThrow(
+                () -> new UsernameNotFoundException(String.format("User with email %s: not found", email))
+        ).getId();
     }
 }
