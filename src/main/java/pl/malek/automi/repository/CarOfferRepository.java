@@ -37,4 +37,6 @@ public interface CarOfferRepository extends PagingAndSortingRepository<CarOfferE
             @Param("state") State state,
             Pageable pageable
     );
+
+    List<CarOfferEntity> findCarOfferEntitiesByUserEntityId(Long id);
 }
