@@ -34,6 +34,13 @@ public class MarkServiceImpl implements MarkService {
     }
 
     @Override
+    public List<Model> getByMarkId(Long id) {
+        Optional<MarkEntity> optionalMarkEntity = markRepository.findById(id);
+        MarkEntity founded = optionalMarkEntity.orElseThrow();
+        return modelMapper.entitiesToDto(founded.getModels());
+    }
+
+    @Override
     public Mark add(Mark mark, BindingResult result) throws MarkCreationException {
         if (result.hasErrors()) {
             extractErrors(result.getAllErrors());
