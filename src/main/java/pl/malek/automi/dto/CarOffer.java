@@ -11,6 +11,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -42,5 +43,9 @@ public class CarOffer {
     @Size(min = 3, max = 15, message = "length (3-15)")
     @NotBlank(message = "City cannot be null")
     private String city;
+
+    private List<Image> images;
+
+    private LocalDate createdAt;
 
 }

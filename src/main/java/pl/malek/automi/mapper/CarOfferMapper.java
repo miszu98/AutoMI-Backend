@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import pl.malek.automi.dto.CarOffer;
+import pl.malek.automi.dto.Image;
 import pl.malek.automi.entity.CarOfferEntity;
 import pl.malek.automi.entity.ImageEntity;
 import pl.malek.automi.exception.CarNotFoundException;
@@ -35,6 +36,7 @@ public class CarOfferMapper {
                 .user(userMapper.entityToDto(carOfferEntity.getUserEntity()))
                 .price(carOfferEntity.getPrice())
                 .city(carOfferEntity.getCity())
+                .createdAt(carOfferEntity.getCreatedAt())
                 .build();
     }
 
@@ -47,6 +49,7 @@ public class CarOfferMapper {
                 .userEntity(userService.getById(carOffer.getUser().getId()))
                 .price(carOffer.getPrice())
                 .city(carOffer.getCity())
+                .createdAt(carOffer.getCreatedAt())
                 .build();
     }
 
@@ -64,6 +67,8 @@ public class CarOfferMapper {
                                     .user(userMapper.entityToDto(carOfferEntity.getUserEntity()))
                                     .price(carOfferEntity.getPrice())
                                     .city(carOfferEntity.getCity())
+                                    .images(carOfferEntity.getImages().stream().map(image -> Image.builder().url(image.getUrl()).build()).collect(Collectors.toList()))
+                                    .createdAt(carOfferEntity.getCreatedAt())
                                     .build()
                 ).collect(Collectors.toList());
     }
@@ -82,6 +87,8 @@ public class CarOfferMapper {
                                 .user(userMapper.entityToDto(carOfferEntity.getUserEntity()))
                                 .price(carOfferEntity.getPrice())
                                 .city(carOfferEntity.getCity())
+                                .images(carOfferEntity.getImages().stream().map(image -> Image.builder().url(image.getUrl()).build()).collect(Collectors.toList()))
+                                .createdAt(carOfferEntity.getCreatedAt())
                                 .build()
                 ).collect(Collectors.toList());
     }

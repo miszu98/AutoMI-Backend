@@ -28,9 +28,14 @@ public class MarkController {
         return ResponseEntity.status(HttpStatus.OK).body(markService.getAll());
     }
 
-    @GetMapping("/{mark}")
+    @GetMapping("/{mark}/name")
     public ResponseEntity<List<Model>> getAllModels(@PathVariable String mark) {
         return ResponseEntity.status(HttpStatus.OK).body(markService.getByMark(mark));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<List<Model>> getAllModels(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(markService.getByMarkId(id));
     }
 
     @PostMapping("/")

@@ -21,7 +21,7 @@ public interface CarOfferService {
 
     CarOffer delete(long id) throws CarOfferNotFoundException;
 
-    CarOffer update(long id, CarOffer carOffer, BindingResult result) throws CarOfferNotFoundException, CarOfferCreationException, CarNotFoundException, UserNotFoundException;
+    CarOffer update(long id, CarOffer carOffer, BindingResult result) throws CarOfferNotFoundException, CarOfferCreationException, CarNotFoundException, UserNotFoundException, ColorNotFoundException, MarkNotFoundException, DrivingGearNotFoundException, ModelNotFoundException, FuelTypeNotFoundException, GearboxNotFoundException, CarCreationException;
 
     void extractErrors(List<ObjectError> errors) throws CarOfferCreationException;
 
@@ -36,4 +36,6 @@ public interface CarOfferService {
     CarType transformCarType(Object id);
 
     State transformState(Object id);
+
+    List<CarOffer> getOffersByUser(Long id);
 }

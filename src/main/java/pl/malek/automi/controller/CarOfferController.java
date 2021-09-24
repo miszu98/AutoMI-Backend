@@ -10,6 +10,7 @@ import pl.malek.automi.dto.CarOffer;
 import pl.malek.automi.exception.*;
 import pl.malek.automi.service.CarOfferService;
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -46,8 +47,13 @@ public class CarOfferController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CarOffer> update(@PathVariable long id, @Valid @RequestBody CarOffer carOffer, BindingResult result) throws UserNotFoundException, CarOfferCreationException, CarNotFoundException, CarOfferNotFoundException {
+    public ResponseEntity<CarOffer> update(@PathVariable long id, @Valid @RequestBody CarOffer carOffer, BindingResult result) throws UserNotFoundException, CarOfferCreationException, CarNotFoundException, CarOfferNotFoundException, ColorNotFoundException, MarkNotFoundException, DrivingGearNotFoundException, ModelNotFoundException, FuelTypeNotFoundException, GearboxNotFoundException, CarCreationException {
         return ResponseEntity.status(HttpStatus.OK).body(carOfferService.update(id, carOffer, result));
+    }
+
+    @GetMapping("/{id}/user/")
+    public ResponseEntity<List<CarOffer>> getOffersByUser(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(carOfferService.getOffersByUser(id));
     }
 
 }

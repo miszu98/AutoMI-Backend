@@ -37,7 +37,7 @@ public class ModelMapper {
                     .builder()
                     .id(modelEntity.getId())
                     .model(modelEntity.getModel())
-                        .markId(modelEntity.getId())
+                        .markId(modelEntity.getMarkEntity().getId())
                         .build()
                 ).collect(Collectors.toList());
     }

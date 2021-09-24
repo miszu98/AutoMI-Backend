@@ -33,6 +33,7 @@ public class CarMapper {
     public CarEntity dtoToEntity(Car car) throws MarkNotFoundException, ModelNotFoundException, FuelTypeNotFoundException, GearboxNotFoundException, ColorNotFoundException, DrivingGearNotFoundException {
         return CarEntity
                 .builder()
+                .id(car.getId())
                 .mark(markService.getById(car.getMark().getId()))
                 .model(modelService.getById(car.getModel().getId()))
                 .fuelType(fuelTypeService.getById(car.getFuelType().getId()))
@@ -85,7 +86,7 @@ public class CarMapper {
                                         .carType(carEntity.getCarType())
                                         .drivingGear(drivingGearMapper.entityToDto(carEntity.getDrivingGear()))
                                         .color(colorMapper.entityToDto(carEntity.getColor()))
-                                        .yearOfProduction(carEntity.getYearOfProduction().toString())
+                                        .yearOfProduction(carEntity.getYearOfProduction())
                                         .build()
                 ).collect(Collectors.toList());
     }

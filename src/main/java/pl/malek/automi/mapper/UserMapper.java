@@ -19,6 +19,7 @@ public class UserMapper {
     public UserEntity dtoToEntity(User user) throws RoleNotFoundException {
         return UserEntity
                 .builder()
+                .id(user.getId())
                 .email(user.getEmail())
                 .password(user.getPassword())
                 .isActive(true)
@@ -29,6 +30,7 @@ public class UserMapper {
     public User entityToDto(UserEntity userEntity) {
         return User
                 .builder()
+                .id(userEntity.getId())
                 .email(userEntity.getEmail())
                 .dateJoined(userEntity.getDateJoined())
                 .isActive(userEntity.getIsActive())

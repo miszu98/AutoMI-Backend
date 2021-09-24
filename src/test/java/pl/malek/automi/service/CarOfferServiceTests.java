@@ -96,7 +96,7 @@ public class CarOfferServiceTests {
     }
 
     @Test
-    void shouldUpdateCarOffer() throws UserNotFoundException, CarOfferNotFoundException, CarOfferCreationException, CarNotFoundException {
+    void shouldUpdateCarOffer() throws UserNotFoundException, CarOfferNotFoundException, CarOfferCreationException, CarNotFoundException, ColorNotFoundException, MarkNotFoundException, DrivingGearNotFoundException, ModelNotFoundException, FuelTypeNotFoundException, GearboxNotFoundException, CarCreationException {
         var id = 1L;
         var updatedCarOffer = Constants.CarOffers.DataTransferObjects.UPDATED_CAR_OFFER;
         var updatedCarOfferEntity = Constants.CarOffers.Entities.UPDATED_CAR_OFFER;

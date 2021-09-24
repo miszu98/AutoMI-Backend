@@ -10,6 +10,7 @@ import pl.malek.automi.dto.JwtRequest;
 import pl.malek.automi.dto.JwtResponse;
 import pl.malek.automi.service.AuthenticationService;
 import pl.malek.automi.service.Impl.JwtUserDetailsServiceImpl;
+import pl.malek.automi.service.UserService;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,14 +26,18 @@ public class AuthenticationController {
 
     private JwtUserDetailsServiceImpl userDetailsService;
 
+    private UserService userService;
+
     @PostMapping("/")
     public ResponseEntity<JwtResponse> createAuthenticationToken(@RequestBody JwtRequest authRequest) throws Exception {
         authenticationService.authenticate(authRequest.getEmail(), authRequest.getPassword());
 
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.getEmail());
 
+        final Long userId = userService.getIdByEmail(userDetails.getUsername());
+
         final String token = jwtTokenUtil.generateToken(userDetails);
         List<String> roles = userDetails.getAuthorities().stream().map(role -> role.getAuthority()).collect(Collectors.toList());
-        return ResponseEntity.status(HttpStatus.OK).body(new JwtResponse(token, userDetails.getUsername(), roles.get(0)));
+        return ResponseEntity.status(HttpStatus.OK).body(new JwtResponse(token, userDetails.getUsername(), roles.get(0), userId));
     }
 }
