@@ -26,7 +26,7 @@ public class CarOffer {
     @NotBlank(message = "Title field may be not blank")
     private String title;
 
-    @Size(min = 50, max = 512, message = "length (50-512)")
+    @Size(min = 50, max = 5000, message = "length (50-512)")
     @NotBlank(message = "Description field may be not blank")
     private String description;
 
