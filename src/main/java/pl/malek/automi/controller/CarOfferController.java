@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.malek.automi.dto.CarOffer;
+import pl.malek.automi.dto.FilteredPage;
 import pl.malek.automi.exception.*;
 import pl.malek.automi.service.CarOfferService;
 import javax.validation.Valid;
@@ -20,14 +21,14 @@ public class CarOfferController {
 
     private final CarOfferService carOfferService;
 
-    @GetMapping("/{count}/page={page}/")
-    public ResponseEntity<Iterable<CarOffer>> getOffers(@PathVariable int page, @PathVariable int count) {
-        PageRequest pageRequest = PageRequest.of(page, count);
-        return ResponseEntity.status(HttpStatus.OK).body(carOfferService.getAll(pageRequest));
-    }
+//    @GetMapping("/{count}/page={page}/")
+//    public ResponseEntity<Iterable<CarOffer>> getOffers(@PathVariable int page, @PathVariable int count) {
+//        PageRequest pageRequest = PageRequest.of(page, count);
+//        return ResponseEntity.status(HttpStatus.OK).body(carOfferService.getAll(pageRequest));
+//    }
 
     @PostMapping("/filter/{size}/page={page}")
-    public ResponseEntity<?> filterOffers(@RequestBody Map<String, Object> params, @PathVariable int size, @PathVariable int page) {
+    public ResponseEntity<FilteredPage> filterOffers(@RequestBody Map<String, String> params, @PathVariable int size, @PathVariable int page) {
         return ResponseEntity.status(HttpStatus.OK).body(carOfferService.filter(params, PageRequest.of(page, size)));
     }
 
@@ -56,4 +57,8 @@ public class CarOfferController {
         return ResponseEntity.status(HttpStatus.OK).body(carOfferService.getOffersByUser(id));
     }
 
+    @GetMapping("/newest")
+    public ResponseEntity<List<CarOffer>> getNewestOffers() {
+        return ResponseEntity.status(HttpStatus.OK).body(carOfferService.getNewestOffer());
+    }
 }

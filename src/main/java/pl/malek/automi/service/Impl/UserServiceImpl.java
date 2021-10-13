@@ -17,6 +17,7 @@ import pl.malek.automi.service.RoleService;
 import pl.malek.automi.service.UserService;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -33,6 +34,10 @@ public class UserServiceImpl implements UserService {
     public User add(User user, BindingResult result) throws UserCreationException, RoleNotFoundException {
         if (result.hasErrors()) {
             extractErrors(result.getAllErrors());
+        }
+        boolean userExist = userRepository.findByEmail(user.getEmail()).isPresent();
+        if (userExist) {
+            throw new UserCreationException(Arrays.asList(String.format("User with email: %s already exists", user.getEmail())));
         }
         user.setRole("USER");
         user.setPassword(passwordEncoder.encode(user.getPassword()));

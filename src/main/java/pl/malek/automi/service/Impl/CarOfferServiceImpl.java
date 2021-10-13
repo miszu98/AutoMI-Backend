@@ -7,18 +7,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import pl.malek.automi.dto.CarOffer;
-import pl.malek.automi.dto.Image;
+import pl.malek.automi.dto.FilteredPage;
 import pl.malek.automi.entity.CarOfferEntity;
-import pl.malek.automi.entity.ImageEntity;
 import pl.malek.automi.enums.CarType;
 import pl.malek.automi.enums.State;
 import pl.malek.automi.exception.*;
 import pl.malek.automi.mapper.CarMapper;
 import pl.malek.automi.mapper.CarOfferMapper;
 import pl.malek.automi.repository.CarOfferRepository;
-import pl.malek.automi.repository.ImageRepository;
 import pl.malek.automi.service.CarOfferService;
 import pl.malek.automi.service.CarService;
+
+import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +34,7 @@ public class CarOfferServiceImpl implements CarOfferService {
     private final CarService carService;
 
     @Override
+    @Transactional
     public CarOffer add(CarOffer carOffer, BindingResult result) throws CarNotFoundException, UserNotFoundException, CarOfferCreationException, ColorNotFoundException, MarkNotFoundException, ModelNotFoundException, GearboxNotFoundException, FuelTypeNotFoundException, DrivingGearNotFoundException {
         if (result.hasErrors()) {
             extractErrors(result.getAllErrors());
@@ -43,17 +45,18 @@ public class CarOfferServiceImpl implements CarOfferService {
         return carOfferMapper.entityToDto(carOfferEntity);
     }
 
-    @Override
-    public List<CarOffer> getAll(Pageable pageable) {
-        return carOfferMapper.entitiesToDto(carOfferRepository.findAll(pageable));
-    }
+//    @Override
+//    public List<CarOffer> getAll(Pageable pageable) {
+//        return carOfferMapper.entitiesToDto(carOfferRepository.findAll(pageable));
+//    }
+//
+//    @Override
+//    public List<CarOffer> getAll() {
+//        return carOfferMapper.entitiesToDto((Page<CarOfferEntity>) carOfferRepository.findAll());
+//    }
 
     @Override
-    public List<CarOffer> getAll() {
-        return carOfferMapper.entitiesToDto((Page<CarOfferEntity>) carOfferRepository.findAll());
-    }
-
-    @Override
+    @Transactional
     public CarOffer delete(long id) throws CarOfferNotFoundException {
         var carEntity = getById(id);
         carOfferRepository.deleteById(id);
@@ -61,6 +64,7 @@ public class CarOfferServiceImpl implements CarOfferService {
     }
 
     @Override
+    @Transactional
     public CarOffer update(long id, CarOffer carOffer, BindingResult result) throws CarOfferNotFoundException, CarOfferCreationException, CarNotFoundException, UserNotFoundException, ColorNotFoundException, MarkNotFoundException, DrivingGearNotFoundException, ModelNotFoundException, FuelTypeNotFoundException, GearboxNotFoundException, CarCreationException {
         if (result.hasErrors()) {
             extractErrors(result.getAllErrors());
@@ -74,14 +78,9 @@ public class CarOfferServiceImpl implements CarOfferService {
         foundedCarOfferEntity.setTitle(carOffer.getTitle());
         foundedCarOfferEntity.setDescription(carOffer.getDescription());
         foundedCarOfferEntity.setCity(carOffer.getCity());
-//        foundedCarOfferEntity.setImages(
-//                carOffer.getImages().stream()
-//                        .map(image -> ImageEntity.builder().url(image.getUrl()).build()).collect(Collectors.toList()));
         foundedCarOfferEntity.setPrice(carOffer.getPrice());
         foundedCarOfferEntity.setCarEntity(carMapper.dtoToEntity(updatedCar));
-
         carOfferRepository.save(foundedCarOfferEntity);
-
 
         return carOfferMapper.entityToDto(foundedCarOfferEntity);
     }
@@ -97,6 +96,7 @@ public class CarOfferServiceImpl implements CarOfferService {
     }
 
     @Override
+    @Transactional
     public CarOfferEntity getById(Long id) throws CarOfferNotFoundException {
         return carOfferRepository.findById(id).orElseThrow(
                 () -> new CarOfferNotFoundException(
@@ -106,8 +106,9 @@ public class CarOfferServiceImpl implements CarOfferService {
     }
 
     @Override
+    @Transactional
     public CarOffer getOfferById(Long id) throws CarOfferNotFoundException {
-        return carOfferMapper.entityToDto(carOfferRepository.findById(id).orElseThrow(
+        return carOfferMapper.entityToDtoWithImages(carOfferRepository.findById(id).orElseThrow(
                 () -> new CarOfferNotFoundException(
                         String.format("Car offer with id: %d not found", id)
                 )
@@ -115,13 +116,15 @@ public class CarOfferServiceImpl implements CarOfferService {
     }
 
     @Override
+    @Transactional
     public List<CarOffer> getOffersByUser(Long id) {
         return carOfferMapper
                 .entitiesToDto(carOfferRepository.findCarOfferEntitiesByUserEntityId(id));
     }
 
     @Override
-    public List<CarOffer> filter(Map<String, Object> params, Pageable pageable) {
+    @Transactional
+    public FilteredPage filter(Map<String, String> params, Pageable pageable) {
         return carOfferMapper.entitiesToDto(carOfferRepository
                 .findCarOfferEntitiesByParams(
                         transformId(params.get("mark")),
@@ -131,8 +134,20 @@ public class CarOfferServiceImpl implements CarOfferService {
                         transformId(params.get("drivingGear")),
                         transformCarType(params.get("carType")),
                         transformState(params.get("state")),
+                        params.get("city") == null ? null : params.get("city"),
+                        params.get("startPower") == null ? null : Long.valueOf(params.get("startPower")),
+                        params.get("endPower") == null ? null : Long.valueOf(params.get("endPower")),
+                        params.get("ecStart") == null ? null : Long.valueOf(params.get("ecStart")),
+                        params.get("ecEnd") == null ? null : Long.valueOf(params.get("ecEnd")),
                         pageable
                 ));
+    }
+
+    @Override
+    @Transactional
+    public List<CarOffer> getNewestOffer() {
+        LocalDate todayDate = LocalDate.now();
+        return carOfferMapper.entitiesToDto(carOfferRepository.findCarOfferEntitiesByCreatedAt(todayDate));
     }
 
     @Override
