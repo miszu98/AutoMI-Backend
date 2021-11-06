@@ -31,23 +31,26 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public User add(User user, BindingResult result) throws UserCreationException, RoleNotFoundException {
+    public User add(User user, BindingResult result)
+            throws UserCreationException, RoleNotFoundException {
         if (result.hasErrors()) {
             extractErrors(result.getAllErrors());
         }
         boolean userExist = userRepository.findByEmail(user.getEmail()).isPresent();
         if (userExist) {
-            throw new UserCreationException(Arrays.asList(String.format("User with email: %s already exists", user.getEmail())));
+            throw new UserCreationException(
+                    Arrays.asList(
+                                    String.format(
+                                            "User with email: %s already exists",
+                                            user.getEmail()
+                                    )
+                            )
+            );
         }
         user.setRole("USER");
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         var userEntity = userRepository.save(userMapper.dtoToEntity(user));
         return userMapper.entityToDto(userEntity);
-    }
-
-    @Override
-    public List<User> getAll() {
-        return userMapper.entitiesToDto(userRepository.findAll());
     }
 
     @Override

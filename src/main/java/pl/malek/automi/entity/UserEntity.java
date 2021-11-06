@@ -38,6 +38,8 @@ public class UserEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "userEntity")
     private List<CarOfferEntity> offerList;
 
-
-
 }
+
+
+
+

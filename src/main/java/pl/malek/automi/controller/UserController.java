@@ -21,13 +21,9 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/")
-    public ResponseEntity<List<User>> getAll() {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.getAll());
-    }
-
     @PostMapping("/")
-    public ResponseEntity<User> register(@Valid @RequestBody User user, BindingResult result) throws RoleNotFoundException, UserCreationException {
+    public ResponseEntity<User> register(@Valid @RequestBody User user, BindingResult result)
+            throws RoleNotFoundException, UserCreationException {
         return ResponseEntity.status(HttpStatus.OK).body(userService.add(user, result));
     }
 
@@ -37,8 +33,11 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> update(@PathVariable long id, @Valid @RequestBody User user, BindingResult result) throws UserNotFoundException, RoleNotFoundException, UserCreationException {
+    public ResponseEntity<User> update(@PathVariable long id, @Valid @RequestBody User user, BindingResult result)
+            throws UserNotFoundException, RoleNotFoundException, UserCreationException {
         return ResponseEntity.status(HttpStatus.OK).body(userService.update(id, user, result));
     }
 
 }
+
+

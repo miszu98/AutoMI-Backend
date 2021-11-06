@@ -38,6 +38,8 @@ public class CarOfferMapper {
                 .price(carOfferEntity.getPrice())
                 .city(carOfferEntity.getCity())
                 .createdAt(carOfferEntity.getCreatedAt())
+                .phoneNumber(carOfferEntity.getPhoneNumber())
+                .email(carOfferEntity.getEmail())
                 .build();
     }
 
@@ -52,6 +54,8 @@ public class CarOfferMapper {
                 .price(carOfferEntity.getPrice())
                 .city(carOfferEntity.getCity())
                 .createdAt(carOfferEntity.getCreatedAt())
+                .email(carOfferEntity.getEmail())
+                .phoneNumber(carOfferEntity.getPhoneNumber())
                 .images(carOfferEntity.getImages().stream().map(imageEntity ->  Image.builder().url(imageEntity.getUrl()).build()).collect(Collectors.toList()))
                 .build();
     }
@@ -67,6 +71,8 @@ public class CarOfferMapper {
                 .price(carOffer.getPrice())
                 .city(carOffer.getCity())
                 .createdAt(carOffer.getCreatedAt())
+                .email(carOffer.getEmail())
+                .phoneNumber(carOffer.getPhoneNumber())
                 .build();
     }
 
@@ -105,6 +111,8 @@ public class CarOfferMapper {
                                 .user(userMapper.entityToDto(carOfferEntity.getUserEntity()))
                                 .price(carOfferEntity.getPrice())
                                 .city(carOfferEntity.getCity())
+                                .email(carOfferEntity.getEmail())
+                                .phoneNumber(carOfferEntity.getPhoneNumber())
                                 .images(carOfferEntity.getImages().stream().map(image -> Image.builder().url(image.getUrl()).build()).collect(Collectors.toList()))
                                 .createdAt(carOfferEntity.getCreatedAt())
                                 .build()

@@ -13,9 +13,11 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Table(name = "driving_gears")
 public class DrivingGearEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String drivingGear;
 }
+

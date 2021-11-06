@@ -21,9 +21,9 @@ public class MarkEntity {
 
     private String mark;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "markEntity")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "markEntity")
     private List<ModelEntity> models;
 
-
-
 }
+
+

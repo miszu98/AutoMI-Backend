@@ -25,3 +25,5 @@ public class ImageEntity {
     @JoinColumn(name = "car_offer_id", referencedColumnName = "id")
     private CarOfferEntity carOfferEntity;
 }
+
+

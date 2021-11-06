@@ -38,8 +38,10 @@ public interface CarOfferRepository extends PagingAndSortingRepository<CarOfferE
         "and (:carType is null or c.carEntity.carType = :carType) " +
         "and (:state is null or c.carEntity.state = :state) " +
             "and (:city is null or c.city = :city) " +
-            "and ((:powerStartRange is null or c.carEntity.power >= :powerStartRange) and (:powerEndRange is null or c.carEntity.power <= :powerEndRange)) " +
-            "and ((:ecStartRange is null or c.carEntity.engineCapacity >= :ecStartRange) and (:ecEndRange is null or c.carEntity.engineCapacity <= :ecEndRange))")
+            "and ((:powerStartRange is null or c.carEntity.power >= :powerStartRange) " +
+            "and (:powerEndRange is null or c.carEntity.power <= :powerEndRange)) " +
+            "and ((:ecStartRange is null or c.carEntity.engineCapacity >= :ecStartRange) " +
+            "and (:ecEndRange is null or c.carEntity.engineCapacity <= :ecEndRange))")
     Page<CarOfferEntity> findCarOfferEntitiesByParams(
             @Param("markId") Long markId,
             @Param("modelId") Long modelId,
