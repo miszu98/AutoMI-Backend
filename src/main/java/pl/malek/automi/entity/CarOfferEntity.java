@@ -46,5 +46,20 @@ public class CarOfferEntity {
 
     private String city;
 
+    private String email;
+
+    private String phoneNumber;
 
 }
+
+
+
+
+
+
+
+
+
+
+
+

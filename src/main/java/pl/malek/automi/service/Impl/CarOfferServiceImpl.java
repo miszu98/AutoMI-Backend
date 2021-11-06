@@ -1,7 +1,6 @@
 package pl.malek.automi.service.Impl;
 
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
@@ -35,7 +34,10 @@ public class CarOfferServiceImpl implements CarOfferService {
 
     @Override
     @Transactional
-    public CarOffer add(CarOffer carOffer, BindingResult result) throws CarNotFoundException, UserNotFoundException, CarOfferCreationException, ColorNotFoundException, MarkNotFoundException, ModelNotFoundException, GearboxNotFoundException, FuelTypeNotFoundException, DrivingGearNotFoundException {
+    public CarOffer add(CarOffer carOffer, BindingResult result)
+            throws CarNotFoundException, UserNotFoundException, CarOfferCreationException,
+            ColorNotFoundException, MarkNotFoundException, ModelNotFoundException,
+            GearboxNotFoundException, FuelTypeNotFoundException, DrivingGearNotFoundException {
         if (result.hasErrors()) {
             extractErrors(result.getAllErrors());
         }
@@ -80,6 +82,8 @@ public class CarOfferServiceImpl implements CarOfferService {
         foundedCarOfferEntity.setCity(carOffer.getCity());
         foundedCarOfferEntity.setPrice(carOffer.getPrice());
         foundedCarOfferEntity.setCarEntity(carMapper.dtoToEntity(updatedCar));
+        foundedCarOfferEntity.setPhoneNumber(carOffer.getPhoneNumber());
+        foundedCarOfferEntity.setEmail(carOffer.getEmail());
         carOfferRepository.save(foundedCarOfferEntity);
 
         return carOfferMapper.entityToDto(foundedCarOfferEntity);

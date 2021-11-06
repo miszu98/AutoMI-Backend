@@ -11,7 +11,7 @@ public class PasswordConstraintValidator implements ConstraintValidator<ValidPas
 
     @Override
     public void initialize(ValidPassword constraintAnnotation) {
-
+        ConstraintValidator.super.initialize(constraintAnnotation);
     }
 
     @Override
@@ -37,3 +37,5 @@ public class PasswordConstraintValidator implements ConstraintValidator<ValidPas
         return false;
     }
 }
+
+

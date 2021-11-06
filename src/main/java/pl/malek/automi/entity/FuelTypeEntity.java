@@ -21,3 +21,5 @@ public class FuelTypeEntity {
 
     private String fuelTypeName;
 }
+
+

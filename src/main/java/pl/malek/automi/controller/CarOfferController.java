@@ -28,8 +28,13 @@ public class CarOfferController {
 //    }
 
     @PostMapping("/filter/{size}/page={page}")
-    public ResponseEntity<FilteredPage> filterOffers(@RequestBody Map<String, String> params, @PathVariable int size, @PathVariable int page) {
-        return ResponseEntity.status(HttpStatus.OK).body(carOfferService.filter(params, PageRequest.of(page, size)));
+    public ResponseEntity<FilteredPage> filterOffers(
+            @RequestBody Map<String, String> params,
+            @PathVariable int size,
+            @PathVariable int page) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(carOfferService.filter(params, PageRequest.of(page, size)));
     }
 
     @GetMapping("/{id}")
@@ -38,7 +43,10 @@ public class CarOfferController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<CarOffer> add(@Valid @RequestBody CarOffer carOffer, BindingResult result) throws CarNotFoundException, CarOfferCreationException, MarkNotFoundException, UserNotFoundException, ColorNotFoundException, FuelTypeNotFoundException, ModelNotFoundException, GearboxNotFoundException, DrivingGearNotFoundException {
+    public ResponseEntity<CarOffer> add(@Valid @RequestBody CarOffer carOffer, BindingResult result)
+            throws CarNotFoundException, CarOfferCreationException, MarkNotFoundException,
+            UserNotFoundException, ColorNotFoundException, FuelTypeNotFoundException,
+            ModelNotFoundException, GearboxNotFoundException, DrivingGearNotFoundException {
         return ResponseEntity.status(HttpStatus.OK).body(carOfferService.add(carOffer, result));
     }
 

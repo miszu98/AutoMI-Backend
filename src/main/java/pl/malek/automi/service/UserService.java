@@ -11,13 +11,13 @@ import pl.malek.automi.exception.UserNotFoundException;
 import java.util.List;
 
 public interface UserService {
-    User add(User user, BindingResult result) throws UserCreationException, RoleNotFoundException;
-
-    List<User> getAll();
+    User add(User user, BindingResult result)
+            throws UserCreationException, RoleNotFoundException;
 
     User delete(long id) throws UserNotFoundException;
 
-    User update(long id, User user, BindingResult result) throws UserNotFoundException, UserCreationException, RoleNotFoundException;
+    User update(long id, User user, BindingResult result)
+            throws UserNotFoundException, UserCreationException, RoleNotFoundException;
 
     void extractErrors(List<ObjectError> errors) throws UserCreationException;
 
@@ -25,3 +25,5 @@ public interface UserService {
 
     Long getIdByEmail(String email);
 }
+
+

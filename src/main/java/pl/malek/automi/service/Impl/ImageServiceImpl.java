@@ -26,14 +26,17 @@ public class ImageServiceImpl implements ImageService {
     private ImageRepository imageRepository;
     private CarOfferRepository carOfferRepository;
 
-    public ImageServiceImpl(@Value("${CLOUDINARY_URL}") String config, ImageRepository imageRepository, CarOfferRepository carOfferRepository) {
+    public ImageServiceImpl(@Value("${CLOUDINARY_URL}") String config,
+                            ImageRepository imageRepository,
+                            CarOfferRepository carOfferRepository) {
         cloudinary = new Cloudinary(config);
         this.imageRepository = imageRepository;
         this.carOfferRepository = carOfferRepository;
     }
 
     @Override
-    public List<String> upload(MultipartFile[] files, Long offerId) throws IOException, CarOfferNotFoundException {
+    public List<String> upload(MultipartFile[] files, Long offerId)
+            throws IOException, CarOfferNotFoundException {
         var links = new ArrayList<String>();
 
         var foundedOffer = carOfferRepository.findById(offerId).orElseThrow(
@@ -46,15 +49,11 @@ public class ImageServiceImpl implements ImageService {
                             new EagerTransformation().width(400).height(300).crop("pad"),
                             new EagerTransformation().width(260).height(200).crop("crop").gravity("north")
                     )));
-
             var link = (String) map.get("url");
             links.add(link);
-
             var imgEntity = ImageEntity.builder().url(link).carOfferEntity(foundedOffer).build();
-
             imageRepository.save(imgEntity);
         }
-
         return links;
     }
 
