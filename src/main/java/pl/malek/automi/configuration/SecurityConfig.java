@@ -65,7 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, USERS).permitAll()
                 .antMatchers(HttpMethod.PUT, ENDPOINTS).hasAuthority(ROLE_ADMIN)
                 .antMatchers(HttpMethod.PUT, CAR_OFFERS).authenticated()
-                .antMatchers(HttpMethod.POST, CAR_OFFERS).permitAll() // just for test
+                .antMatchers(HttpMethod.POST, CAR_OFFERS).authenticated() // just for test
                 .antMatchers(HttpMethod.DELETE, ENDPOINTS).hasAuthority(ROLE_ADMIN)
                 .antMatchers(HttpMethod.DELETE, USERS + "/{id}").hasAuthority(ROLE_ADMIN)
                 .antMatchers(HttpMethod.DELETE, CAR_OFFERS).authenticated()
