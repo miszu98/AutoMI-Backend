@@ -13,9 +13,12 @@ import pl.malek.automi.exception.UserCreationException;
 import pl.malek.automi.exception.UserNotFoundException;
 import pl.malek.automi.mapper.UserMapper;
 import pl.malek.automi.repository.UserRepository;
+import pl.malek.automi.service.MailSenderService;
+import pl.malek.automi.service.ReminderService;
 import pl.malek.automi.service.RoleService;
 import pl.malek.automi.service.UserService;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -28,9 +31,28 @@ public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
     private final RoleService roleService;
     private final PasswordEncoder passwordEncoder;
-
+    private final MailSenderService mailSenderService;
+    private final ReminderService reminderService;
 
     @Override
+    public boolean changePassword(String uuid, String newPassword) {
+        String email = reminderService.findByUuid(uuid).getEmail();
+
+        UserEntity user = userRepository.findByEmail(email).orElseThrow(
+                () -> new UsernameNotFoundException(String.format("User with email: %s not found", email))
+        );
+
+        user.setPassword(passwordEncoder.encode(newPassword));
+
+        userRepository.save(user);
+
+        reminderService.deleteReminderByEmail(email);
+
+        return true;
+    }
+
+    @Override
+    @Transactional
     public User add(User user, BindingResult result)
             throws UserCreationException, RoleNotFoundException {
         if (result.hasErrors()) {
@@ -50,6 +72,7 @@ public class UserServiceImpl implements UserService {
         user.setRole("USER");
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         var userEntity = userRepository.save(userMapper.dtoToEntity(user));
+        mailSenderService.send(user.getEmail(), "AutoMI - Place for you car", "Welcome!");
         return userMapper.entityToDto(userEntity);
     }
 

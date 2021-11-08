@@ -24,6 +24,8 @@ public interface UserService {
     UserEntity getById(long id) throws UserNotFoundException;
 
     Long getIdByEmail(String email);
+
+    boolean changePassword(String uuid, String newPassword);
 }
 
 

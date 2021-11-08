@@ -69,7 +69,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.DELETE, ENDPOINTS).hasAuthority(ROLE_ADMIN)
                 .antMatchers(HttpMethod.DELETE, USERS + "/{id}").hasAuthority(ROLE_ADMIN)
                 .antMatchers(HttpMethod.DELETE, CAR_OFFERS).authenticated()
-                .antMatchers(HttpMethod.GET, "/**").permitAll();
+                .antMatchers(HttpMethod.GET, "/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/emails/**").permitAll();
 
 
         http.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
