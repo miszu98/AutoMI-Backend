@@ -22,8 +22,7 @@ import java.util.stream.Collectors;
 @Component
 public class JwtTokenUtil implements Serializable {
 
-    private static final long serialVersionUID = 1;
-    public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
+    private static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
 
     @Autowired
     private UserRepository userRepository;
@@ -48,7 +47,7 @@ public class JwtTokenUtil implements Serializable {
         return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
     }
 
-    private Boolean isTokenExpired(String token) {
+    public Boolean isTokenExpired(String token) {
         final Date expiration = getExpirationDateFromToken(token);
         return expiration.before(new Date());
     }
@@ -77,3 +76,7 @@ public class JwtTokenUtil implements Serializable {
         return ((username.equals(userDetails.getUsername())) && !isTokenExpired(token));
     }
 }
+
+
+
+

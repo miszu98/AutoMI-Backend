@@ -8,7 +8,6 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 public class JwtResponse implements Serializable {
-    private static final long serialVersionUID = 1;
 
     private String token;
 

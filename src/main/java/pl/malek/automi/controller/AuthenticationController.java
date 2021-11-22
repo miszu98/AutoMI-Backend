@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import pl.malek.automi.configuration.JwtTokenUtil;
 import pl.malek.automi.dto.JwtRequest;
 import pl.malek.automi.dto.JwtResponse;
+import pl.malek.automi.dto.Token;
+import pl.malek.automi.dto.TokenExpired;
 import pl.malek.automi.service.AuthenticationService;
 import pl.malek.automi.service.Impl.JwtUserDetailsServiceImpl;
 import pl.malek.automi.service.UserService;
@@ -36,4 +38,11 @@ public class AuthenticationController {
 
         return ResponseEntity.status(HttpStatus.OK).body(new JwtResponse(token));
     }
+
+    @PostMapping("/token-check")
+    public ResponseEntity<TokenExpired> getTokenExpiredInfo(@RequestBody Token token) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(TokenExpired.builder().status(jwtTokenUtil.isTokenExpired(token.getToken())).build());
+    }
+
 }
