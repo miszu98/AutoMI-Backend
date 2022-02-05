@@ -29,7 +29,7 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
                         String.format("User with email: %s not exist", email)
                 )
         );
-        System.out.println(user.getRoleEntity().getRoleName());
+//        System.out.println(user.getRoleEntity().getRoleName());
         return new User(
                 user.getEmail(),
                 user.getPassword(),

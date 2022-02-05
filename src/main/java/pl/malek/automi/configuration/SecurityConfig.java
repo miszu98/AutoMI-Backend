@@ -27,7 +27,8 @@ import static pl.malek.automi.utils.Endpoints.*;
 @AllArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private static final String ROLE_ADMIN = "ADMIN";
+    private static final String ROLE_ADMIN = "ROLE_ADMIN";
+    private static final String ROLE_USER = "ROLE_USER";
     private static final String[] ENDPOINTS = {
             USERS,
             ROLES,

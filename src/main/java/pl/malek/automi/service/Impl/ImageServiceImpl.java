@@ -3,6 +3,7 @@ package pl.malek.automi.service.Impl;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.EagerTransformation;
 import com.cloudinary.utils.ObjectUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
+@Slf4j
 @Service
 public class ImageServiceImpl implements ImageService {
 
@@ -42,7 +43,7 @@ public class ImageServiceImpl implements ImageService {
         var foundedOffer = carOfferRepository.findById(offerId).orElseThrow(
                 () -> new CarOfferNotFoundException(String.format("Not found Car offer with id: %d", offerId))
         );
-
+        log.info("Przetwarzanie plików zdjęć");
         for (MultipartFile image : files) {
             var map = cloudinary.uploader().upload(image.getBytes(), ObjectUtils.asMap(
                     "eager", Arrays.asList(
@@ -51,8 +52,10 @@ public class ImageServiceImpl implements ImageService {
                     )));
             var link = (String) map.get("url");
             links.add(link);
+            log.info("Tworzę link do zdjecia: " + link);
             var imgEntity = ImageEntity.builder().url(link).carOfferEntity(foundedOffer).build();
             imageRepository.save(imgEntity);
+            log.info("Przypisuje zdjecie do ogłoszenia i zapisuje do bazy danych");
         }
         return links;
     }

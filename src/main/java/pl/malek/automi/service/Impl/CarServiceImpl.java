@@ -1,6 +1,7 @@
 package pl.malek.automi.service.Impl;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -14,6 +15,7 @@ import pl.malek.automi.service.CarService;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 @AllArgsConstructor
 public class CarServiceImpl implements CarService {
@@ -27,6 +29,7 @@ public class CarServiceImpl implements CarService {
             extractErrors(result.getAllErrors());
         }
         var carEntity = carRepository.save(carMapper.dtoToEntity(car));
+        log.info("Zapisuje szczegóły samochodu do osobnej tabeli: " + car);
         return carMapper.entityToDto(carEntity);
     }
 

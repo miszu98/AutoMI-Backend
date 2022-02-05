@@ -18,7 +18,6 @@ insert into users(id, email, is_active, password, role_id)
 values (4, 'adam98@wp.pl', true, '$2a$12$zxR35r8RQ7qsHHoEaQUog.0Bwl/VUGHAPkKrtoZ0FxdC5dV.bQ50e', 1);
 
 -- Colors
-
 insert into colors values (1, 'BLACK');
 
 insert into colors values (2, 'RED');
@@ -116,6 +115,7 @@ insert into models values (11, 'A8', 3);
 insert into models values (12, 'RS6', 3);
 
 insert into models values (13, 'RS5', 3);
+
 
 -- Cars
 

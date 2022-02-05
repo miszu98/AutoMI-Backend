@@ -1,6 +1,7 @@
 package pl.malek.automi.controller;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @RestController
 @AllArgsConstructor
 @RequestMapping("/car-offers")
@@ -47,6 +49,8 @@ public class CarOfferController {
             throws CarNotFoundException, CarOfferCreationException, MarkNotFoundException,
             UserNotFoundException, ColorNotFoundException, FuelTypeNotFoundException,
             ModelNotFoundException, GearboxNotFoundException, DrivingGearNotFoundException {
+        log.info("Uruchamiam metode: add");
+        log.info("Dostarczone dane: " + carOffer);
         return ResponseEntity.status(HttpStatus.OK).body(carOfferService.add(carOffer, result));
     }
 

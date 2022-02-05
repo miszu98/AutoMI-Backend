@@ -1,6 +1,7 @@
 package pl.malek.automi.service.Impl;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Service
 @AllArgsConstructor
 public class CarOfferServiceImpl implements CarOfferService {
@@ -43,7 +45,9 @@ public class CarOfferServiceImpl implements CarOfferService {
         }
         var car = carService.add(carOffer.getCar());
         carOffer.setCar(car);
+        log.info("Przypisuje szczegóły samochodu do ogłoszenia");
         var carOfferEntity = carOfferRepository.save(carOfferMapper.dtoToEntity(carOffer));
+        log.info("Zapisuje ogłoszenie do bazy danych");
         return carOfferMapper.entityToDto(carOfferEntity);
     }
 
