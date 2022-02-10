@@ -5,7 +5,7 @@ This repository is responsible for backend
 
 ## Technologies and Dependecies
 
-* JAVA 11
+* JAVA
 * Spring Boot 
   * Spring Security
   * Passay and Validation
