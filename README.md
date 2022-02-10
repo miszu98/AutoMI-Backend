@@ -8,7 +8,7 @@ This repository is responsible for backend
 * JAVA 11
 * Spring Boot 
   * Spring Security
-  * Passay
+  * Passay and Validation
   * Cloudinary
   * JWT
   * Lombok
@@ -19,6 +19,7 @@ This repository is responsible for backend
   * Swagger
 * Database: PostgreSQL
 
+Link to repository with frontend: https://github.com/miszu98/AutoMI-Frontend
 
 ## Status of project: 
 ```diff 
